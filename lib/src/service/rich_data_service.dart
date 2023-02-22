@@ -21,6 +21,6 @@ class RichDataService with DioManager {
       debugPrint(e);
       throw e;
     });
-    return RSVersionModel.fromJson(jsonDecode(response.data));
+    return RSVersionModel.fromJson(response.data);
   }
 }

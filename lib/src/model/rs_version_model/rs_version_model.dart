@@ -5,7 +5,7 @@ part 'rs_version_model.g.dart';
 @Collection()
 class RSVersionModel {
   Id id = Isar.autoIncrement;
-  final String? version;
+  final int? version;
   final DateTime? getDate;
 
   RSVersionModel({
@@ -15,7 +15,7 @@ class RSVersionModel {
 
   factory RSVersionModel.fromJson(Map<String, dynamic> json) {
     return RSVersionModel(
-      version: json[0],
+      version: json['version'],
       getDate: DateTime.now(),
     );
   }

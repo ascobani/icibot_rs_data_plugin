@@ -25,7 +25,7 @@ const RSVersionModelSchema = CollectionSchema(
     r'version': PropertySchema(
       id: 1,
       name: r'version',
-      type: IsarType.string,
+      type: IsarType.long,
     )
   },
   estimateSize: _rSVersionModelEstimateSize,
@@ -48,12 +48,6 @@ int _rSVersionModelEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.version;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   return bytesCount;
 }
 
@@ -64,7 +58,7 @@ void _rSVersionModelSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeDateTime(offsets[0], object.getDate);
-  writer.writeString(offsets[1], object.version);
+  writer.writeLong(offsets[1], object.version);
 }
 
 RSVersionModel _rSVersionModelDeserialize(
@@ -75,7 +69,7 @@ RSVersionModel _rSVersionModelDeserialize(
 ) {
   final object = RSVersionModel(
     getDate: reader.readDateTimeOrNull(offsets[0]),
-    version: reader.readStringOrNull(offsets[1]),
+    version: reader.readLongOrNull(offsets[1]),
   );
   object.id = id;
   return object;
@@ -91,7 +85,7 @@ P _rSVersionModelDeserializeProp<P>(
     case 0:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -341,58 +335,49 @@ extension RSVersionModelQueryFilter
   }
 
   QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
-      versionEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      versionEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'version',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
       versionGreaterThan(
-    String? value, {
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'version',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
       versionLessThan(
-    String? value, {
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'version',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
       versionBetween(
-    String? lower,
-    String? upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -401,77 +386,6 @@ extension RSVersionModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
-      versionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'version',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
-      versionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'version',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
-      versionContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'version',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
-      versionMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'version',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
-      versionIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'version',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
-      versionIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'version',
-        value: '',
       ));
     });
   }
@@ -561,10 +475,9 @@ extension RSVersionModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSVersionModel, RSVersionModel, QDistinct> distinctByVersion(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSVersionModel, RSVersionModel, QDistinct> distinctByVersion() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'version', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'version');
     });
   }
 }
@@ -583,7 +496,7 @@ extension RSVersionModelQueryProperty
     });
   }
 
-  QueryBuilder<RSVersionModel, String?, QQueryOperations> versionProperty() {
+  QueryBuilder<RSVersionModel, int?, QQueryOperations> versionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'version');
     });

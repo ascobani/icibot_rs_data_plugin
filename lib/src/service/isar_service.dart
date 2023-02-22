@@ -10,20 +10,24 @@ class IsarService {
   }
 
   Future<void> saveRSDataModel(RSDataModel data) async {
-    await deleteDB();
     var isar = await db;
     isar.writeTxnSync<int>(() => isar.rSDataModels.putSync(data));
   }
 
+  Future<void> saveRSVersionModel(RSVersionModel data) async {
+    var isar = await db;
+    isar.writeTxnSync<int>(() => isar.rSVersionModels.putSync(data));
+  }
+
   Future<void> deleteDB() async {
     var isar = await db;
-    isar.clear();
+    await isar.clear();
   }
 
   Future<Isar> openDB() async {
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
-        [RSDataModelSchema, RSVersionModelSchema], //isarModels,
+        [RSDataModelSchema, RSVersionModelSchema], //Isar Models,
         inspector: true,
       );
     }
