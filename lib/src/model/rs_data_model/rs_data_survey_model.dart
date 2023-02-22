@@ -1,4 +1,4 @@
-part of 'rs_data_model.dart';
+
 
 class RSDataSurveyModel {
   int? icibotId;

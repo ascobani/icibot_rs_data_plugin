@@ -3,24 +3,24 @@ import 'package:isar/isar.dart';
 import 'dart:convert';
 
 
-part 'rs_data_menu_items_model.dart';
+import 'rs_data_menu_items_model.dart';
 
-part 'rs_data_home_page_designer_model.dart';
+import 'rs_data_home_page_designer_model.dart';
 
-part 'rs_data_survey_header_model.dart';
+import 'rs_data_survey_header_model.dart';
 
-part 'rs_data_menu_categories_model.dart';
+import 'rs_data_menu_categories_model.dart';
 
-part 'rs_data_survey_model.dart';
+import 'rs_data_survey_model.dart';
 
-part 'rs_data_title_language_model.dart';
+import 'rs_data_title_language_model.dart';
 
-part 'rs_data_menu_section_model.dart';
+import 'rs_data_menu_section_model.dart';
 
-part 'rs_data_menu_item_title_and_descriptions_model.dart';
+import 'rs_data_menu_item_title_and_descriptions_model.dart';
 
 class RSDataModel {
-
+  Id id = Isar.autoIncrement;
   int? icibotId;
   int? clientId;
   int? facebookId;
