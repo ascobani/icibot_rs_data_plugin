@@ -1,5 +1,5 @@
-import 'package:icibot_rs_data_plugin/icibot_rs_data.dart';
-import 'package:icibot_rs_data_plugin/src/service/rich_data_service.dart';
+import 'package:icibot_rs_data_plugin/src/service/icibot_rs_data_service.dart';
+
 
 void main() async {
   var isar = IsarService();

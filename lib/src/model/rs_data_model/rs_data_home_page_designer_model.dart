@@ -1,7 +1,6 @@
 part of 'rs_data_model.dart';
 @embedded
 class RsDataHomePageDesignerModel {
-
   int? icibotId;
   int? hotelId;
   String? type;

@@ -1,6 +1,5 @@
 library icibot_rs_data_plugin;
 
-export '/src/service/isar_service.dart';
 export '/src/model/rs_data_model/rs_data_model.dart';
 export '/src/model/rs_version_model/rs_version_model.dart';
 
