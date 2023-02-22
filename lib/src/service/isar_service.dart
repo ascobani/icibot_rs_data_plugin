@@ -9,6 +9,16 @@ class IsarService {
     db = openDB();
   }
 
+  Future<RSDataModel?> getRSDataModel() async {
+    var isar = await db;
+    return isar.rSDataModels.get(1);
+  }
+
+  Future<RSVersionModel?> getRSVersionModel() async {
+    var isar = await db;
+    return isar.rSVersionModels.get(1);
+  }
+
   Future<void> saveRSDataModel(RSDataModel data) async {
     var isar = await db;
     isar.writeTxnSync<int>(() => isar.rSDataModels.putSync(data));
@@ -21,7 +31,7 @@ class IsarService {
 
   Future<void> deleteDB() async {
     var isar = await db;
-    await isar.clear();
+    isar.clearSync();
   }
 
   Future<Isar> openDB() async {
