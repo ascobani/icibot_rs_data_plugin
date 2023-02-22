@@ -5,5 +5,5 @@ import 'package:icibot_rs_data_plugin/src/service/rich_data_service.dart';
 void main() async {
   var response = await RichDataService().getRichData(3);
   var isar = IsarService();
-  await isar.saveModel1(response);
+  await isar.saveRSDataModel(response);
 }

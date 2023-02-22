@@ -1,5 +1,8 @@
 import 'package:isar/isar.dart';
 
+part 'rs_version_model.g.dart';
+
+@Collection()
 class RSVersionModel {
   Id id = Isar.autoIncrement;
   final String? version;
