@@ -772,7 +772,7 @@ const RSDataModelSchema = CollectionSchema(
     r'rating': PropertySchema(
       id: 142,
       name: r'rating',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'releaseDate': PropertySchema(
       id: 143,
@@ -2641,7 +2641,7 @@ void _rSDataModelSerialize(
   writer.writeString(offsets[139], object.privacyPolicyLink);
   writer.writeString(offsets[140], object.productType);
   writer.writeBool(offsets[141], object.qrReader);
-  writer.writeLong(offsets[142], object.rating);
+  writer.writeDouble(offsets[142], object.rating);
   writer.writeString(offsets[143], object.releaseDate);
   writer.writeString(offsets[144], object.reportDbScheme);
   writer.writeString(offsets[145], object.reservationMailAddress);
@@ -3094,7 +3094,7 @@ RSDataModel _rSDataModelDeserialize(
     privacyPolicyLink: reader.readStringOrNull(offsets[139]),
     productType: reader.readStringOrNull(offsets[140]),
     qrReader: reader.readBoolOrNull(offsets[141]),
-    rating: reader.readLongOrNull(offsets[142]),
+    rating: reader.readDoubleOrNull(offsets[142]),
     releaseDate: reader.readStringOrNull(offsets[143]),
     reportDbScheme: reader.readStringOrNull(offsets[144]),
     reservationMailAddress: reader.readStringOrNull(offsets[145]),
@@ -3691,7 +3691,7 @@ P _rSDataModelDeserializeProp<P>(
     case 141:
       return (reader.readBoolOrNull(offset)) as P;
     case 142:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 143:
       return (reader.readStringOrNull(offset)) as P;
     case 144:
@@ -17129,47 +17129,55 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> ratingEqualTo(
-      int? value) {
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'rating',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       ratingGreaterThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'rating',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> ratingLessThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'rating',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> ratingBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -17178,6 +17186,7 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -30540,7 +30549,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, int?, QQueryOperations> ratingProperty() {
+  QueryBuilder<RSDataModel, double?, QQueryOperations> ratingProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'rating');
     });

@@ -46,7 +46,7 @@ class RSDataModel {
   String? placeId;
   String? imageUrl;
   String? photos;
-  int? rating;
+  double? rating;
   String? webSiteUrl;
   String? latLng;
   String? onlineReservationUrl;
@@ -462,7 +462,7 @@ class RSDataModel {
     placeId = json['place_id'];
     imageUrl = json['image_url'];
     photos = json['photos'];
-    rating = json['rating'];
+    rating = json['rating'].toDouble();
     webSiteUrl = json['web_site_url'];
     latLng = json['lat_lng'];
     onlineReservationUrl = json['online_reservation_url'];

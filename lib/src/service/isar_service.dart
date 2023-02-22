@@ -46,7 +46,8 @@ class IsarService {
   /// Currently not working
   Future<void> deleteDB() async {
     var isar = await db;
-    isar.clearSync();
+    print('deleteDB');
+    await isar.writeTxn(() => isar.clear());
   }
 
   /// Creates a new instance of [IsarService]

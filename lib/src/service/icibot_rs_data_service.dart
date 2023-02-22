@@ -14,12 +14,13 @@ part 'rich_data_service.dart';
 class IcIbotRSDataService {
   /// Creates a new instance of [IcIbotRSDataService]
   IcIbotRSDataService() {
-    IcIbotRSDataService.init();
+    init();
   }
 
   /// Initializes the [IcIbotRSDataService]
-  IcIbotRSDataService.init() {
-    IsarService().openDB();
+  Future<void> init() async {
+    await IsarService().openDB();
+    await RichDataService().init();
   }
 
   ///Uses the [IsarService] to open the database
@@ -30,7 +31,7 @@ class IcIbotRSDataService {
   /// If the version did change, it will get the [RSDataModel] from the server and save it to the database
   ///
   /// @version - The latest version of the [RSVersionModel] can be found in the {https://b1development.s3.eu-central-1.amazonaws.com/icibotV2/$appHotelId/MobileVersion.json} by the key "version"
-  Future<void> versionControlledUpdate({required int hotelId}) async {
+  Future<void> versionControlledUpdate({required int appHotelId}) async {
     // [RSVersionModel] is used to check if the version of the [RSDataModel] has changed
     var richDataService = RichDataService();
     var isarService = IsarService();
@@ -38,17 +39,27 @@ class IcIbotRSDataService {
       // Gets the [RSVersionModel] from the database
       RSVersionModel? versionModel = await isarService.getRSVersionModel();
       // Gets the [RSVersionModel] from the server
-      var versionModelFromServer =
-          await richDataService.getVersion(id: hotelId);
-      if (versionModel == null ||
-          versionModel.version != versionModelFromServer.version) {
+      print('versionControlledUpdate: $appHotelId');
+      RSVersionModel? versionModelFromServer =
+          await richDataService.getVersion(appHotelId: appHotelId);
+      // Checks if the version of the [RSVersionModel] has changed
+      print(
+          'versionControlledUpdate: ${versionModelFromServer.version}, currentVersion: ${versionModel?.version}');
+      // If the version did not change and the [RSVersionModel] is not null, return
+      if (versionModelFromServer.version != null &&
+          versionModelFromServer.version == versionModel?.version) {
+        return;
+      }
+      if (versionModel?.version != versionModelFromServer.version) {
         // Gets the [RSDataModel] from the server
-        var dataModelFromServer =
-            await richDataService.getRichData(id: hotelId);
+        RSDataModel? dataModelFromServer =
+            await richDataService.getRichData(appHotelId: appHotelId);
+        // Deletes everything from the database
+        await isarService.deleteDB();
         // Saves the [RSDataModel] to the database
-        await IsarService().saveRSDataModel(dataModelFromServer);
+        await isarService.saveRSDataModel(dataModelFromServer);
         // Saves the [RSVersionModel] to the database
-        await IsarService().saveRSVersionModel(versionModelFromServer);
+        await isarService.saveRSVersionModel(versionModelFromServer);
       }
     } catch (e) {
       rethrow;
