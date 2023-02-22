@@ -1,6 +1,7 @@
-
+import 'package:isar/isar.dart';
 
 class RSDataTitleLanguageModel {
+  Id id = Isar.autoIncrement;
   String? locale;
   String? title;
 
