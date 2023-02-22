@@ -1,6 +1,6 @@
+part of 'rs_data_model.dart';
 
-
-
+@embedded
 class RSDataSurveyHeaderModel {
 
   int? icibotId;

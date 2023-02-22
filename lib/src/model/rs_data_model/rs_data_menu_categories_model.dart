@@ -1,11 +1,8 @@
 
 
-import 'dart:convert';
+part of 'rs_data_model.dart';
 
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_menu_items_model.dart';
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_survey_header_model.dart';
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_title_language_model.dart';
-
+@embedded
 class RSDataMenuCategoriesModel {
   int? icibotId;
   int? menuSectionId;

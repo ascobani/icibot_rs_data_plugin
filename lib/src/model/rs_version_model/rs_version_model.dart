@@ -1,7 +1,8 @@
+import 'package:isar/isar.dart';
+
 class RSVersionModel {
-
+  Id id = Isar.autoIncrement;
   final String? version;
-
   final DateTime? getDate;
 
   RSVersionModel({

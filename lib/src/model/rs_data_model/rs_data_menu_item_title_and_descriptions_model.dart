@@ -1,6 +1,8 @@
+part of 'rs_data_model.dart';
 
-
+@embedded
 class RSDataMenuItemTitleAndDescriptionModel {
+
   int? icibotId;
   int? menuItemId;
   String? title;

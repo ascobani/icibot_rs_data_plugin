@@ -1,24 +1,26 @@
-import 'package:isar/isar.dart';
-
 import 'dart:convert';
 
+import 'package:isar/isar.dart';
 
-import 'rs_data_menu_items_model.dart';
+part 'rs_data_menu_section_model.dart';
 
-import 'rs_data_home_page_designer_model.dart';
+part 'rs_data_menu_items_model.dart';
 
-import 'rs_data_survey_header_model.dart';
+part 'rs_data_menu_categories_model.dart';
 
-import 'rs_data_menu_categories_model.dart';
+part 'rs_data_title_language_model.dart';
 
-import 'rs_data_survey_model.dart';
+part 'rs_data_survey_header_model.dart';
 
-import 'rs_data_title_language_model.dart';
+part 'rs_data_survey_model.dart';
 
-import 'rs_data_menu_section_model.dart';
+part 'rs_data_home_page_designer_model.dart';
 
-import 'rs_data_menu_item_title_and_descriptions_model.dart';
+part 'rs_data_menu_item_title_and_descriptions_model.dart';
 
+part 'rs_data_model.g.dart';
+
+@Collection()
 class RSDataModel {
   Id id = Isar.autoIncrement;
   int? icibotId;
@@ -66,7 +68,7 @@ class RSDataModel {
   String? subColor;
   String? kvkkLink;
   String? privacyPolicyLink;
-  String? accommodationContract;
+  List<RSDataTitleLanguageModel>? accommodationContract;
   String? tripAdvisorLink;
   bool? mailVerificationForGuests;
   String? apiAddress;
@@ -92,7 +94,7 @@ class RSDataModel {
   bool? onlineCheckIn;
   bool? onlineCheckInImage;
   bool? onlineCheckInSignature;
-  String? checkInPostMessage;
+  List<RSDataTitleLanguageModel>? checkInPostMessage;
   String? welcomeMessage;
   int? surveyHeaderId;
   RSDataSurveyHeaderModel? surveyHeader;
@@ -482,7 +484,19 @@ class RSDataModel {
     subColor = json['sub_color'];
     kvkkLink = json['kvkk_link'];
     privacyPolicyLink = json['privacy_policy_link'];
-    accommodationContract = json['accommodation_contract'];
+    if (json['accommodation_contract'].contains(':') &&
+        json['accommodation_contract'] != '') {
+      accommodationContract = jsonDecode(json['accommodation_contract'])
+          .entries
+          .map<RSDataTitleLanguageModel>(
+              (e) => RSDataTitleLanguageModel.fromJson(e))
+          .toList();
+    } else {
+      accommodationContract = [
+        RSDataTitleLanguageModel(
+            title: json['accommodation_contract'], locale: 'default')
+      ];
+    }
     tripAdvisorLink = json['trip_advisor_link'];
     mailVerificationForGuests = json['mail_verification_for_guests'];
     apiAddress = json['api_address'];
@@ -508,7 +522,19 @@ class RSDataModel {
     onlineCheckIn = json['online_check_in'];
     onlineCheckInImage = json['online_check_in_image'];
     onlineCheckInSignature = json['online_check_in_signature'];
-    checkInPostMessage = json['check_in_post_message'];
+    if (json['check_in_post_message'].contains(':') &&
+        json['check_in_post_message'] != '') {
+      checkInPostMessage = jsonDecode(json['check_in_post_message'])
+          .entries
+          .map<RSDataTitleLanguageModel>(
+              (e) => RSDataTitleLanguageModel.fromJson(e))
+          .toList();
+    } else {
+      checkInPostMessage = [
+        RSDataTitleLanguageModel(
+            title: json['check_in_post_message'], locale: 'default')
+      ];
+    }
     welcomeMessage = json['welcome_message'];
     surveyHeaderId = json['survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json['survey_header']);
@@ -593,7 +619,7 @@ class RSDataModel {
     manuelRequestOwnerType = json['manuel_request_owner_type'];
     onetimeInformation = json['onetime_information'];
     isAccountVerifyNecessaryForRequest =
-        json['is_account_verify_necessary_for_request'];
+    json['is_account_verify_necessary_for_request'];
     isClosedStaffChat = json['is_closed_staff_chat'];
     operationSystem = json['operation_system'];
     loyaltyManagement = json['loyalty_management'];

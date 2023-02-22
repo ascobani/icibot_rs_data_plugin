@@ -1,10 +1,7 @@
-
-
-import 'dart:convert';
-
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_title_language_model.dart';
-
+part of 'rs_data_model.dart';
+@embedded
 class RsDataHomePageDesignerModel {
+
   int? icibotId;
   int? hotelId;
   String? type;

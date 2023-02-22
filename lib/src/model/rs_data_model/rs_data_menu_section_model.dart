@@ -1,12 +1,7 @@
+part of 'rs_data_model.dart';
 
 
-import 'dart:convert';
-
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_menu_categories_model.dart';
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_survey_header_model.dart';
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_survey_model.dart';
-import 'package:icibot_rs_data_plugin/src/model/rs_data_model/rs_data_title_language_model.dart';
-
+@embedded
 class RsDataMenuSectionModel {
   int? icibotId;
   int? hotelId;
@@ -42,17 +37,19 @@ class RsDataMenuSectionModel {
     menuAreaId = json?['menuAreaId'];
     catalogueActive = json?['catalogueActive'];
     timetableAndReservationActive = json?['timetableAndReservationActive'];
-    if(json?['title'] != '') {
+    if (json?['title'].contains(':') && json?['title'] != '') {
       title = jsonDecode(json?['title'])
           .entries
           .map<RSDataTitleLanguageModel>(
               (e) => RSDataTitleLanguageModel.fromJson(e))
           .toList();
+    } else {
+      title = [RSDataTitleLanguageModel(title: json?['title'], locale: 'default')];
     }
     theShow = json?['theShow'];
     surveyHeaderId = json?['surveyHeaderId'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json?['survey_header']);
-    if(json?['menu_categories'] != null) {
+    if (json?['menu_categories'] != null) {
       menuCategories = json?['menu_categories']
           .map<RSDataMenuCategoriesModel>(
               (e) => RSDataMenuCategoriesModel.fromJson(e))
