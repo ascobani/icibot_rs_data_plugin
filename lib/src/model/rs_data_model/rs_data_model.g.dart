@@ -112,7 +112,8 @@ const RSDataModelSchema = CollectionSchema(
     r'checkInPostMessage': PropertySchema(
       id: 17,
       name: r'checkInPostMessage',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'checkInSurveyId': PropertySchema(
       id: 18,
@@ -1232,9 +1233,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.checkInPostMessage;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.checkInPostMessage;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2332,7 +2341,12 @@ void _rSDataModelSerialize(
   );
   writer.writeString(offsets[15], object.callCenter);
   writer.writeBool(offsets[16], object.callForRequests);
-  writer.writeString(offsets[17], object.checkInPostMessage);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[17],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.checkInPostMessage,
+  );
   writer.writeLong(offsets[18], object.checkInSurveyId);
   writer.writeLong(offsets[19], object.checkOutSurveyId);
   writer.writeString(offsets[20], object.childAgeRange);
@@ -2816,7 +2830,12 @@ RSDataModel _rSDataModelDeserialize(
     ),
     callCenter: reader.readStringOrNull(offsets[15]),
     callForRequests: reader.readBoolOrNull(offsets[16]),
-    checkInPostMessage: reader.readStringOrNull(offsets[17]),
+    checkInPostMessage: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[17],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     checkInSurveyId: reader.readLongOrNull(offsets[18]),
     checkOutSurveyId: reader.readLongOrNull(offsets[19]),
     childAgeRange: reader.readStringOrNull(offsets[20]),
@@ -3278,7 +3297,12 @@ P _rSDataModelDeserializeProp<P>(
     case 16:
       return (reader.readBoolOrNull(offset)) as P;
     case 17:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 18:
       return (reader.readLongOrNull(offset)) as P;
     case 19:
@@ -5211,138 +5235,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      checkInPostMessageLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'checkInPostMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'checkInPostMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'checkInPostMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'checkInPostMessage',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'checkInPostMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'checkInPostMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'checkInPostMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      checkInPostMessageMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'checkInPostMessage',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'checkInPostMessage',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       checkInPostMessageIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'checkInPostMessage',
-        value: '',
-      ));
+      return query.listLength(
+        r'checkInPostMessage',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       checkInPostMessageIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'checkInPostMessage',
-        value: '',
-      ));
+      return query.listLength(
+        r'checkInPostMessage',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      checkInPostMessageLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'checkInPostMessage',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      checkInPostMessageLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'checkInPostMessage',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      checkInPostMessageLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'checkInPostMessage',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -24268,6 +24245,13 @@ extension RSDataModelQueryObject
     });
   }
 
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      checkInPostMessageElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'checkInPostMessage');
+    });
+  }
+
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> cinema(
       FilterQuery<RsDataMenuSectionModel> q) {
     return QueryBuilder.apply(this, (query) {
@@ -24735,20 +24719,6 @@ extension RSDataModelQuerySortBy
       sortByCallForRequestsDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'callForRequests', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortByCheckInPostMessage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'checkInPostMessage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortByCheckInPostMessageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'checkInPostMessage', Sort.desc);
     });
   }
 
@@ -26702,20 +26672,6 @@ extension RSDataModelQuerySortThenBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenByCheckInPostMessage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'checkInPostMessage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenByCheckInPostMessageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'checkInPostMessage', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByCheckInSurveyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'checkInSurveyId', Sort.asc);
@@ -28621,14 +28577,6 @@ extension RSDataModelQueryWhereDistinct
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QDistinct>
-      distinctByCheckInPostMessage({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'checkInPostMessage',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct>
       distinctByCheckInSurveyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'checkInSurveyId');
@@ -29763,7 +29711,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
       checkInPostMessageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'checkInPostMessage');
