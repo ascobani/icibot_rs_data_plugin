@@ -1,8 +1,10 @@
-import 'package:icibot_rs_data_plugin/src/service/icibot_rs_data_service.dart';
+import 'icibot_rs_data.dart';
 
 void main() async {
   IcIbotRSDataService service = IcIbotRSDataService();
   //await service.init();
   // await service.clearDB();
   await service.versionControlledUpdate(appHotelId: 30);
+  RSDataModel? data = await service.getRSDataModel();
+  print(data!.bars!.title!.elementAt(0).title);
 }

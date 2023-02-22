@@ -1,7 +1,7 @@
 part of 'rs_data_model.dart';
+
 @embedded
 class RSDataMenuItemsModel {
-
   int? icibotId;
   int? menuSectionId;
   List<RSDataTitleLanguageModel>? menuSectionName;
@@ -211,12 +211,19 @@ class RSDataMenuItemsModel {
           .toList();
     }
     menuCategoryId = json['menu_category_id'];
-    if (json['menu_category_name'] != '') {
-      menuCategoryName = jsonDecode(json['menu_category_name'])
+    
+    if (json['menu_category_name'].contains(':') &&
+        json['menu_category_name'] != '') {
+      menuCategoryName = jsonDecode(json['description'])
           .entries
           .map<RSDataTitleLanguageModel>(
               (e) => RSDataTitleLanguageModel.fromJson(e))
           .toList();
+    } else {
+      menuCategoryName = [
+        RSDataTitleLanguageModel(
+            title: json['menu_category_name'], locale: 'tr')
+      ];
     }
     hotelId = json['hotel_id'];
     if (json['name'] != '') {
@@ -226,12 +233,16 @@ class RSDataMenuItemsModel {
               (e) => RSDataTitleLanguageModel.fromJson(e))
           .toList();
     }
-    if (json['description'] != '') {
+    if (json['description'].contains(':') && json['description'] != '') {
       description = jsonDecode(json['description'])
           .entries
           .map<RSDataTitleLanguageModel>(
               (e) => RSDataTitleLanguageModel.fromJson(e))
           .toList();
+    } else {
+      description = [
+        RSDataTitleLanguageModel(title: json['description'], locale: 'tr')
+      ];
     }
     imageUrl = json['image_url'];
     email = json['email'];

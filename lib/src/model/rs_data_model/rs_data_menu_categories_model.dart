@@ -1,5 +1,3 @@
-
-
 part of 'rs_data_model.dart';
 
 @embedded
@@ -38,10 +36,15 @@ class RSDataMenuCategoriesModel {
               (e) => RSDataTitleLanguageModel.fromJson(e))
           .toList();
     } else {
-      title = [RSDataTitleLanguageModel(title: json?['title'], locale: 'default')];
+      title = [
+        RSDataTitleLanguageModel(title: json?['title'], locale: 'default')
+      ];
     }
     hotelId = json?['hotel_id'];
     menuItemId = json?['menu_item_id'];
+    menuItems = json?['menu_items']
+        .map<RSDataMenuItemsModel>((e) => RSDataMenuItemsModel.fromJson(e))
+        .toList();
     priority = json?['priority'];
     default0SurveyHeaderId = json?['default:0;survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json?['survey_header']);
