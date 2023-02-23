@@ -46,8 +46,8 @@ class RSDataModel {
   String? houseKeepingPhone;
   String? masterColor;
   bool? activated;
-  String? subscriptionStartDate;
-  String? subscriptionEndDate;
+  DateTime? subscriptionStartDate;
+  DateTime? subscriptionEndDate;
   String? address;
   String? postCode;
   String? city;
@@ -101,7 +101,7 @@ class RSDataModel {
   DateTime? updatedAt;
   int? mobileVersion;
   String? hotelChain;
-  String? mobileVersionPublishDate;
+  DateTime? mobileVersionPublishDate;
   String? mobilePublishBy;
   bool? onlineCheckIn;
   bool? onlineCheckInImage;
@@ -139,8 +139,8 @@ class RSDataModel {
   bool? openForYear;
   DateTime? openDate;
   DateTime? closeDate;
-  String? entryDate;
-  String? releaseDate;
+  DateTime? entryDate;
+  DateTime? releaseDate;
   String? babyAgeRange;
   String? childAgeRange;
   String? oldAgeRange;
@@ -462,8 +462,8 @@ class RSDataModel {
     houseKeepingPhone = json['house_keeping_phone'];
     masterColor = json['master_color'];
     activated = json['activated'];
-    subscriptionStartDate = json['subscription_start_date'];
-    subscriptionEndDate = json['subscription_end_date'];
+    subscriptionStartDate = DateTime.parse(json['subscription_start_date']);
+    subscriptionEndDate = DateTime.parse(json['subscription_end_date']);
     address = json['address'];
     postCode = json['post_code'];
     city = json['city'];
@@ -528,7 +528,7 @@ class RSDataModel {
     createdAt = DateTime.parse(json['created_at']);
     updatedAt = DateTime.parse(json['updated_at']);
     mobileVersion = json['mobile_version'];
-    mobileVersionPublishDate = json['mobile_version_publish_date'];
+    mobileVersionPublishDate = DateTime.parse(json['mobile_version_publish_date']);
     mobilePublishBy = json['mobile_publish_by'];
     hotelChain = json['hotel_chain'];
     onlineCheckIn = json['online_check_in'];
@@ -590,8 +590,8 @@ class RSDataModel {
     openForYear = json['open_for_year'];
     openDate = DateTime.parse(json['open_date']);
     closeDate = DateTime.parse(json['close_date']);
-    entryDate = json['entry_date'];
-    releaseDate = json['release_date'];
+    entryDate = DateTime.parse(json['entry_date']);
+    releaseDate = DateTime.parse(json['release_date']);
     babyAgeRange = json['baby_age_range'];
     childAgeRange = json['child_age_range'];
     oldAgeRange = json['old_age_range'];
