@@ -18,6 +18,18 @@ part 'rs_data_home_page_designer_model.dart';
 
 part 'rs_data_menu_item_title_and_descriptions_model.dart';
 
+part 'rs_data_menu_item_bullet_list.dart';
+
+part 'rs_data_menu_item_catalog_groups_model.dart';
+
+part 'rs_data_images_model.dart';
+
+part 'rs_data_item_catalogs.dart';
+
+part 'rs_data_menu_item_catalog_prices_model.dart';
+
+part 'rs_data_tags_model.dart';
+
 part 'rs_data_model.g.dart';
 
 @Collection()
@@ -684,8 +696,6 @@ class RSDataModel {
     giftCard = RsDataMenuSectionModel.fromJson(json['gift_card']);
     guestny = RsDataMenuSectionModel.fromJson(json['guestny']);
   }
-
-
 }
 
 List<RSDataTitleLanguageModel> getLanguage({required String data}) {

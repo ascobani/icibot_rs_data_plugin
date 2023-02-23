@@ -99,6 +99,8 @@ class RSDataMenuItemsModel {
   String? referenceCode;
   int? surveyHeaderId;
   RSDataSurveyHeaderModel? surveyHeader;
+  List<RSDataMenuItemCatalogGroupsModel>? menuItemCatalogGroups;
+  List<RSDataMenuItemBulletListModel>? bulletList;
 
   RSDataMenuItemsModel({
     this.icibotId,
@@ -106,6 +108,7 @@ class RSDataMenuItemsModel {
     this.menuSectionName,
     this.menuCategoryId,
     this.menuCategoryName,
+    this.bulletList,
     this.hotelId,
     this.name,
     this.description,
@@ -117,6 +120,7 @@ class RSDataMenuItemsModel {
     this.webSiteUrl,
     this.virtualTourUrl,
     this.dressCode,
+    this.menuItemCatalogGroups,
     this.locationDescription,
     this.activateMapLocation,
     this.mapLocation,
@@ -308,5 +312,17 @@ class RSDataMenuItemsModel {
     referenceCode = json['reference_code'];
     surveyHeaderId = json['survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json['survey_header']);
+    if (json['menu_item_catalog_groups'] != null) {
+      menuItemCatalogGroups = json['menu_item_catalog_groups']
+          .map<RSDataMenuItemCatalogGroupsModel>(
+              (e) => RSDataMenuItemCatalogGroupsModel.fromJson(e))
+          .toList();
+    }
+    if (json['menu_item_bullet_lists'] != null) {
+      bulletList = json['menu_item_bullet_lists']
+          .map<RSDataMenuItemBulletListModel>(
+              (e) => RSDataMenuItemBulletListModel.fromJson(e))
+          .toList();
+    }
   }
 }
