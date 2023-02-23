@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:icibot_rs_data_plugin/test/rich_data_service_test.dart';
 import 'package:isar/isar.dart';
-import 'package:test/test.dart';
 
 import '../../icibot_rs_data.dart';
 import '../manager/dio_manager/dio_manager.dart';

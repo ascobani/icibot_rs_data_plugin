@@ -44,7 +44,7 @@ class IsarService {
   /// Deletes the database
   Future<void> deleteDB() async {
     var isar = await db;
-    print('deleteDB');
+
     await isar.writeTxn(() => isar.clear());
   }
 

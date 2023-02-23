@@ -5,15 +5,12 @@ enum RichDataServiceStatus { success, error }
 
 /// [RichDataService] is a service class that is used to get data from the server.
 class RichDataService with DioManager {
-  final RichDataServiceTest richDataTest = RichDataServiceTest();
-
   /// Initializes the [RichDataService]
   Future<void> init() async {
     await dio.get('/3/MobileVersion.json?$timeStamp').catchError((e) {
-      print('init: ${RichDataServiceStatus.error}');
+
       throw e;
     });
-    print('init: ${RichDataServiceStatus.success}');
   }
 
   /// Gets the [RSDataModel] from the server
@@ -22,10 +19,9 @@ class RichDataService with DioManager {
   Future<RSDataModel> getRichData({required int appHotelId}) async {
     final response =
         await dio.get('/$appHotelId/RichData.gz?$timeStamp').catchError((e) {
-      print('getRichData: ${RichDataServiceStatus.error}');
       throw e;
     });
-    print('getRichData: ${RichDataServiceStatus.success}');
+
     return RSDataModel.fromJson(jsonDecode(response.data));
   }
 
@@ -36,10 +32,8 @@ class RichDataService with DioManager {
     final response = await dio
         .get('/$appHotelId/MobileVersion.json?$timeStamp')
         .catchError((e) {
-      print('getVersion: ${RichDataServiceStatus.error}');
       throw e;
     });
-    print('getVersion: ${RichDataServiceStatus.success}');
     return RSVersionModel.fromJson(response.data);
   }
 }
