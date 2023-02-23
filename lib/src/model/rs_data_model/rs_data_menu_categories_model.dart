@@ -29,17 +29,7 @@ class RSDataMenuCategoriesModel {
   RSDataMenuCategoriesModel.fromJson(Map<String, dynamic>? json) {
     icibotId = json?['id'];
     menuSectionId = json?['menu_section_id'];
-    if (json?['title'].contains(':') && json?['title'] != '') {
-      title = jsonDecode(json?['title'])
-          .entries
-          .map<RSDataTitleLanguageModel>(
-              (e) => RSDataTitleLanguageModel.fromJson(e))
-          .toList();
-    } else {
-      title = [
-        RSDataTitleLanguageModel(title: json?['title'], locale: 'default')
-      ];
-    }
+    title = getLanguage(data: json?['title']);
     hotelId = json?['hotel_id'];
     menuItemId = json?['menu_item_id'];
     if (json?['menu_items'] != null) {

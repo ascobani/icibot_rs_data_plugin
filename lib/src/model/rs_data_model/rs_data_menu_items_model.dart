@@ -212,17 +212,7 @@ class RSDataMenuItemsModel {
     menuCategoryName = getLanguage(data: json['menu_category_name']);
     hotelId = json['hotel_id'];
     name = getLanguage(data: json['name']);
-    if (json['description'].contains(':') && json['description'] != '') {
-      description = jsonDecode(json['description'])
-          .entries
-          .map<RSDataTitleLanguageModel>(
-              (e) => RSDataTitleLanguageModel.fromJson(e))
-          .toList();
-    } else {
-      description = [
-        RSDataTitleLanguageModel(title: json['description'], locale: 'tr')
-      ];
-    }
+    description = getLanguage(data: json['description']);
     imageUrl = json['image_url'];
     email = json['email'];
     phone = json['phone'];
