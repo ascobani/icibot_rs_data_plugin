@@ -110,7 +110,7 @@ class RSDataModel {
   String? welcomeMessage;
   int? surveyHeaderId;
   RSDataSurveyHeaderModel? surveyHeader;
-  String? surveyTitle;
+  List<RSDataTitleLanguageModel>? surveyTitle;
   String? surveyDescription;
   String? deliveryTimeOfDay;
   int? notificationPoint;
@@ -550,7 +550,7 @@ class RSDataModel {
     welcomeMessage = json['welcome_message'];
     surveyHeaderId = json['survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json['survey_header']);
-    surveyTitle = json['survey_title'];
+    surveyTitle = getLanguage(data: json['survey_title']);
     surveyDescription = json['survey_description'];
     deliveryTimeOfDay = json['delivery_time_of_day'];
     notificationPoint = json['notification_point'];
@@ -675,8 +675,7 @@ class RSDataModel {
     roomGuide = RsDataMenuSectionModel.fromJson(json['room_guide']);
     malls = RsDataMenuSectionModel.fromJson(json['malls']);
     upsell = RsDataMenuSectionModel.fromJson(json['upsell']);
-    frontOffice = RsDataMenuSectionModel.fromJson(
-        json['front_office']); //TODO: check this
+    frontOffice = RsDataMenuSectionModel.fromJson(json['front_office']);
     mice = RsDataMenuSectionModel.fromJson(json['mice']);
     wedding = RsDataMenuSectionModel.fromJson(json['wedding']);
     avm = RsDataMenuSectionModel.fromJson(json['avm']);
