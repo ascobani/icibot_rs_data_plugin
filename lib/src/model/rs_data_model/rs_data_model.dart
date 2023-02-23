@@ -54,21 +54,21 @@ class RSDataModel {
   String? country;
   String? currencyCode;
   String? deliveryDistanceType;
-  String? languages;
+  List<String>? languages;
   String? placeId;
   String? imageUrl;
   String? photos;
   double? rating;
-  String? webSiteUrl;
+  List<RSDataTitleLanguageModel>? webSiteUrl;
   String? latLng;
-  String? onlineReservationUrl;
+  List<RSDataTitleLanguageModel>? onlineReservationUrl;
   bool? directReservation;
   String? reservationMailAddress;
   String? groupHotels;
   String? googleAnalyticsLink;
   String? yandexMetricaLink;
   String? bingLink;
-  String? surveyUrl;
+  List<RSDataTitleLanguageModel>? surveyUrl;
   String? hotelInformationTr;
   String? hotelInformationEn;
   String? hotelInformationRu;
@@ -78,8 +78,8 @@ class RSDataModel {
   String? hotelInformationIr;
   String? hotelInformationEs;
   String? subColor;
-  String? kvkkLink;
-  String? privacyPolicyLink;
+  List<RSDataTitleLanguageModel>? kvkkLink;
+  List<RSDataTitleLanguageModel>? privacyPolicyLink;
   List<RSDataTitleLanguageModel>? accommodationContract;
   String? tripAdvisorLink;
   bool? mailVerificationForGuests;
@@ -107,7 +107,7 @@ class RSDataModel {
   bool? onlineCheckInImage;
   bool? onlineCheckInSignature;
   List<RSDataTitleLanguageModel>? checkInPostMessage;
-  String? welcomeMessage;
+  List<RSDataTitleLanguageModel>? welcomeMessage;
   int? surveyHeaderId;
   RSDataSurveyHeaderModel? surveyHeader;
   List<RSDataTitleLanguageModel>? surveyTitle;
@@ -150,8 +150,8 @@ class RSDataModel {
   bool? claimTrackingManager;
   String? hotelType;
   bool? mobilePayment;
-  String? title;
-  String? description;
+  List<RSDataTitleLanguageModel>? title;
+  List<RSDataTitleLanguageModel>? description;
   String? wifiName;
   String? wifiPassword;
   String? whatsappNo;
@@ -175,7 +175,7 @@ class RSDataModel {
   int? upsellItemId;
   String? hotelLanguage;
   String? hotelToken;
-  String? hotelTokenExpiredTime;
+  DateTime? hotelTokenExpiredTime;
   String? manuelRequestOwnerType;
   int? tokenExpireSeconds;
   String? onetimeInformation;
@@ -470,21 +470,25 @@ class RSDataModel {
     country = json['country'];
     currencyCode = json['currency_code'];
     deliveryDistanceType = json['delivery_distance_type'];
-    languages = json['languages'];
+    languages = json['languages']
+        .split(',')
+        .map((e) => e.trim())
+        .toList()
+        .cast<String>();
     placeId = json['place_id'];
     imageUrl = json['image_url'];
     photos = json['photos'];
     rating = json['rating'].toDouble();
-    webSiteUrl = json['web_site_url'];
+    webSiteUrl = getLanguage(data: json['web_site_url']);
     latLng = json['lat_lng'];
-    onlineReservationUrl = json['online_reservation_url'];
+    onlineReservationUrl = getLanguage(data: json['online_reservation_url']);
     directReservation = json['direct_reservation'];
     reservationMailAddress = json['reservation_mail_address'];
     groupHotels = json['group_hotels'];
     googleAnalyticsLink = json['google_analytics_link'];
     yandexMetricaLink = json['yandex_metrica_link'];
     bingLink = json['bing_link'];
-    surveyUrl = json['survey_url'];
+    surveyUrl = getLanguage(data: json['survey_url']);
     hotelInformationTr = json['hotel_information_tr'];
     hotelInformationEn = json['hotel_information_en'];
     hotelInformationRu = json['hotel_information_ru'];
@@ -494,8 +498,8 @@ class RSDataModel {
     hotelInformationIr = json['hotel_information_ir'];
     hotelInformationEs = json['hotel_information_es'];
     subColor = json['sub_color'];
-    kvkkLink = json['kvkk_link'];
-    privacyPolicyLink = json['privacy_policy_link'];
+    kvkkLink = getLanguage(data: json['kvkk_link']);
+    privacyPolicyLink = getLanguage(data: json['privacy_policy_link']);
     if (json['accommodation_contract'].contains(':') &&
         json['accommodation_contract'] != '') {
       accommodationContract = jsonDecode(json['accommodation_contract'])
@@ -528,7 +532,8 @@ class RSDataModel {
     createdAt = DateTime.parse(json['created_at']);
     updatedAt = DateTime.parse(json['updated_at']);
     mobileVersion = json['mobile_version'];
-    mobileVersionPublishDate = DateTime.parse(json['mobile_version_publish_date']);
+    mobileVersionPublishDate =
+        DateTime.parse(json['mobile_version_publish_date']);
     mobilePublishBy = json['mobile_publish_by'];
     hotelChain = json['hotel_chain'];
     onlineCheckIn = json['online_check_in'];
@@ -547,7 +552,7 @@ class RSDataModel {
             title: json['check_in_post_message'], locale: 'default')
       ];
     }
-    welcomeMessage = json['welcome_message'];
+    welcomeMessage = getLanguage(data: json['welcome_message']);
     surveyHeaderId = json['survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json['survey_header']);
     surveyTitle = getLanguage(data: json['survey_title']);
@@ -601,8 +606,8 @@ class RSDataModel {
     claimTrackingManager = json['claim_tracking_manager'];
     hotelType = json['hotel_type'];
     mobilePayment = json['mobile_payment'];
-    title = json['title'];
-    description = json['description'];
+    title = getLanguage(data: json['title']);
+    description = getLanguage(data: json['description']);
     wifiName = json['wifi_name'];
     wifiPassword = json['wifi_password'];
     whatsappNo = json['whatsapp_no'];
@@ -626,7 +631,7 @@ class RSDataModel {
     upsellItemId = json['upsell_item_id'];
     hotelLanguage = json['hotel_language'];
     hotelToken = json['hotel_token'];
-    hotelTokenExpiredTime = json['hotel_token_expired_time'];
+    hotelTokenExpiredTime = DateTime.parse(json['hotel_token_expired_time']);
     tokenExpireSeconds = json['token_expire_seconds'];
     manuelRequestOwnerType = json['manuel_request_owner_type'];
     onetimeInformation = json['onetime_information'];

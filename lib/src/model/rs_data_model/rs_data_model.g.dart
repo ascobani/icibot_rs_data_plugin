@@ -221,7 +221,8 @@ const RSDataModelSchema = CollectionSchema(
     r'description': PropertySchema(
       id: 38,
       name: r'description',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'directReservation': PropertySchema(
       id: 39,
@@ -384,7 +385,7 @@ const RSDataModelSchema = CollectionSchema(
     r'hotelTokenExpiredTime': PropertySchema(
       id: 69,
       name: r'hotelTokenExpiredTime',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'hotelType': PropertySchema(
       id: 70,
@@ -462,12 +463,13 @@ const RSDataModelSchema = CollectionSchema(
     r'kvkkLink': PropertySchema(
       id: 84,
       name: r'kvkkLink',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'languages': PropertySchema(
       id: 85,
       name: r'languages',
-      type: IsarType.string,
+      type: IsarType.stringList,
     ),
     r'latLng': PropertySchema(
       id: 86,
@@ -624,7 +626,8 @@ const RSDataModelSchema = CollectionSchema(
     r'onlineReservationUrl': PropertySchema(
       id: 115,
       name: r'onlineReservationUrl',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'openDate': PropertySchema(
       id: 116,
@@ -757,7 +760,8 @@ const RSDataModelSchema = CollectionSchema(
     r'privacyPolicyLink': PropertySchema(
       id: 139,
       name: r'privacyPolicyLink',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'productType': PropertySchema(
       id: 140,
@@ -993,7 +997,8 @@ const RSDataModelSchema = CollectionSchema(
     r'surveyUrl': PropertySchema(
       id: 184,
       name: r'surveyUrl',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'telegramNo': PropertySchema(
       id: 185,
@@ -1013,7 +1018,8 @@ const RSDataModelSchema = CollectionSchema(
     r'title': PropertySchema(
       id: 188,
       name: r'title',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'titleAndDescriptions': PropertySchema(
       id: 189,
@@ -1072,7 +1078,8 @@ const RSDataModelSchema = CollectionSchema(
     r'webSiteUrl': PropertySchema(
       id: 199,
       name: r'webSiteUrl',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'wedding': PropertySchema(
       id: 200,
@@ -1083,7 +1090,8 @@ const RSDataModelSchema = CollectionSchema(
     r'welcomeMessage': PropertySchema(
       id: 201,
       name: r'welcomeMessage',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'whatsappNo': PropertySchema(
       id: 202,
@@ -1333,9 +1341,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.description;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.description;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -1536,12 +1552,6 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.hotelTokenExpiredTime;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.hotelType;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -1596,15 +1606,29 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.kvkkLink;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.kvkkLink;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
-    final value = object.languages;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.languages;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += value.length * 3;
+        }
+      }
     }
   }
   {
@@ -1736,9 +1760,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.onlineReservationUrl;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.onlineReservationUrl;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -1888,9 +1920,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.privacyPolicyLink;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.privacyPolicyLink;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2120,9 +2160,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.surveyUrl;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.surveyUrl;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2144,9 +2192,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.title;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.title;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2207,9 +2263,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.webSiteUrl;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.webSiteUrl;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2221,9 +2285,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.welcomeMessage;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.welcomeMessage;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2352,7 +2424,12 @@ void _rSDataModelSerialize(
   );
   writer.writeString(offsets[36], object.deliveryDistanceType);
   writer.writeString(offsets[37], object.deliveryTimeOfDay);
-  writer.writeString(offsets[38], object.description);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[38],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.description,
+  );
   writer.writeBool(offsets[39], object.directReservation);
   writer.writeString(offsets[40], object.email);
   writer.writeDateTime(offsets[41], object.entryDate);
@@ -2423,7 +2500,7 @@ void _rSDataModelSerialize(
   writer.writeString(offsets[66], object.hotelInformationTr);
   writer.writeString(offsets[67], object.hotelLanguage);
   writer.writeString(offsets[68], object.hotelToken);
-  writer.writeString(offsets[69], object.hotelTokenExpiredTime);
+  writer.writeDateTime(offsets[69], object.hotelTokenExpiredTime);
   writer.writeString(offsets[70], object.hotelType);
   writer.writeString(offsets[71], object.houseKeepingPhone);
   writer.writeObject<RsDataMenuSectionModel>(
@@ -2453,8 +2530,13 @@ void _rSDataModelSerialize(
     RsDataMenuSectionModelSchema.serialize,
     object.kidsClub,
   );
-  writer.writeString(offsets[84], object.kvkkLink);
-  writer.writeString(offsets[85], object.languages);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[84],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.kvkkLink,
+  );
+  writer.writeStringList(offsets[85], object.languages);
   writer.writeString(offsets[86], object.latLng);
   writer.writeObject<RsDataMenuSectionModel>(
     offsets[87],
@@ -2519,7 +2601,12 @@ void _rSDataModelSerialize(
   writer.writeBool(offsets[112], object.onlineCheckIn);
   writer.writeBool(offsets[113], object.onlineCheckInImage);
   writer.writeBool(offsets[114], object.onlineCheckInSignature);
-  writer.writeString(offsets[115], object.onlineReservationUrl);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[115],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.onlineReservationUrl,
+  );
   writer.writeDateTime(offsets[116], object.openDate);
   writer.writeBool(offsets[117], object.openForYear);
   writer.writeBool(offsets[118], object.operationSystem);
@@ -2608,7 +2695,12 @@ void _rSDataModelSerialize(
     object.pools,
   );
   writer.writeString(offsets[138], object.postCode);
-  writer.writeString(offsets[139], object.privacyPolicyLink);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[139],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.privacyPolicyLink,
+  );
   writer.writeString(offsets[140], object.productType);
   writer.writeBool(offsets[141], object.qrReader);
   writer.writeDouble(offsets[142], object.rating);
@@ -2708,11 +2800,21 @@ void _rSDataModelSerialize(
     RSDataTitleLanguageModelSchema.serialize,
     object.surveyTitle,
   );
-  writer.writeString(offsets[184], object.surveyUrl);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[184],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.surveyUrl,
+  );
   writer.writeString(offsets[185], object.telegramNo);
   writer.writeString(offsets[186], object.thirdLevelAlertList);
   writer.writeString(offsets[187], object.timeZone);
-  writer.writeString(offsets[188], object.title);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[188],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.title,
+  );
   writer.writeObjectList<RSDataMenuItemTitleAndDescriptionModel>(
     offsets[189],
     allOffsets,
@@ -2743,14 +2845,24 @@ void _rSDataModelSerialize(
     object.video,
   );
   writer.writeString(offsets[198], object.virtualTourUrl);
-  writer.writeString(offsets[199], object.webSiteUrl);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[199],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.webSiteUrl,
+  );
   writer.writeObject<RsDataMenuSectionModel>(
     offsets[200],
     allOffsets,
     RsDataMenuSectionModelSchema.serialize,
     object.wedding,
   );
-  writer.writeString(offsets[201], object.welcomeMessage);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[201],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.welcomeMessage,
+  );
   writer.writeString(offsets[202], object.whatsappNo);
   writer.writeString(offsets[203], object.wifiName);
   writer.writeString(offsets[204], object.wifiPassword);
@@ -2848,7 +2960,12 @@ RSDataModel _rSDataModelDeserialize(
     ),
     deliveryDistanceType: reader.readStringOrNull(offsets[36]),
     deliveryTimeOfDay: reader.readStringOrNull(offsets[37]),
-    description: reader.readStringOrNull(offsets[38]),
+    description: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[38],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     directReservation: reader.readBoolOrNull(offsets[39]),
     email: reader.readStringOrNull(offsets[40]),
     entryDate: reader.readDateTimeOrNull(offsets[41]),
@@ -2914,7 +3031,7 @@ RSDataModel _rSDataModelDeserialize(
     hotelInformationTr: reader.readStringOrNull(offsets[66]),
     hotelLanguage: reader.readStringOrNull(offsets[67]),
     hotelToken: reader.readStringOrNull(offsets[68]),
-    hotelTokenExpiredTime: reader.readStringOrNull(offsets[69]),
+    hotelTokenExpiredTime: reader.readDateTimeOrNull(offsets[69]),
     hotelType: reader.readStringOrNull(offsets[70]),
     houseKeepingPhone: reader.readStringOrNull(offsets[71]),
     housekeeping: reader.readObjectOrNull<RsDataMenuSectionModel>(
@@ -2941,8 +3058,13 @@ RSDataModel _rSDataModelDeserialize(
       RsDataMenuSectionModelSchema.deserialize,
       allOffsets,
     ),
-    kvkkLink: reader.readStringOrNull(offsets[84]),
-    languages: reader.readStringOrNull(offsets[85]),
+    kvkkLink: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[84],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
+    languages: reader.readStringList(offsets[85]),
     latLng: reader.readStringOrNull(offsets[86]),
     life: reader.readObjectOrNull<RsDataMenuSectionModel>(
       offsets[87],
@@ -3000,7 +3122,12 @@ RSDataModel _rSDataModelDeserialize(
     onlineCheckIn: reader.readBoolOrNull(offsets[112]),
     onlineCheckInImage: reader.readBoolOrNull(offsets[113]),
     onlineCheckInSignature: reader.readBoolOrNull(offsets[114]),
-    onlineReservationUrl: reader.readStringOrNull(offsets[115]),
+    onlineReservationUrl: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[115],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     openDate: reader.readDateTimeOrNull(offsets[116]),
     openForYear: reader.readBoolOrNull(offsets[117]),
     operationSystem: reader.readBoolOrNull(offsets[118]),
@@ -3071,7 +3198,12 @@ RSDataModel _rSDataModelDeserialize(
       allOffsets,
     ),
     postCode: reader.readStringOrNull(offsets[138]),
-    privacyPolicyLink: reader.readStringOrNull(offsets[139]),
+    privacyPolicyLink: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[139],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     productType: reader.readStringOrNull(offsets[140]),
     qrReader: reader.readBoolOrNull(offsets[141]),
     rating: reader.readDoubleOrNull(offsets[142]),
@@ -3162,11 +3294,21 @@ RSDataModel _rSDataModelDeserialize(
       allOffsets,
       RSDataTitleLanguageModel(),
     ),
-    surveyUrl: reader.readStringOrNull(offsets[184]),
+    surveyUrl: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[184],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     telegramNo: reader.readStringOrNull(offsets[185]),
     thirdLevelAlertList: reader.readStringOrNull(offsets[186]),
     timeZone: reader.readStringOrNull(offsets[187]),
-    title: reader.readStringOrNull(offsets[188]),
+    title: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[188],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     titleAndDescriptions:
         reader.readObjectList<RSDataMenuItemTitleAndDescriptionModel>(
       offsets[189],
@@ -3195,13 +3337,23 @@ RSDataModel _rSDataModelDeserialize(
       allOffsets,
     ),
     virtualTourUrl: reader.readStringOrNull(offsets[198]),
-    webSiteUrl: reader.readStringOrNull(offsets[199]),
+    webSiteUrl: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[199],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     wedding: reader.readObjectOrNull<RsDataMenuSectionModel>(
       offsets[200],
       RsDataMenuSectionModelSchema.deserialize,
       allOffsets,
     ),
-    welcomeMessage: reader.readStringOrNull(offsets[201]),
+    welcomeMessage: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[201],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     whatsappNo: reader.readStringOrNull(offsets[202]),
     wifiName: reader.readStringOrNull(offsets[203]),
     wifiPassword: reader.readStringOrNull(offsets[204]),
@@ -3346,7 +3498,12 @@ P _rSDataModelDeserializeProp<P>(
     case 37:
       return (reader.readStringOrNull(offset)) as P;
     case 38:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 39:
       return (reader.readBoolOrNull(offset)) as P;
     case 40:
@@ -3443,7 +3600,7 @@ P _rSDataModelDeserializeProp<P>(
     case 68:
       return (reader.readStringOrNull(offset)) as P;
     case 69:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 70:
       return (reader.readStringOrNull(offset)) as P;
     case 71:
@@ -3485,9 +3642,14 @@ P _rSDataModelDeserializeProp<P>(
         allOffsets,
       )) as P;
     case 84:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 85:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readStringList(offset)) as P;
     case 86:
       return (reader.readStringOrNull(offset)) as P;
     case 87:
@@ -3575,7 +3737,12 @@ P _rSDataModelDeserializeProp<P>(
     case 114:
       return (reader.readBoolOrNull(offset)) as P;
     case 115:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 116:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 117:
@@ -3675,7 +3842,12 @@ P _rSDataModelDeserializeProp<P>(
     case 138:
       return (reader.readStringOrNull(offset)) as P;
     case 139:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 140:
       return (reader.readStringOrNull(offset)) as P;
     case 141:
@@ -3811,7 +3983,12 @@ P _rSDataModelDeserializeProp<P>(
         RSDataTitleLanguageModel(),
       )) as P;
     case 184:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 185:
       return (reader.readStringOrNull(offset)) as P;
     case 186:
@@ -3819,7 +3996,12 @@ P _rSDataModelDeserializeProp<P>(
     case 187:
       return (reader.readStringOrNull(offset)) as P;
     case 188:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 189:
       return (reader.readObjectList<RSDataMenuItemTitleAndDescriptionModel>(
         offset,
@@ -3858,7 +4040,12 @@ P _rSDataModelDeserializeProp<P>(
     case 198:
       return (reader.readStringOrNull(offset)) as P;
     case 199:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 200:
       return (reader.readObjectOrNull<RsDataMenuSectionModel>(
         offset,
@@ -3866,7 +4053,12 @@ P _rSDataModelDeserializeProp<P>(
         allOffsets,
       )) as P;
     case 201:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 202:
       return (reader.readStringOrNull(offset)) as P;
     case 203:
@@ -7226,138 +7418,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      descriptionLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'description',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      descriptionMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'description',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'description',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       descriptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'description',
-        value: '',
-      ));
+      return query.listLength(
+        r'description',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       descriptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'description',
-        value: '',
-      ));
+      return query.listLength(
+        r'description',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      descriptionLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'description',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      descriptionLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'description',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      descriptionLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'description',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -10884,58 +11029,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      hotelTokenExpiredTimeEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      hotelTokenExpiredTimeEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'hotelTokenExpiredTime',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       hotelTokenExpiredTimeGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'hotelTokenExpiredTime',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       hotelTokenExpiredTimeLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'hotelTokenExpiredTime',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       hotelTokenExpiredTimeBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -10944,78 +11080,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      hotelTokenExpiredTimeStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'hotelTokenExpiredTime',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      hotelTokenExpiredTimeEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'hotelTokenExpiredTime',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      hotelTokenExpiredTimeContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'hotelTokenExpiredTime',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      hotelTokenExpiredTimeMatches(String pattern,
-          {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'hotelTokenExpiredTime',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      hotelTokenExpiredTimeIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'hotelTokenExpiredTime',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      hotelTokenExpiredTimeIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'hotelTokenExpiredTime',
-        value: '',
       ));
     });
   }
@@ -12128,138 +12192,92 @@ extension RSDataModelQueryFilter
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> kvkkLinkEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'kvkkLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      kvkkLinkGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
+      kvkkLinkLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'kvkkLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      kvkkLinkLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'kvkkLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> kvkkLinkBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'kvkkLink',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      kvkkLinkStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'kvkkLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      kvkkLinkEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'kvkkLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      kvkkLinkContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'kvkkLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> kvkkLinkMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'kvkkLink',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'kvkkLink',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       kvkkLinkIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'kvkkLink',
-        value: '',
-      ));
+      return query.listLength(
+        r'kvkkLink',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       kvkkLinkIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'kvkkLink',
-        value: '',
-      ));
+      return query.listLength(
+        r'kvkkLink',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      kvkkLinkLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'kvkkLink',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      kvkkLinkLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'kvkkLink',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      kvkkLinkLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'kvkkLink',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -12282,8 +12300,8 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesEqualTo(
-    String? value, {
+      languagesElementEqualTo(
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -12296,8 +12314,8 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesGreaterThan(
-    String? value, {
+      languagesElementGreaterThan(
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -12312,8 +12330,8 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesLessThan(
-    String? value, {
+      languagesElementLessThan(
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -12328,9 +12346,9 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesBetween(
-    String? lower,
-    String? upper, {
+      languagesElementBetween(
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -12348,7 +12366,7 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesStartsWith(
+      languagesElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -12362,7 +12380,7 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesEndsWith(
+      languagesElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -12376,7 +12394,7 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesContains(String value, {bool caseSensitive = true}) {
+      languagesElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'languages',
@@ -12387,7 +12405,7 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesMatches(String pattern, {bool caseSensitive = true}) {
+      languagesElementMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'languages',
@@ -12398,7 +12416,7 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesIsEmpty() {
+      languagesElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'languages',
@@ -12408,12 +12426,101 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      languagesIsNotEmpty() {
+      languagesElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'languages',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      languagesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'languages',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      languagesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'languages',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      languagesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'languages',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      languagesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'languages',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      languagesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'languages',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      languagesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'languages',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -14819,138 +14926,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      onlineReservationUrlLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'onlineReservationUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'onlineReservationUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'onlineReservationUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'onlineReservationUrl',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'onlineReservationUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'onlineReservationUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'onlineReservationUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      onlineReservationUrlMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'onlineReservationUrl',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'onlineReservationUrl',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       onlineReservationUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'onlineReservationUrl',
-        value: '',
-      ));
+      return query.listLength(
+        r'onlineReservationUrl',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       onlineReservationUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'onlineReservationUrl',
-        value: '',
-      ));
+      return query.listLength(
+        r'onlineReservationUrl',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      onlineReservationUrlLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'onlineReservationUrl',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      onlineReservationUrlLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'onlineReservationUrl',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      onlineReservationUrlLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'onlineReservationUrl',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -16392,138 +16452,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      privacyPolicyLinkLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'privacyPolicyLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'privacyPolicyLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'privacyPolicyLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'privacyPolicyLink',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'privacyPolicyLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'privacyPolicyLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'privacyPolicyLink',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      privacyPolicyLinkMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'privacyPolicyLink',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'privacyPolicyLink',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       privacyPolicyLinkIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'privacyPolicyLink',
-        value: '',
-      ));
+      return query.listLength(
+        r'privacyPolicyLink',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       privacyPolicyLinkIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'privacyPolicyLink',
-        value: '',
-      ));
+      return query.listLength(
+        r'privacyPolicyLink',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      privacyPolicyLinkLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'privacyPolicyLink',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      privacyPolicyLinkLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'privacyPolicyLink',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      privacyPolicyLinkLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'privacyPolicyLink',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -20859,138 +20872,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      surveyUrlLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'surveyUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'surveyUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'surveyUrl',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'surveyUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'surveyUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'surveyUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyUrlMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'surveyUrl',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'surveyUrl',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyUrl',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyUrl',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'surveyUrl',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyUrl',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyUrlLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyUrl',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyUrlLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyUrl',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyUrlLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyUrl',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -21472,135 +21438,91 @@ extension RSDataModelQueryFilter
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'title',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      titleGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
+      titleLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'title',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'title',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'title',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'title',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'title',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'title',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'title',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'title',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'title',
-        value: '',
-      ));
+      return query.listLength(
+        r'title',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       titleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'title',
-        value: '',
-      ));
+      return query.listLength(
+        r'title',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      titleLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'title',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      titleLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'title',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      titleLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'title',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -22463,138 +22385,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      webSiteUrlLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'webSiteUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'webSiteUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'webSiteUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'webSiteUrl',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'webSiteUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'webSiteUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'webSiteUrl',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      webSiteUrlMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'webSiteUrl',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'webSiteUrl',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       webSiteUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'webSiteUrl',
-        value: '',
-      ));
+      return query.listLength(
+        r'webSiteUrl',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       webSiteUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'webSiteUrl',
-        value: '',
-      ));
+      return query.listLength(
+        r'webSiteUrl',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      webSiteUrlLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'webSiteUrl',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      webSiteUrlLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'webSiteUrl',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      webSiteUrlLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'webSiteUrl',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -22635,138 +22510,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      welcomeMessageLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'welcomeMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'welcomeMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'welcomeMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'welcomeMessage',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'welcomeMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'welcomeMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'welcomeMessage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      welcomeMessageMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'welcomeMessage',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'welcomeMessage',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       welcomeMessageIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'welcomeMessage',
-        value: '',
-      ));
+      return query.listLength(
+        r'welcomeMessage',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       welcomeMessageIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'welcomeMessage',
-        value: '',
-      ));
+      return query.listLength(
+        r'welcomeMessage',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      welcomeMessageLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'welcomeMessage',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      welcomeMessageLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'welcomeMessage',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      welcomeMessageLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'welcomeMessage',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -23465,6 +23293,13 @@ extension RSDataModelQueryObject
     });
   }
 
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      descriptionElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'description');
+    });
+  }
+
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> events(
       FilterQuery<RsDataMenuSectionModel> q) {
     return QueryBuilder.apply(this, (query) {
@@ -23542,6 +23377,13 @@ extension RSDataModelQueryObject
     });
   }
 
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> kvkkLinkElement(
+      FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'kvkkLink');
+    });
+  }
+
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> life(
       FilterQuery<RsDataMenuSectionModel> q) {
     return QueryBuilder.apply(this, (query) {
@@ -23588,6 +23430,13 @@ extension RSDataModelQueryObject
       FilterQuery<RsDataMenuSectionModel> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'news');
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      onlineReservationUrlElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'onlineReservationUrl');
     });
   }
 
@@ -23682,6 +23531,13 @@ extension RSDataModelQueryObject
     });
   }
 
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      privacyPolicyLinkElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'privacyPolicyLink');
+    });
+  }
+
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> restaurants(
       FilterQuery<RsDataMenuSectionModel> q) {
     return QueryBuilder.apply(this, (query) {
@@ -23760,6 +23616,20 @@ extension RSDataModelQueryObject
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyUrlElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'surveyUrl');
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> titleElement(
+      FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'title');
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       titleAndDescriptionsElement(
           FilterQuery<RSDataMenuItemTitleAndDescriptionModel> q) {
     return QueryBuilder.apply(this, (query) {
@@ -23788,10 +23658,24 @@ extension RSDataModelQueryObject
     });
   }
 
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      webSiteUrlElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'webSiteUrl');
+    });
+  }
+
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> wedding(
       FilterQuery<RsDataMenuSectionModel> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'wedding');
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      welcomeMessageElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'welcomeMessage');
     });
   }
 }
@@ -24145,18 +24029,6 @@ extension RSDataModelQuerySortBy
       sortByDeliveryTimeOfDayDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'deliveryTimeOfDay', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByDescription() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'description', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByDescriptionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'description', Sort.desc);
     });
   }
 
@@ -24613,30 +24485,6 @@ extension RSDataModelQuerySortBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByKvkkLink() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'kvkkLink', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByKvkkLinkDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'kvkkLink', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByLanguages() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languages', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByLanguagesDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languages', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByLatLng() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'latLng', Sort.asc);
@@ -24931,20 +24779,6 @@ extension RSDataModelQuerySortBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortByOnlineReservationUrl() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineReservationUrl', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortByOnlineReservationUrlDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineReservationUrl', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByOpenDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'openDate', Sort.asc);
@@ -25065,20 +24899,6 @@ extension RSDataModelQuerySortBy
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByPostCodeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'postCode', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortByPrivacyPolicyLink() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'privacyPolicyLink', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortByPrivacyPolicyLinkDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'privacyPolicyLink', Sort.desc);
     });
   }
 
@@ -25507,18 +25327,6 @@ extension RSDataModelQuerySortBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortBySurveyUrl() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyUrl', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortBySurveyUrlDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyUrl', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByTelegramNo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'telegramNo', Sort.asc);
@@ -25554,18 +25362,6 @@ extension RSDataModelQuerySortBy
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByTimeZoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'timeZone', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByTitle() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'title', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByTitleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'title', Sort.desc);
     });
   }
 
@@ -25643,31 +25439,6 @@ extension RSDataModelQuerySortBy
       sortByVirtualTourUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'virtualTourUrl', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByWebSiteUrl() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'webSiteUrl', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByWebSiteUrlDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'webSiteUrl', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortByWelcomeMessage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'welcomeMessage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortByWelcomeMessageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'welcomeMessage', Sort.desc);
     });
   }
 
@@ -26069,18 +25840,6 @@ extension RSDataModelQuerySortThenBy
       thenByDeliveryTimeOfDayDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'deliveryTimeOfDay', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByDescription() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'description', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByDescriptionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'description', Sort.desc);
     });
   }
 
@@ -26549,30 +26308,6 @@ extension RSDataModelQuerySortThenBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByKvkkLink() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'kvkkLink', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByKvkkLinkDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'kvkkLink', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByLanguages() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languages', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByLanguagesDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languages', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByLatLng() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'latLng', Sort.asc);
@@ -26867,20 +26602,6 @@ extension RSDataModelQuerySortThenBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenByOnlineReservationUrl() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineReservationUrl', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenByOnlineReservationUrlDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineReservationUrl', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByOpenDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'openDate', Sort.asc);
@@ -27001,20 +26722,6 @@ extension RSDataModelQuerySortThenBy
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByPostCodeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'postCode', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenByPrivacyPolicyLink() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'privacyPolicyLink', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenByPrivacyPolicyLinkDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'privacyPolicyLink', Sort.desc);
     });
   }
 
@@ -27443,18 +27150,6 @@ extension RSDataModelQuerySortThenBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenBySurveyUrl() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyUrl', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenBySurveyUrlDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyUrl', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByTelegramNo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'telegramNo', Sort.asc);
@@ -27490,18 +27185,6 @@ extension RSDataModelQuerySortThenBy
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByTimeZoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'timeZone', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByTitle() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'title', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByTitleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'title', Sort.desc);
     });
   }
 
@@ -27579,31 +27262,6 @@ extension RSDataModelQuerySortThenBy
       thenByVirtualTourUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'virtualTourUrl', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByWebSiteUrl() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'webSiteUrl', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByWebSiteUrlDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'webSiteUrl', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenByWelcomeMessage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'welcomeMessage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenByWelcomeMessageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'welcomeMessage', Sort.desc);
     });
   }
 
@@ -27848,13 +27506,6 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByDescription(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QDistinct>
       distinctByDirectReservation() {
     return QueryBuilder.apply(this, (query) {
@@ -28022,10 +27673,9 @@ extension RSDataModelQueryWhereDistinct
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QDistinct>
-      distinctByHotelTokenExpiredTime({bool caseSensitive = true}) {
+      distinctByHotelTokenExpiredTime() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'hotelTokenExpiredTime',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'hotelTokenExpiredTime');
     });
   }
 
@@ -28107,17 +27757,9 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByKvkkLink(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByLanguages() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'kvkkLink', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByLanguages(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'languages', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'languages');
     });
   }
 
@@ -28280,14 +27922,6 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct>
-      distinctByOnlineReservationUrl({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'onlineReservationUrl',
-          caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByOpenDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'openDate');
@@ -28354,14 +27988,6 @@ extension RSDataModelQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'postCode', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByPrivacyPolicyLink(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'privacyPolicyLink',
-          caseSensitive: caseSensitive);
     });
   }
 
@@ -28599,13 +28225,6 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctBySurveyUrl(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'surveyUrl', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByTelegramNo(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -28625,13 +28244,6 @@ extension RSDataModelQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'timeZone', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByTitle(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'title', caseSensitive: caseSensitive);
     });
   }
 
@@ -28673,21 +28285,6 @@ extension RSDataModelQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'virtualTourUrl',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByWebSiteUrl(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'webSiteUrl', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByWelcomeMessage(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'welcomeMessage',
           caseSensitive: caseSensitive);
     });
   }
@@ -28975,7 +28572,8 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> descriptionProperty() {
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
+      descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
     });
@@ -29183,7 +28781,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations>
       hotelTokenExpiredTimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hotelTokenExpiredTime');
@@ -29284,13 +28882,15 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> kvkkLinkProperty() {
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
+      kvkkLinkProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'kvkkLink');
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> languagesProperty() {
+  QueryBuilder<RSDataModel, List<String>?, QQueryOperations>
+      languagesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'languages');
     });
@@ -29492,7 +29092,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
       onlineReservationUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'onlineReservationUrl');
@@ -29651,7 +29251,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
       privacyPolicyLinkProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'privacyPolicyLink');
@@ -29944,7 +29544,8 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> surveyUrlProperty() {
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
+      surveyUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'surveyUrl');
     });
@@ -29969,7 +29570,8 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> titleProperty() {
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
+      titleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'title');
     });
@@ -30042,7 +29644,8 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> webSiteUrlProperty() {
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
+      webSiteUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'webSiteUrl');
     });
@@ -30055,7 +29658,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
       welcomeMessageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'welcomeMessage');
