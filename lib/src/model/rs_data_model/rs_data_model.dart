@@ -619,7 +619,7 @@ class RSDataModel {
     manuelRequestOwnerType = json['manuel_request_owner_type'];
     onetimeInformation = json['onetime_information'];
     isAccountVerifyNecessaryForRequest =
-    json['is_account_verify_necessary_for_request'];
+        json['is_account_verify_necessary_for_request'];
     isClosedStaffChat = json['is_closed_staff_chat'];
     operationSystem = json['operation_system'];
     loyaltyManagement = json['loyalty_management'];
@@ -683,5 +683,21 @@ class RSDataModel {
     services = RsDataMenuSectionModel.fromJson(json['services']);
     giftCard = RsDataMenuSectionModel.fromJson(json['gift_card']);
     guestny = RsDataMenuSectionModel.fromJson(json['guestny']);
+  }
+
+
+}
+
+List<RSDataTitleLanguageModel> getLanguage({required String data}) {
+  if (data.contains(':') && data != '') {
+    return jsonDecode(data)
+        .entries
+        .map<RSDataTitleLanguageModel>(
+            (e) => RSDataTitleLanguageModel.fromJson(e))
+        .toList();
+  } else {
+    return [
+      RSDataTitleLanguageModel(title: data, locale: 'tr'),
+    ];
   }
 }

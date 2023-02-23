@@ -42,8 +42,6 @@ class IsarService {
   }
 
   /// Deletes the database
-  ///
-  /// Currently not working
   Future<void> deleteDB() async {
     var isar = await db;
     print('deleteDB');

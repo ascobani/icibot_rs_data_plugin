@@ -42,9 +42,11 @@ class RSDataMenuCategoriesModel {
     }
     hotelId = json?['hotel_id'];
     menuItemId = json?['menu_item_id'];
-    menuItems = json?['menu_items']
-        .map<RSDataMenuItemsModel>((e) => RSDataMenuItemsModel.fromJson(e))
-        .toList();
+    if (json?['menu_items'] != null) {
+      menuItems = json?['menu_items']
+          .map<RSDataMenuItemsModel>((e) => RSDataMenuItemsModel.fromJson(e))
+          .toList();
+    }
     priority = json?['priority'];
     default0SurveyHeaderId = json?['default:0;survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json?['survey_header']);

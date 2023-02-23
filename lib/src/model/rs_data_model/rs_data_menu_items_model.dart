@@ -203,36 +203,11 @@ class RSDataMenuItemsModel {
   RSDataMenuItemsModel.fromJson(Map<String, dynamic> json) {
     icibotId = json['id'];
     menuSectionId = json['menu_section_id'];
-    if (json['menu_section_name'] != '') {
-      menuSectionName = jsonDecode(json['menu_section_name'])
-          .entries
-          .map<RSDataTitleLanguageModel>(
-              (e) => RSDataTitleLanguageModel.fromJson(e))
-          .toList();
-    }
+    menuSectionName = getLanguage(data: json['menu_section_name']);
     menuCategoryId = json['menu_category_id'];
-    
-    if (json['menu_category_name'].contains(':') &&
-        json['menu_category_name'] != '') {
-      menuCategoryName = jsonDecode(json['description'])
-          .entries
-          .map<RSDataTitleLanguageModel>(
-              (e) => RSDataTitleLanguageModel.fromJson(e))
-          .toList();
-    } else {
-      menuCategoryName = [
-        RSDataTitleLanguageModel(
-            title: json['menu_category_name'], locale: 'tr')
-      ];
-    }
+    menuCategoryName = getLanguage(data: json['menu_category_name']);
     hotelId = json['hotel_id'];
-    if (json['name'] != '') {
-      name = jsonDecode(json['name'])
-          .entries
-          .map<RSDataTitleLanguageModel>(
-              (e) => RSDataTitleLanguageModel.fromJson(e))
-          .toList();
-    }
+    name = getLanguage(data: json['name']);
     if (json['description'].contains(':') && json['description'] != '') {
       description = jsonDecode(json['description'])
           .entries

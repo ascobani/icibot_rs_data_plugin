@@ -4,7 +4,7 @@ void main() async {
   IcIbotRSDataService service = IcIbotRSDataService();
   //await service.init();
   // await service.clearDB();
-  await service.versionControlledUpdate(appHotelId: 30);
+  await service.versionControlledUpdate(appHotelId: 3);
   RSDataModel? data = await service.getRSDataModel();
   print(data!.bars!.title!.elementAt(0).title);
 }

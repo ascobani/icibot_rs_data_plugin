@@ -7,7 +7,6 @@ import 'package:test/test.dart';
 import '../../icibot_rs_data.dart';
 import '../manager/dio_manager/dio_manager.dart';
 
-
 part 'isar_service.dart';
 
 part 'rich_data_service.dart';
@@ -24,9 +23,6 @@ class IcIbotRSDataService {
     await IsarService().openDB();
     await RichDataService().init();
   }
-
-  ///Uses the [IsarService] to open the database
-  late Future<Isar> db;
 
   /// Gets the [RSDataModel] from the database if version did not change or there is no [RSDataModel] in the database
   ///

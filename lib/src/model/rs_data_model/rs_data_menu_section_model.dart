@@ -1,6 +1,5 @@
 part of 'rs_data_model.dart';
 
-
 @embedded
 class RsDataMenuSectionModel {
   int? icibotId;
@@ -37,15 +36,7 @@ class RsDataMenuSectionModel {
     menuAreaId = json?['menuAreaId'];
     catalogueActive = json?['catalogueActive'];
     timetableAndReservationActive = json?['timetableAndReservationActive'];
-    if (json?['title'].contains(':') && json?['title'] != '') {
-      title = jsonDecode(json?['title'])
-          .entries
-          .map<RSDataTitleLanguageModel>(
-              (e) => RSDataTitleLanguageModel.fromJson(e))
-          .toList();
-    } else {
-      title = [RSDataTitleLanguageModel(title: json?['title'], locale: 'default')];
-    }
+    title = getLanguage(data: json?['title']);
     theShow = json?['theShow'];
     surveyHeaderId = json?['surveyHeaderId'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json?['survey_header']);
