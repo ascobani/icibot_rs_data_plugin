@@ -97,8 +97,8 @@ class RSDataModel {
   String? smFacebookUrl;
   String? smTwitterUrl;
   String? smVkontakteUrl;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   int? mobileVersion;
   String? hotelChain;
   String? mobileVersionPublishDate;
@@ -137,8 +137,8 @@ class RSDataModel {
   String? googlePlayLink;
   String? firebaseLink;
   bool? openForYear;
-  String? openDate;
-  String? closeDate;
+  DateTime? openDate;
+  DateTime? closeDate;
   String? entryDate;
   String? releaseDate;
   String? babyAgeRange;
@@ -525,8 +525,8 @@ class RSDataModel {
     smFacebookUrl = json['sm_facebook_url'];
     smTwitterUrl = json['sm_twitter_url'];
     smVkontakteUrl = json['sm_vkontakte_url'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    createdAt = DateTime.parse(json['created_at']);
+    updatedAt = DateTime.parse(json['updated_at']);
     mobileVersion = json['mobile_version'];
     mobileVersionPublishDate = json['mobile_version_publish_date'];
     mobilePublishBy = json['mobile_publish_by'];
@@ -588,8 +588,8 @@ class RSDataModel {
     googlePlayLink = json['google_play_link'];
     firebaseLink = json['firebase_link'];
     openForYear = json['open_for_year'];
-    openDate = json['open_date'];
-    closeDate = json['close_date'];
+    openDate = DateTime.parse(json['open_date']);
+    closeDate = DateTime.parse(json['close_date']);
     entryDate = json['entry_date'];
     releaseDate = json['release_date'];
     babyAgeRange = json['baby_age_range'];

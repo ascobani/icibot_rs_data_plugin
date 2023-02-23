@@ -4,11 +4,7 @@ void main() async {
   IcIbotRSDataService service = IcIbotRSDataService();
   //await service.init();
   //await service.clearDB();
-  await service.versionControlledUpdate(appHotelId: 3);
+  await service.versionControlledUpdate(appHotelId: 30);
   RSDataModel? data = await service.getRSDataModel();
-  print(data?.bars?.title?.getSelectedLocale('trsda'));
-print(data?.bars?.title?.getSelectedLocale('en'));
-
-
-
+  print(data?.bars?.title?.getSelectedLocale('tr'));
 }
