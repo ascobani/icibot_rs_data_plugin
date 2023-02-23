@@ -7,4 +7,10 @@ void main() async {
   await service.versionControlledUpdate(appHotelId: 30);
   RSDataModel? data = await service.getRSDataModel();
   print(data?.bars?.title?.getSelectedLocale('tr'));
+
+  RSVersionModel? version = await service.getRSVersionModel();
+
+  print(version?.getDate);
+
+  service.clearDB();
 }
