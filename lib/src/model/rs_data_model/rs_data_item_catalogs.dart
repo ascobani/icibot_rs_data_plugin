@@ -20,10 +20,10 @@ class RSDataMenuItemCatalogsModel {
   String? expirePeriodType;
   int? expirePeriod;
   List<RSDataMenuItemCatalogPricesModel>? menuItemCatalogPrices;
-  List<String>? restrictedMenuItemCapacities; //TODO Check the model
-  List<String>? menuItemCatalogModifierGroups; //TODO Check the model
+  List<String>? restrictedMenuItemCapacities;
+  List<String>? menuItemCatalogModifierGroups;
   List<RSDataImagesModel>? images;
-  List<RSDataTagsModel>? tags; // TODO: CheckModel
+  List<RSDataTagsModel>? tags;
 
   RSDataMenuItemCatalogsModel({
     this.id,
