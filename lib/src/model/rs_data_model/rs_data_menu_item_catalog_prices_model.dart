@@ -7,11 +7,11 @@ class RSDataMenuItemCatalogPricesModel {
   int? menuItemCatalogModifierGroupId;
   int? menuItemCatalogId;
   int? menuItemId;
-  int? price;
+  double? price;
   String? size;
   int? priority;
   bool? activateOffer;
-  int? offerPrice;
+  double? offerPrice;
   String? offerTitle;
   String? currencyCode;
   bool? isModifier;
@@ -20,7 +20,7 @@ class RSDataMenuItemCatalogPricesModel {
   String? reservationBlockTimeType;
   int? maximumLimit;
   bool? canBePurchasedWithLoyaltyPoints;
-  int? loyaltyPointsExchangeValue;
+  double? loyaltyPointsExchangeValue;
   String? createdAt;
   int? createdBy;
   String? updatedAt;
@@ -58,11 +58,11 @@ class RSDataMenuItemCatalogPricesModel {
         json['menu_item_catalog_modifier_group_id'];
     menuItemCatalogId = json['menu_item_catalog_id'];
     menuItemId = json['menu_item_id'];
-    price = json['price'];
+    price = json['price'].toDouble();
     size = json['size'];
     priority = json['priority'];
     activateOffer = json['activate_offer'];
-    offerPrice = json['offer_price'];
+    offerPrice = json['offer_price'].toDouble();
     offerTitle = json['offer_title'];
     currencyCode = json['currency_code'];
     isModifier = json['is_modifier'];
@@ -72,7 +72,7 @@ class RSDataMenuItemCatalogPricesModel {
     maximumLimit = json['maximum_limit'];
     canBePurchasedWithLoyaltyPoints =
         json['can_be_purchased_with_loyalty_points'];
-    loyaltyPointsExchangeValue = json['loyalty_points_exchange_value'];
+    loyaltyPointsExchangeValue = json['loyalty_points_exchange_value'].toDouble();
     createdAt = json['created_at'];
     createdBy = json['created_by'];
     updatedAt = json['updated_at'];

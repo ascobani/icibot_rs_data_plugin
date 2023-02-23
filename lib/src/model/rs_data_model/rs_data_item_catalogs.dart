@@ -2,20 +2,22 @@ part of 'rs_data_model.dart';
 
 @embedded
 class RSDataMenuItemCatalogsModel {
+  /// Id
   int? id;
   int? menuItemCatalogGroupId;
   int? menuItemId;
   int? priority;
+  /// İlgili ürünün adı
   String? name;
   String? description;
   bool? cannotBeSold;
-  int? rewardPoint;
-  int? vat;
+  double? rewardPoint;
+  double? vat;
   String? termsAndConditions;
   String? usageTerms;
-  String? startingDate;
-  String? endingDate;
-  int? inventory;
+  DateTime? startingDate;
+  DateTime? endingDate;
+  double? inventory;
   String? capacityType;
   String? expirePeriodType;
   int? expirePeriod;
@@ -58,13 +60,13 @@ class RSDataMenuItemCatalogsModel {
     name = json['name'];
     description = json['description'];
     cannotBeSold = json['cannot_be_sold'];
-    rewardPoint = json['reward_point'];
-    vat = json['vat'];
+    rewardPoint = json['reward_point'].toDouble();
+    vat = json['vat'].toDouble();
     termsAndConditions = json['terms_and_conditions'];
     usageTerms = json['usage_terms'];
-    startingDate = json['starting_date'];
-    endingDate = json['ending_date'];
-    inventory = json['inventory'];
+    startingDate = DateTime.parse(json['starting_date']);
+    endingDate = DateTime.parse(json['ending_date']);
+    inventory = json['inventory'].toDouble();
     capacityType = json['capacity_type'];
     expirePeriodType = json['expire_period_type'];
     expirePeriod = json['expire_period'];

@@ -53153,7 +53153,7 @@ const RSDataMenuItemCatalogsModelSchema = Schema(
     r'endingDate': PropertySchema(
       id: 3,
       name: r'endingDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'expirePeriod': PropertySchema(
       id: 4,
@@ -53179,7 +53179,7 @@ const RSDataMenuItemCatalogsModelSchema = Schema(
     r'inventory': PropertySchema(
       id: 8,
       name: r'inventory',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'menuItemCatalogGroupId': PropertySchema(
       id: 9,
@@ -53220,12 +53220,12 @@ const RSDataMenuItemCatalogsModelSchema = Schema(
     r'rewardPoint': PropertySchema(
       id: 16,
       name: r'rewardPoint',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'startingDate': PropertySchema(
       id: 17,
       name: r'startingDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'tags': PropertySchema(
       id: 18,
@@ -53246,7 +53246,7 @@ const RSDataMenuItemCatalogsModelSchema = Schema(
     r'vat': PropertySchema(
       id: 21,
       name: r'vat',
-      type: IsarType.long,
+      type: IsarType.double,
     )
   },
   estimateSize: _rSDataMenuItemCatalogsModelEstimateSize,
@@ -53269,12 +53269,6 @@ int _rSDataMenuItemCatalogsModelEstimateSize(
   }
   {
     final value = object.description;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.endingDate;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -53344,12 +53338,6 @@ int _rSDataMenuItemCatalogsModelEstimateSize(
     }
   }
   {
-    final value = object.startingDate;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final list = object.tags;
     if (list != null) {
       bytesCount += 3 + list.length * 3;
@@ -53387,7 +53375,7 @@ void _rSDataMenuItemCatalogsModelSerialize(
   writer.writeBool(offsets[0], object.cannotBeSold);
   writer.writeString(offsets[1], object.capacityType);
   writer.writeString(offsets[2], object.description);
-  writer.writeString(offsets[3], object.endingDate);
+  writer.writeDateTime(offsets[3], object.endingDate);
   writer.writeLong(offsets[4], object.expirePeriod);
   writer.writeString(offsets[5], object.expirePeriodType);
   writer.writeLong(offsets[6], object.id);
@@ -53397,7 +53385,7 @@ void _rSDataMenuItemCatalogsModelSerialize(
     RSDataImagesModelSchema.serialize,
     object.images,
   );
-  writer.writeLong(offsets[8], object.inventory);
+  writer.writeDouble(offsets[8], object.inventory);
   writer.writeLong(offsets[9], object.menuItemCatalogGroupId);
   writer.writeStringList(offsets[10], object.menuItemCatalogModifierGroups);
   writer.writeObjectList<RSDataMenuItemCatalogPricesModel>(
@@ -53410,8 +53398,8 @@ void _rSDataMenuItemCatalogsModelSerialize(
   writer.writeString(offsets[13], object.name);
   writer.writeLong(offsets[14], object.priority);
   writer.writeStringList(offsets[15], object.restrictedMenuItemCapacities);
-  writer.writeLong(offsets[16], object.rewardPoint);
-  writer.writeString(offsets[17], object.startingDate);
+  writer.writeDouble(offsets[16], object.rewardPoint);
+  writer.writeDateTime(offsets[17], object.startingDate);
   writer.writeObjectList<RSDataTagsModel>(
     offsets[18],
     allOffsets,
@@ -53420,7 +53408,7 @@ void _rSDataMenuItemCatalogsModelSerialize(
   );
   writer.writeString(offsets[19], object.termsAndConditions);
   writer.writeString(offsets[20], object.usageTerms);
-  writer.writeLong(offsets[21], object.vat);
+  writer.writeDouble(offsets[21], object.vat);
 }
 
 RSDataMenuItemCatalogsModel _rSDataMenuItemCatalogsModelDeserialize(
@@ -53433,7 +53421,7 @@ RSDataMenuItemCatalogsModel _rSDataMenuItemCatalogsModelDeserialize(
     cannotBeSold: reader.readBoolOrNull(offsets[0]),
     capacityType: reader.readStringOrNull(offsets[1]),
     description: reader.readStringOrNull(offsets[2]),
-    endingDate: reader.readStringOrNull(offsets[3]),
+    endingDate: reader.readDateTimeOrNull(offsets[3]),
     expirePeriod: reader.readLongOrNull(offsets[4]),
     expirePeriodType: reader.readStringOrNull(offsets[5]),
     id: reader.readLongOrNull(offsets[6]),
@@ -53443,7 +53431,7 @@ RSDataMenuItemCatalogsModel _rSDataMenuItemCatalogsModelDeserialize(
       allOffsets,
       RSDataImagesModel(),
     ),
-    inventory: reader.readLongOrNull(offsets[8]),
+    inventory: reader.readDoubleOrNull(offsets[8]),
     menuItemCatalogGroupId: reader.readLongOrNull(offsets[9]),
     menuItemCatalogModifierGroups: reader.readStringList(offsets[10]),
     menuItemCatalogPrices:
@@ -53457,8 +53445,8 @@ RSDataMenuItemCatalogsModel _rSDataMenuItemCatalogsModelDeserialize(
     name: reader.readStringOrNull(offsets[13]),
     priority: reader.readLongOrNull(offsets[14]),
     restrictedMenuItemCapacities: reader.readStringList(offsets[15]),
-    rewardPoint: reader.readLongOrNull(offsets[16]),
-    startingDate: reader.readStringOrNull(offsets[17]),
+    rewardPoint: reader.readDoubleOrNull(offsets[16]),
+    startingDate: reader.readDateTimeOrNull(offsets[17]),
     tags: reader.readObjectList<RSDataTagsModel>(
       offsets[18],
       RSDataTagsModelSchema.deserialize,
@@ -53467,7 +53455,7 @@ RSDataMenuItemCatalogsModel _rSDataMenuItemCatalogsModelDeserialize(
     ),
     termsAndConditions: reader.readStringOrNull(offsets[19]),
     usageTerms: reader.readStringOrNull(offsets[20]),
-    vat: reader.readLongOrNull(offsets[21]),
+    vat: reader.readDoubleOrNull(offsets[21]),
   );
   return object;
 }
@@ -53486,7 +53474,7 @@ P _rSDataMenuItemCatalogsModelDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 4:
       return (reader.readLongOrNull(offset)) as P;
     case 5:
@@ -53501,7 +53489,7 @@ P _rSDataMenuItemCatalogsModelDeserializeProp<P>(
         RSDataImagesModel(),
       )) as P;
     case 8:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 9:
       return (reader.readLongOrNull(offset)) as P;
     case 10:
@@ -53522,9 +53510,9 @@ P _rSDataMenuItemCatalogsModelDeserializeProp<P>(
     case 15:
       return (reader.readStringList(offset)) as P;
     case 16:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 17:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 18:
       return (reader.readObjectList<RSDataTagsModel>(
         offset,
@@ -53537,7 +53525,7 @@ P _rSDataMenuItemCatalogsModelDeserializeProp<P>(
     case 20:
       return (reader.readStringOrNull(offset)) as P;
     case 21:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -53906,58 +53894,49 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> endingDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      QAfterFilterCondition> endingDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'endingDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> endingDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'endingDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> endingDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'endingDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> endingDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -53966,79 +53945,6 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> endingDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'endingDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> endingDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'endingDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-          QAfterFilterCondition>
-      endingDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'endingDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-          QAfterFilterCondition>
-      endingDateMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'endingDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> endingDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'endingDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> endingDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'endingDate',
-        value: '',
       ));
     });
   }
@@ -54473,49 +54379,58 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> inventoryEqualTo(int? value) {
+      QAfterFilterCondition> inventoryEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'inventory',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> inventoryGreaterThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'inventory',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> inventoryLessThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'inventory',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> inventoryBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -54524,6 +54439,7 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -55528,49 +55444,58 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> rewardPointEqualTo(int? value) {
+      QAfterFilterCondition> rewardPointEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'rewardPoint',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> rewardPointGreaterThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'rewardPoint',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> rewardPointLessThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'rewardPoint',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> rewardPointBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -55579,6 +55504,7 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -55602,58 +55528,49 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> startingDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      QAfterFilterCondition> startingDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'startingDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> startingDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'startingDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> startingDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'startingDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> startingDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -55662,79 +55579,6 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> startingDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'startingDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> startingDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'startingDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-          QAfterFilterCondition>
-      startingDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'startingDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-          QAfterFilterCondition>
-      startingDateMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'startingDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> startingDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'startingDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> startingDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'startingDate',
-        value: '',
       ));
     });
   }
@@ -56177,49 +56021,58 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
-      QAfterFilterCondition> vatEqualTo(int? value) {
+      QAfterFilterCondition> vatEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'vat',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> vatGreaterThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'vat',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> vatLessThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'vat',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogsModel, RSDataMenuItemCatalogsModel,
       QAfterFilterCondition> vatBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -56228,6 +56081,7 @@ extension RSDataMenuItemCatalogsModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -56306,7 +56160,7 @@ const RSDataMenuItemCatalogPricesModelSchema = Schema(
     r'loyaltyPointsExchangeValue': PropertySchema(
       id: 7,
       name: r'loyaltyPointsExchangeValue',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'maximumLimit': PropertySchema(
       id: 8,
@@ -56341,7 +56195,7 @@ const RSDataMenuItemCatalogPricesModelSchema = Schema(
     r'offerPrice': PropertySchema(
       id: 14,
       name: r'offerPrice',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'offerTitle': PropertySchema(
       id: 15,
@@ -56351,7 +56205,7 @@ const RSDataMenuItemCatalogPricesModelSchema = Schema(
     r'price': PropertySchema(
       id: 16,
       name: r'price',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'priority': PropertySchema(
       id: 17,
@@ -56448,16 +56302,16 @@ void _rSDataMenuItemCatalogPricesModelSerialize(
   writer.writeString(offsets[4], object.currencyCode);
   writer.writeLong(offsets[5], object.id);
   writer.writeBool(offsets[6], object.isModifier);
-  writer.writeLong(offsets[7], object.loyaltyPointsExchangeValue);
+  writer.writeDouble(offsets[7], object.loyaltyPointsExchangeValue);
   writer.writeLong(offsets[8], object.maximumLimit);
   writer.writeLong(offsets[9], object.menuItemCatalogGroupId);
   writer.writeLong(offsets[10], object.menuItemCatalogId);
   writer.writeLong(offsets[11], object.menuItemCatalogModifierGroupId);
   writer.writeLong(offsets[12], object.menuItemCatalogModifierId);
   writer.writeLong(offsets[13], object.menuItemId);
-  writer.writeLong(offsets[14], object.offerPrice);
+  writer.writeDouble(offsets[14], object.offerPrice);
   writer.writeString(offsets[15], object.offerTitle);
-  writer.writeLong(offsets[16], object.price);
+  writer.writeDouble(offsets[16], object.price);
   writer.writeLong(offsets[17], object.priority);
   writer.writeString(offsets[18], object.reservationBlockTimeType);
   writer.writeLong(offsets[19], object.reservationBlockTimeValue);
@@ -56480,16 +56334,16 @@ RSDataMenuItemCatalogPricesModel _rSDataMenuItemCatalogPricesModelDeserialize(
     currencyCode: reader.readStringOrNull(offsets[4]),
     id: reader.readLongOrNull(offsets[5]),
     isModifier: reader.readBoolOrNull(offsets[6]),
-    loyaltyPointsExchangeValue: reader.readLongOrNull(offsets[7]),
+    loyaltyPointsExchangeValue: reader.readDoubleOrNull(offsets[7]),
     maximumLimit: reader.readLongOrNull(offsets[8]),
     menuItemCatalogGroupId: reader.readLongOrNull(offsets[9]),
     menuItemCatalogId: reader.readLongOrNull(offsets[10]),
     menuItemCatalogModifierGroupId: reader.readLongOrNull(offsets[11]),
     menuItemCatalogModifierId: reader.readLongOrNull(offsets[12]),
     menuItemId: reader.readLongOrNull(offsets[13]),
-    offerPrice: reader.readLongOrNull(offsets[14]),
+    offerPrice: reader.readDoubleOrNull(offsets[14]),
     offerTitle: reader.readStringOrNull(offsets[15]),
-    price: reader.readLongOrNull(offsets[16]),
+    price: reader.readDoubleOrNull(offsets[16]),
     priority: reader.readLongOrNull(offsets[17]),
     reservationBlockTimeType: reader.readStringOrNull(offsets[18]),
     reservationBlockTimeValue: reader.readLongOrNull(offsets[19]),
@@ -56522,7 +56376,7 @@ P _rSDataMenuItemCatalogPricesModelDeserializeProp<P>(
     case 6:
       return (reader.readBoolOrNull(offset)) as P;
     case 7:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 8:
       return (reader.readLongOrNull(offset)) as P;
     case 9:
@@ -56536,11 +56390,11 @@ P _rSDataMenuItemCatalogPricesModelDeserializeProp<P>(
     case 13:
       return (reader.readLongOrNull(offset)) as P;
     case 14:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 15:
       return (reader.readStringOrNull(offset)) as P;
     case 16:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 17:
       return (reader.readLongOrNull(offset)) as P;
     case 18:
@@ -57196,11 +57050,15 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
   QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
-      QAfterFilterCondition> loyaltyPointsExchangeValueEqualTo(int? value) {
+      QAfterFilterCondition> loyaltyPointsExchangeValueEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'loyaltyPointsExchangeValue',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
@@ -57209,14 +57067,16 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
       QAfterFilterCondition> loyaltyPointsExchangeValueGreaterThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'loyaltyPointsExchangeValue',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
@@ -57225,14 +57085,16 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
       QAfterFilterCondition> loyaltyPointsExchangeValueLessThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'loyaltyPointsExchangeValue',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
@@ -57241,10 +57103,11 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
       QAfterFilterCondition> loyaltyPointsExchangeValueBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -57253,6 +57116,7 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -57798,11 +57662,15 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
   QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
-      QAfterFilterCondition> offerPriceEqualTo(int? value) {
+      QAfterFilterCondition> offerPriceEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'offerPrice',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
@@ -57811,14 +57679,16 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
       QAfterFilterCondition> offerPriceGreaterThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'offerPrice',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
@@ -57827,14 +57697,16 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
       QAfterFilterCondition> offerPriceLessThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'offerPrice',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
@@ -57843,10 +57715,11 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
       RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel,
       QAfterFilterCondition> offerPriceBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -57855,6 +57728,7 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -58055,52 +57929,59 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
     });
   }
 
-  QueryBuilder<
-      RSDataMenuItemCatalogPricesModel,
-      RSDataMenuItemCatalogPricesModel,
-      QAfterFilterCondition> priceEqualTo(int? value) {
+  QueryBuilder<RSDataMenuItemCatalogPricesModel,
+      RSDataMenuItemCatalogPricesModel, QAfterFilterCondition> priceEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'price',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel, QAfterFilterCondition> priceGreaterThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'price',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel, QAfterFilterCondition> priceLessThan(
-    int? value, {
+    double? value, {
     bool include = false,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'price',
         value: value,
+        epsilon: epsilon,
       ));
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogPricesModel,
       RSDataMenuItemCatalogPricesModel, QAfterFilterCondition> priceBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -58109,6 +57990,7 @@ extension RSDataMenuItemCatalogPricesModelQueryFilter on QueryBuilder<
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
