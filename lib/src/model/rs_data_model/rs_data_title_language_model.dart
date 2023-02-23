@@ -15,3 +15,13 @@ class RSDataTitleLanguageModel {
     title = json.value;
   }
 }
+
+extension ShowSelectedLocale on List<RSDataTitleLanguageModel> {
+  /// Returns the selected locale title
+  ///
+  /// If the selected locale is not found, the first locale title is returned
+  String? getSelectedLocale(String locale) {
+    return firstWhere((element) => element.locale == locale,
+        orElse: () => this[0]).title;
+  }
+}

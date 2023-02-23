@@ -6,6 +6,9 @@ void main() async {
   //await service.clearDB();
   await service.versionControlledUpdate(appHotelId: 3);
   RSDataModel? data = await service.getRSDataModel();
-  print(
-      data!.bars!.title!.firstWhere((element) => element.locale == 'en').title);
+  print(data?.bars?.title?.getSelectedLocale('trsda'));
+print(data?.bars?.title?.getSelectedLocale('en'));
+
+
+
 }
