@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'icibot_rs_data.dart';
 
 void main() async {

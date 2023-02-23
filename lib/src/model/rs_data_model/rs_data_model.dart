@@ -111,7 +111,7 @@ class RSDataModel {
   int? surveyHeaderId;
   RSDataSurveyHeaderModel? surveyHeader;
   List<RSDataTitleLanguageModel>? surveyTitle;
-  String? surveyDescription;
+  List<RSDataTitleLanguageModel>? surveyDescription;
   String? deliveryTimeOfDay;
   int? notificationPoint;
   int? surveyPoint;
@@ -551,7 +551,7 @@ class RSDataModel {
     surveyHeaderId = json['survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json['survey_header']);
     surveyTitle = getLanguage(data: json['survey_title']);
-    surveyDescription = json['survey_description'];
+    surveyDescription = getLanguage(data: json['survey_description']);
     deliveryTimeOfDay = json['delivery_time_of_day'];
     notificationPoint = json['notification_point'];
     surveyPoint = json['survey_point'];

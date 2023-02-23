@@ -965,7 +965,8 @@ const RSDataModelSchema = CollectionSchema(
     r'surveyDescription': PropertySchema(
       id: 179,
       name: r'surveyDescription',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'surveyHeader': PropertySchema(
       id: 180,
@@ -2113,9 +2114,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.surveyDescription;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.surveyDescription;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2709,7 +2718,12 @@ void _rSDataModelSerialize(
   writer.writeString(offsets[176], object.subscriptionEndDate);
   writer.writeString(offsets[177], object.subscriptionStartDate);
   writer.writeString(offsets[178], object.surveyAddress);
-  writer.writeString(offsets[179], object.surveyDescription);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[179],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.surveyDescription,
+  );
   writer.writeObject<RSDataSurveyHeaderModel>(
     offsets[180],
     allOffsets,
@@ -3159,7 +3173,12 @@ RSDataModel _rSDataModelDeserialize(
     subscriptionEndDate: reader.readStringOrNull(offsets[176]),
     subscriptionStartDate: reader.readStringOrNull(offsets[177]),
     surveyAddress: reader.readStringOrNull(offsets[178]),
-    surveyDescription: reader.readStringOrNull(offsets[179]),
+    surveyDescription: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[179],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     surveyHeader: reader.readObjectOrNull<RSDataSurveyHeaderModel>(
       offsets[180],
       RSDataSurveyHeaderModelSchema.deserialize,
@@ -3798,7 +3817,12 @@ P _rSDataModelDeserializeProp<P>(
     case 178:
       return (reader.readStringOrNull(offset)) as P;
     case 179:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 180:
       return (reader.readObjectOrNull<RSDataSurveyHeaderModel>(
         offset,
@@ -20888,138 +20912,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      surveyDescriptionLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'surveyDescription',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'surveyDescription',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'surveyDescription',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyDescriptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyDescription',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyDescription',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyDescriptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'surveyDescription',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyDescription',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyDescription',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyDescription',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyDescription',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -24194,6 +24171,13 @@ extension RSDataModelQueryObject
     });
   }
 
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'surveyDescription');
+    });
+  }
+
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> surveyHeader(
       FilterQuery<RSDataSurveyHeaderModel> q) {
     return QueryBuilder.apply(this, (query) {
@@ -25928,20 +25912,6 @@ extension RSDataModelQuerySortBy
       sortBySurveyAddressDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'surveyAddress', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortBySurveyDescription() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortBySurveyDescriptionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.desc);
     });
   }
 
@@ -27881,20 +27851,6 @@ extension RSDataModelQuerySortThenBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenBySurveyDescription() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenBySurveyDescriptionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenBySurveyHeaderId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'surveyHeaderId', Sort.asc);
@@ -29065,14 +29021,6 @@ extension RSDataModelQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'surveyAddress',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctBySurveyDescription(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'surveyDescription',
           caseSensitive: caseSensitive);
     });
   }
@@ -30401,7 +30349,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
       surveyDescriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'surveyDescription');
