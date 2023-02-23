@@ -1,6 +1,6 @@
 name: icibot_rs_data_plugin
 description: Plugin for RSData implementation
-version: 1.0.3
+version: 1.0.3+1
 # repository: https://github.com/ascobani/icibot_rs_data_plugin
 
 
@@ -8,7 +8,6 @@ environment:
   sdk: '>=2.19.0 <4.0.0'
 
 dependencies:
-  cupertino_icons: ^1.0.5
   dio: ^5.0.0
   isar: ^3.0.5
   isar_flutter_libs: ^3.0.5

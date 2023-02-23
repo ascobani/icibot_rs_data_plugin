@@ -35,6 +35,7 @@ Future<void> getLatestVersion() async {
 // Data will be null if there is no data in the device
 // There will be just two data in the device at the same time, the latest and the latest version data
 Future<void> getData() async {
+  // You can get the rsData that is stored in the device by using the getRSDataModel method
   RSDataModel? data = await service.getRSDataModel();
   
   // Some filed have multi language support so you can get the selected language by using getSelectedLocale method
@@ -42,7 +43,7 @@ Future<void> getData() async {
   // Some filed can be null so you have to handle it
   print(data?.bars?.title?.getSelectedLocale('tr'));
   
-  // To get the latest version data, you have to call the getLatestVersion method
+  // To get the latest version data from the device, you can use the getRSVersionModel method
   RSVersionModel? data = await service.getRSVersionModel();
   
   // With the version model, you can get the version number and the when that version is inserted to the device
