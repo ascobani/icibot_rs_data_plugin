@@ -46,8 +46,8 @@ class RSDataModel {
   String? houseKeepingPhone;
   String? masterColor;
   bool? activated;
-  String? subscriptionStartDate;
-  String? subscriptionEndDate;
+  DateTime? subscriptionStartDate;
+  DateTime? subscriptionEndDate;
   String? address;
   String? postCode;
   String? city;
@@ -97,11 +97,11 @@ class RSDataModel {
   String? smFacebookUrl;
   String? smTwitterUrl;
   String? smVkontakteUrl;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   int? mobileVersion;
   String? hotelChain;
-  String? mobileVersionPublishDate;
+  DateTime? mobileVersionPublishDate;
   String? mobilePublishBy;
   bool? onlineCheckIn;
   bool? onlineCheckInImage;
@@ -110,8 +110,8 @@ class RSDataModel {
   String? welcomeMessage;
   int? surveyHeaderId;
   RSDataSurveyHeaderModel? surveyHeader;
-  String? surveyTitle;
-  String? surveyDescription;
+  List<RSDataTitleLanguageModel>? surveyTitle;
+  List<RSDataTitleLanguageModel>? surveyDescription;
   String? deliveryTimeOfDay;
   int? notificationPoint;
   int? surveyPoint;
@@ -137,10 +137,10 @@ class RSDataModel {
   String? googlePlayLink;
   String? firebaseLink;
   bool? openForYear;
-  String? openDate;
-  String? closeDate;
-  String? entryDate;
-  String? releaseDate;
+  DateTime? openDate;
+  DateTime? closeDate;
+  DateTime? entryDate;
+  DateTime? releaseDate;
   String? babyAgeRange;
   String? childAgeRange;
   String? oldAgeRange;
@@ -462,8 +462,8 @@ class RSDataModel {
     houseKeepingPhone = json['house_keeping_phone'];
     masterColor = json['master_color'];
     activated = json['activated'];
-    subscriptionStartDate = json['subscription_start_date'];
-    subscriptionEndDate = json['subscription_end_date'];
+    subscriptionStartDate = DateTime.parse(json['subscription_start_date']);
+    subscriptionEndDate = DateTime.parse(json['subscription_end_date']);
     address = json['address'];
     postCode = json['post_code'];
     city = json['city'];
@@ -525,10 +525,10 @@ class RSDataModel {
     smFacebookUrl = json['sm_facebook_url'];
     smTwitterUrl = json['sm_twitter_url'];
     smVkontakteUrl = json['sm_vkontakte_url'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    createdAt = DateTime.parse(json['created_at']);
+    updatedAt = DateTime.parse(json['updated_at']);
     mobileVersion = json['mobile_version'];
-    mobileVersionPublishDate = json['mobile_version_publish_date'];
+    mobileVersionPublishDate = DateTime.parse(json['mobile_version_publish_date']);
     mobilePublishBy = json['mobile_publish_by'];
     hotelChain = json['hotel_chain'];
     onlineCheckIn = json['online_check_in'];
@@ -550,8 +550,8 @@ class RSDataModel {
     welcomeMessage = json['welcome_message'];
     surveyHeaderId = json['survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json['survey_header']);
-    surveyTitle = json['survey_title'];
-    surveyDescription = json['survey_description'];
+    surveyTitle = getLanguage(data: json['survey_title']);
+    surveyDescription = getLanguage(data: json['survey_description']);
     deliveryTimeOfDay = json['delivery_time_of_day'];
     notificationPoint = json['notification_point'];
     surveyPoint = json['survey_point'];
@@ -588,10 +588,10 @@ class RSDataModel {
     googlePlayLink = json['google_play_link'];
     firebaseLink = json['firebase_link'];
     openForYear = json['open_for_year'];
-    openDate = json['open_date'];
-    closeDate = json['close_date'];
-    entryDate = json['entry_date'];
-    releaseDate = json['release_date'];
+    openDate = DateTime.parse(json['open_date']);
+    closeDate = DateTime.parse(json['close_date']);
+    entryDate = DateTime.parse(json['entry_date']);
+    releaseDate = DateTime.parse(json['release_date']);
     babyAgeRange = json['baby_age_range'];
     childAgeRange = json['child_age_range'];
     oldAgeRange = json['old_age_range'];
@@ -675,8 +675,7 @@ class RSDataModel {
     roomGuide = RsDataMenuSectionModel.fromJson(json['room_guide']);
     malls = RsDataMenuSectionModel.fromJson(json['malls']);
     upsell = RsDataMenuSectionModel.fromJson(json['upsell']);
-    frontOffice = RsDataMenuSectionModel.fromJson(
-        json['front_office']); //TODO: check this
+    frontOffice = RsDataMenuSectionModel.fromJson(json['front_office']);
     mice = RsDataMenuSectionModel.fromJson(json['mice']);
     wedding = RsDataMenuSectionModel.fromJson(json['wedding']);
     avm = RsDataMenuSectionModel.fromJson(json['avm']);

@@ -154,7 +154,7 @@ const RSDataModelSchema = CollectionSchema(
     r'closeDate': PropertySchema(
       id: 25,
       name: r'closeDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'closeRequest': PropertySchema(
       id: 26,
@@ -195,7 +195,7 @@ const RSDataModelSchema = CollectionSchema(
     r'createdAt': PropertySchema(
       id: 33,
       name: r'createdAt',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'currencyCode': PropertySchema(
       id: 34,
@@ -236,7 +236,7 @@ const RSDataModelSchema = CollectionSchema(
     r'entryDate': PropertySchema(
       id: 41,
       name: r'entryDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'events': PropertySchema(
       id: 42,
@@ -558,7 +558,7 @@ const RSDataModelSchema = CollectionSchema(
     r'mobileVersionPublishDate': PropertySchema(
       id: 102,
       name: r'mobileVersionPublishDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'name': PropertySchema(
       id: 103,
@@ -629,7 +629,7 @@ const RSDataModelSchema = CollectionSchema(
     r'openDate': PropertySchema(
       id: 116,
       name: r'openDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'openForYear': PropertySchema(
       id: 117,
@@ -777,7 +777,7 @@ const RSDataModelSchema = CollectionSchema(
     r'releaseDate': PropertySchema(
       id: 143,
       name: r'releaseDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'reportDbScheme': PropertySchema(
       id: 144,
@@ -950,12 +950,12 @@ const RSDataModelSchema = CollectionSchema(
     r'subscriptionEndDate': PropertySchema(
       id: 176,
       name: r'subscriptionEndDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'subscriptionStartDate': PropertySchema(
       id: 177,
       name: r'subscriptionStartDate',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'surveyAddress': PropertySchema(
       id: 178,
@@ -965,7 +965,8 @@ const RSDataModelSchema = CollectionSchema(
     r'surveyDescription': PropertySchema(
       id: 179,
       name: r'surveyDescription',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'surveyHeader': PropertySchema(
       id: 180,
@@ -986,7 +987,8 @@ const RSDataModelSchema = CollectionSchema(
     r'surveyTitle': PropertySchema(
       id: 183,
       name: r'surveyTitle',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'surveyUrl': PropertySchema(
       id: 184,
@@ -1038,7 +1040,7 @@ const RSDataModelSchema = CollectionSchema(
     r'updatedAt': PropertySchema(
       id: 193,
       name: r'updatedAt',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'upsell': PropertySchema(
       id: 194,
@@ -1273,12 +1275,6 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.closeDate;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.complaint;
     if (value != null) {
       bytesCount += 3 +
@@ -1306,12 +1302,6 @@ int _rSDataModelEstimateSize(
   }
   {
     final value = object.country;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.createdAt;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -1350,12 +1340,6 @@ int _rSDataModelEstimateSize(
   }
   {
     final value = object.email;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.entryDate;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -1702,12 +1686,6 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.mobileVersionPublishDate;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.name;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -1759,12 +1737,6 @@ int _rSDataModelEstimateSize(
   }
   {
     final value = object.onlineReservationUrl;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.openDate;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -1923,12 +1895,6 @@ int _rSDataModelEstimateSize(
   }
   {
     final value = object.productType;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.releaseDate;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -2112,27 +2078,23 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.subscriptionEndDate;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.subscriptionStartDate;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.surveyAddress;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.surveyDescription;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.surveyDescription;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2144,9 +2106,17 @@ int _rSDataModelEstimateSize(
     }
   }
   {
-    final value = object.surveyTitle;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.surveyTitle;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -2204,12 +2174,6 @@ int _rSDataModelEstimateSize(
   }
   {
     final value = object.tripAdvisorLink;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.updatedAt;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -2365,7 +2329,7 @@ void _rSDataModelSerialize(
   writer.writeString(offsets[22], object.city);
   writer.writeBool(offsets[23], object.claimTrackingManager);
   writer.writeLong(offsets[24], object.clientId);
-  writer.writeString(offsets[25], object.closeDate);
+  writer.writeDateTime(offsets[25], object.closeDate);
   writer.writeBool(offsets[26], object.closeRequest);
   writer.writeObject<RsDataMenuSectionModel>(
     offsets[27],
@@ -2378,7 +2342,7 @@ void _rSDataModelSerialize(
   writer.writeString(offsets[30], object.contactPhone);
   writer.writeString(offsets[31], object.country);
   writer.writeBool(offsets[32], object.createPowerBIdata);
-  writer.writeString(offsets[33], object.createdAt);
+  writer.writeDateTime(offsets[33], object.createdAt);
   writer.writeString(offsets[34], object.currencyCode);
   writer.writeObject<RsDataMenuSectionModel>(
     offsets[35],
@@ -2391,7 +2355,7 @@ void _rSDataModelSerialize(
   writer.writeString(offsets[38], object.description);
   writer.writeBool(offsets[39], object.directReservation);
   writer.writeString(offsets[40], object.email);
-  writer.writeString(offsets[41], object.entryDate);
+  writer.writeDateTime(offsets[41], object.entryDate);
   writer.writeObject<RsDataMenuSectionModel>(
     offsets[42],
     allOffsets,
@@ -2537,7 +2501,7 @@ void _rSDataModelSerialize(
   writer.writeBool(offsets[99], object.mobilePayment);
   writer.writeString(offsets[100], object.mobilePublishBy);
   writer.writeLong(offsets[101], object.mobileVersion);
-  writer.writeString(offsets[102], object.mobileVersionPublishDate);
+  writer.writeDateTime(offsets[102], object.mobileVersionPublishDate);
   writer.writeString(offsets[103], object.name);
   writer.writeString(offsets[104], object.negativeSurveyAlertList);
   writer.writeObject<RsDataMenuSectionModel>(
@@ -2556,7 +2520,7 @@ void _rSDataModelSerialize(
   writer.writeBool(offsets[113], object.onlineCheckInImage);
   writer.writeBool(offsets[114], object.onlineCheckInSignature);
   writer.writeString(offsets[115], object.onlineReservationUrl);
-  writer.writeString(offsets[116], object.openDate);
+  writer.writeDateTime(offsets[116], object.openDate);
   writer.writeBool(offsets[117], object.openForYear);
   writer.writeBool(offsets[118], object.operationSystem);
   writer.writeObject<RsDataMenuSectionModel>(
@@ -2648,7 +2612,7 @@ void _rSDataModelSerialize(
   writer.writeString(offsets[140], object.productType);
   writer.writeBool(offsets[141], object.qrReader);
   writer.writeDouble(offsets[142], object.rating);
-  writer.writeString(offsets[143], object.releaseDate);
+  writer.writeDateTime(offsets[143], object.releaseDate);
   writer.writeString(offsets[144], object.reportDbScheme);
   writer.writeString(offsets[145], object.reservationMailAddress);
   writer.writeObject<RsDataMenuSectionModel>(
@@ -2721,10 +2685,15 @@ void _rSDataModelSerialize(
   writer.writeBool(offsets[173], object.staffTracking);
   writer.writeString(offsets[174], object.subColor);
   writer.writeString(offsets[175], object.subDomainName);
-  writer.writeString(offsets[176], object.subscriptionEndDate);
-  writer.writeString(offsets[177], object.subscriptionStartDate);
+  writer.writeDateTime(offsets[176], object.subscriptionEndDate);
+  writer.writeDateTime(offsets[177], object.subscriptionStartDate);
   writer.writeString(offsets[178], object.surveyAddress);
-  writer.writeString(offsets[179], object.surveyDescription);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[179],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.surveyDescription,
+  );
   writer.writeObject<RSDataSurveyHeaderModel>(
     offsets[180],
     allOffsets,
@@ -2733,7 +2702,12 @@ void _rSDataModelSerialize(
   );
   writer.writeLong(offsets[181], object.surveyHeaderId);
   writer.writeLong(offsets[182], object.surveyPoint);
-  writer.writeString(offsets[183], object.surveyTitle);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[183],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.surveyTitle,
+  );
   writer.writeString(offsets[184], object.surveyUrl);
   writer.writeString(offsets[185], object.telegramNo);
   writer.writeString(offsets[186], object.thirdLevelAlertList);
@@ -2753,7 +2727,7 @@ void _rSDataModelSerialize(
     object.tours,
   );
   writer.writeString(offsets[192], object.tripAdvisorLink);
-  writer.writeString(offsets[193], object.updatedAt);
+  writer.writeDateTime(offsets[193], object.updatedAt);
   writer.writeObject<RsDataMenuSectionModel>(
     offsets[194],
     allOffsets,
@@ -2853,7 +2827,7 @@ RSDataModel _rSDataModelDeserialize(
     city: reader.readStringOrNull(offsets[22]),
     claimTrackingManager: reader.readBoolOrNull(offsets[23]),
     clientId: reader.readLongOrNull(offsets[24]),
-    closeDate: reader.readStringOrNull(offsets[25]),
+    closeDate: reader.readDateTimeOrNull(offsets[25]),
     closeRequest: reader.readBoolOrNull(offsets[26]),
     complaint: reader.readObjectOrNull<RsDataMenuSectionModel>(
       offsets[27],
@@ -2865,7 +2839,7 @@ RSDataModel _rSDataModelDeserialize(
     contactPhone: reader.readStringOrNull(offsets[30]),
     country: reader.readStringOrNull(offsets[31]),
     createPowerBIdata: reader.readBoolOrNull(offsets[32]),
-    createdAt: reader.readStringOrNull(offsets[33]),
+    createdAt: reader.readDateTimeOrNull(offsets[33]),
     currencyCode: reader.readStringOrNull(offsets[34]),
     dailyAnimations: reader.readObjectOrNull<RsDataMenuSectionModel>(
       offsets[35],
@@ -2877,7 +2851,7 @@ RSDataModel _rSDataModelDeserialize(
     description: reader.readStringOrNull(offsets[38]),
     directReservation: reader.readBoolOrNull(offsets[39]),
     email: reader.readStringOrNull(offsets[40]),
-    entryDate: reader.readStringOrNull(offsets[41]),
+    entryDate: reader.readDateTimeOrNull(offsets[41]),
     events: reader.readObjectOrNull<RsDataMenuSectionModel>(
       offsets[42],
       RsDataMenuSectionModelSchema.deserialize,
@@ -3009,7 +2983,7 @@ RSDataModel _rSDataModelDeserialize(
     mobilePayment: reader.readBoolOrNull(offsets[99]),
     mobilePublishBy: reader.readStringOrNull(offsets[100]),
     mobileVersion: reader.readLongOrNull(offsets[101]),
-    mobileVersionPublishDate: reader.readStringOrNull(offsets[102]),
+    mobileVersionPublishDate: reader.readDateTimeOrNull(offsets[102]),
     name: reader.readStringOrNull(offsets[103]),
     negativeSurveyAlertList: reader.readStringOrNull(offsets[104]),
     news: reader.readObjectOrNull<RsDataMenuSectionModel>(
@@ -3027,7 +3001,7 @@ RSDataModel _rSDataModelDeserialize(
     onlineCheckInImage: reader.readBoolOrNull(offsets[113]),
     onlineCheckInSignature: reader.readBoolOrNull(offsets[114]),
     onlineReservationUrl: reader.readStringOrNull(offsets[115]),
-    openDate: reader.readStringOrNull(offsets[116]),
+    openDate: reader.readDateTimeOrNull(offsets[116]),
     openForYear: reader.readBoolOrNull(offsets[117]),
     operationSystem: reader.readBoolOrNull(offsets[118]),
     opportunities: reader.readObjectOrNull<RsDataMenuSectionModel>(
@@ -3101,7 +3075,7 @@ RSDataModel _rSDataModelDeserialize(
     productType: reader.readStringOrNull(offsets[140]),
     qrReader: reader.readBoolOrNull(offsets[141]),
     rating: reader.readDoubleOrNull(offsets[142]),
-    releaseDate: reader.readStringOrNull(offsets[143]),
+    releaseDate: reader.readDateTimeOrNull(offsets[143]),
     reportDbScheme: reader.readStringOrNull(offsets[144]),
     reservationMailAddress: reader.readStringOrNull(offsets[145]),
     restaurants: reader.readObjectOrNull<RsDataMenuSectionModel>(
@@ -3166,10 +3140,15 @@ RSDataModel _rSDataModelDeserialize(
     staffTracking: reader.readBoolOrNull(offsets[173]),
     subColor: reader.readStringOrNull(offsets[174]),
     subDomainName: reader.readStringOrNull(offsets[175]),
-    subscriptionEndDate: reader.readStringOrNull(offsets[176]),
-    subscriptionStartDate: reader.readStringOrNull(offsets[177]),
+    subscriptionEndDate: reader.readDateTimeOrNull(offsets[176]),
+    subscriptionStartDate: reader.readDateTimeOrNull(offsets[177]),
     surveyAddress: reader.readStringOrNull(offsets[178]),
-    surveyDescription: reader.readStringOrNull(offsets[179]),
+    surveyDescription: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[179],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     surveyHeader: reader.readObjectOrNull<RSDataSurveyHeaderModel>(
       offsets[180],
       RSDataSurveyHeaderModelSchema.deserialize,
@@ -3177,7 +3156,12 @@ RSDataModel _rSDataModelDeserialize(
     ),
     surveyHeaderId: reader.readLongOrNull(offsets[181]),
     surveyPoint: reader.readLongOrNull(offsets[182]),
-    surveyTitle: reader.readStringOrNull(offsets[183]),
+    surveyTitle: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[183],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     surveyUrl: reader.readStringOrNull(offsets[184]),
     telegramNo: reader.readStringOrNull(offsets[185]),
     thirdLevelAlertList: reader.readStringOrNull(offsets[186]),
@@ -3197,7 +3181,7 @@ RSDataModel _rSDataModelDeserialize(
       allOffsets,
     ),
     tripAdvisorLink: reader.readStringOrNull(offsets[192]),
-    updatedAt: reader.readStringOrNull(offsets[193]),
+    updatedAt: reader.readDateTimeOrNull(offsets[193]),
     upsell: reader.readObjectOrNull<RsDataMenuSectionModel>(
       offsets[194],
       RsDataMenuSectionModelSchema.deserialize,
@@ -3328,7 +3312,7 @@ P _rSDataModelDeserializeProp<P>(
     case 24:
       return (reader.readLongOrNull(offset)) as P;
     case 25:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 26:
       return (reader.readBoolOrNull(offset)) as P;
     case 27:
@@ -3348,7 +3332,7 @@ P _rSDataModelDeserializeProp<P>(
     case 32:
       return (reader.readBoolOrNull(offset)) as P;
     case 33:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 34:
       return (reader.readStringOrNull(offset)) as P;
     case 35:
@@ -3368,7 +3352,7 @@ P _rSDataModelDeserializeProp<P>(
     case 40:
       return (reader.readStringOrNull(offset)) as P;
     case 41:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 42:
       return (reader.readObjectOrNull<RsDataMenuSectionModel>(
         offset,
@@ -3561,7 +3545,7 @@ P _rSDataModelDeserializeProp<P>(
     case 101:
       return (reader.readLongOrNull(offset)) as P;
     case 102:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 103:
       return (reader.readStringOrNull(offset)) as P;
     case 104:
@@ -3593,7 +3577,7 @@ P _rSDataModelDeserializeProp<P>(
     case 115:
       return (reader.readStringOrNull(offset)) as P;
     case 116:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 117:
       return (reader.readBoolOrNull(offset)) as P;
     case 118:
@@ -3699,7 +3683,7 @@ P _rSDataModelDeserializeProp<P>(
     case 142:
       return (reader.readDoubleOrNull(offset)) as P;
     case 143:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 144:
       return (reader.readStringOrNull(offset)) as P;
     case 145:
@@ -3797,13 +3781,18 @@ P _rSDataModelDeserializeProp<P>(
     case 175:
       return (reader.readStringOrNull(offset)) as P;
     case 176:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 177:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 178:
       return (reader.readStringOrNull(offset)) as P;
     case 179:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 180:
       return (reader.readObjectOrNull<RSDataSurveyHeaderModel>(
         offset,
@@ -3815,7 +3804,12 @@ P _rSDataModelDeserializeProp<P>(
     case 182:
       return (reader.readLongOrNull(offset)) as P;
     case 183:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 184:
       return (reader.readStringOrNull(offset)) as P;
     case 185:
@@ -3844,7 +3838,7 @@ P _rSDataModelDeserializeProp<P>(
     case 192:
       return (reader.readStringOrNull(offset)) as P;
     case 193:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 194:
       return (reader.readObjectOrNull<RsDataMenuSectionModel>(
         offset,
@@ -5916,58 +5910,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      closeDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      closeDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'closeDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       closeDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'closeDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       closeDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'closeDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       closeDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -5976,77 +5961,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      closeDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'closeDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      closeDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'closeDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      closeDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'closeDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      closeDateMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'closeDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      closeDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'closeDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      closeDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'closeDate',
-        value: '',
       ));
     });
   }
@@ -6758,58 +6672,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      createdAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      createdAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       createdAtGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       createdAtLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       createdAtBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -6818,77 +6723,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      createdAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      createdAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      createdAtContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      createdAtMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'createdAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      createdAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      createdAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'createdAt',
-        value: '',
       ));
     });
   }
@@ -7723,58 +7557,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      entryDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      entryDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'entryDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       entryDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'entryDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       entryDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'entryDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       entryDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -7783,77 +7608,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      entryDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'entryDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      entryDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'entryDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      entryDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'entryDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      entryDateMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'entryDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      entryDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'entryDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      entryDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'entryDate',
-        value: '',
       ));
     });
   }
@@ -13742,58 +13496,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      mobileVersionPublishDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      mobileVersionPublishDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'mobileVersionPublishDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       mobileVersionPublishDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'mobileVersionPublishDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       mobileVersionPublishDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'mobileVersionPublishDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       mobileVersionPublishDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -13802,79 +13547,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      mobileVersionPublishDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'mobileVersionPublishDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      mobileVersionPublishDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'mobileVersionPublishDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      mobileVersionPublishDateContains(String value,
-          {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'mobileVersionPublishDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      mobileVersionPublishDateMatches(String pattern,
-          {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'mobileVersionPublishDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      mobileVersionPublishDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'mobileVersionPublishDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      mobileVersionPublishDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'mobileVersionPublishDate',
-        value: '',
       ));
     });
   }
@@ -15301,56 +14973,48 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> openDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'openDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       openDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'openDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       openDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'openDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> openDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -15359,78 +15023,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      openDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'openDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      openDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'openDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      openDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'openDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> openDateMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'openDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      openDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'openDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      openDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'openDate',
-        value: '',
       ));
     });
   }
@@ -17216,58 +16808,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      releaseDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      releaseDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'releaseDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       releaseDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'releaseDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       releaseDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'releaseDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       releaseDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -17276,77 +16859,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      releaseDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'releaseDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      releaseDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'releaseDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      releaseDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'releaseDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      releaseDateMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'releaseDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      releaseDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'releaseDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      releaseDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'releaseDate',
-        value: '',
       ));
     });
   }
@@ -20665,58 +20177,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionEndDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      subscriptionEndDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'subscriptionEndDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       subscriptionEndDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'subscriptionEndDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       subscriptionEndDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'subscriptionEndDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       subscriptionEndDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -20725,77 +20228,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionEndDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'subscriptionEndDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionEndDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'subscriptionEndDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionEndDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'subscriptionEndDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionEndDateMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'subscriptionEndDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionEndDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subscriptionEndDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionEndDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'subscriptionEndDate',
-        value: '',
       ));
     });
   }
@@ -20819,58 +20251,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionStartDateEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      subscriptionStartDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'subscriptionStartDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       subscriptionStartDateGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'subscriptionStartDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       subscriptionStartDateLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'subscriptionStartDate',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       subscriptionStartDateBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -20879,78 +20302,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionStartDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'subscriptionStartDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionStartDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'subscriptionStartDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionStartDateContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'subscriptionStartDate',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionStartDateMatches(String pattern,
-          {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'subscriptionStartDate',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionStartDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subscriptionStartDate',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      subscriptionStartDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'subscriptionStartDate',
-        value: '',
       ));
     });
   }
@@ -21128,138 +20479,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      surveyDescriptionLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'surveyDescription',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'surveyDescription',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyDescriptionMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'surveyDescription',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'surveyDescription',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyDescriptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyDescription',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyDescription',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyDescriptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'surveyDescription',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyDescription',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyDescription',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyDescription',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyDescription',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -21448,138 +20752,91 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      surveyTitleLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyTitle',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'surveyTitle',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'surveyTitle',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'surveyTitle',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'surveyTitle',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'surveyTitle',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'surveyTitle',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      surveyTitleMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'surveyTitle',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'surveyTitle',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyTitleIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'surveyTitle',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyTitle',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       surveyTitleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'surveyTitle',
-        value: '',
-      ));
+      return query.listLength(
+        r'surveyTitle',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyTitleLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyTitle',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyTitleLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyTitle',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyTitleLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'surveyTitle',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -22718,58 +21975,49 @@ extension RSDataModelQueryFilter
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      updatedAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      updatedAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       updatedAtGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       updatedAtLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
       updatedAtBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -22778,77 +22026,6 @@ extension RSDataModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      updatedAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      updatedAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      updatedAtContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      updatedAtMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'updatedAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      updatedAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'updatedAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
-      updatedAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'updatedAt',
-        value: '',
       ));
     });
   }
@@ -24561,10 +23738,24 @@ extension RSDataModelQueryObject
     });
   }
 
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyDescriptionElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'surveyDescription');
+    });
+  }
+
   QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition> surveyHeader(
       FilterQuery<RSDataSurveyHeaderModel> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'surveyHeader');
+    });
+  }
+
+  QueryBuilder<RSDataModel, RSDataModel, QAfterFilterCondition>
+      surveyTitleElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'surveyTitle');
     });
   }
 
@@ -26291,20 +25482,6 @@ extension RSDataModelQuerySortBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortBySurveyDescription() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      sortBySurveyDescriptionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortBySurveyHeaderId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'surveyHeaderId', Sort.asc);
@@ -26327,18 +25504,6 @@ extension RSDataModelQuerySortBy
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortBySurveyPointDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'surveyPoint', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortBySurveyTitle() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyTitle', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> sortBySurveyTitleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyTitle', Sort.desc);
     });
   }
 
@@ -28253,20 +27418,6 @@ extension RSDataModelQuerySortThenBy
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenBySurveyDescription() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy>
-      thenBySurveyDescriptionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyDescription', Sort.desc);
-    });
-  }
-
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenBySurveyHeaderId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'surveyHeaderId', Sort.asc);
@@ -28289,18 +27440,6 @@ extension RSDataModelQuerySortThenBy
   QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenBySurveyPointDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'surveyPoint', Sort.desc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenBySurveyTitle() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyTitle', Sort.asc);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QAfterSortBy> thenBySurveyTitleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'surveyTitle', Sort.desc);
     });
   }
 
@@ -28633,10 +27772,9 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByCloseDate(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByCloseDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'closeDate', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'closeDate');
     });
   }
 
@@ -28681,10 +27819,9 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByCreatedAt(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdAt', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'createdAt');
     });
   }
 
@@ -28732,10 +27869,9 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByEntryDate(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByEntryDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'entryDate', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'entryDate');
     });
   }
 
@@ -29057,10 +28193,9 @@ extension RSDataModelQueryWhereDistinct
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QDistinct>
-      distinctByMobileVersionPublishDate({bool caseSensitive = true}) {
+      distinctByMobileVersionPublishDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'mobileVersionPublishDate',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'mobileVersionPublishDate');
     });
   }
 
@@ -29153,10 +28288,9 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByOpenDate(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByOpenDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'openDate', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'openDate');
     });
   }
 
@@ -29250,10 +28384,9 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByReleaseDate(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByReleaseDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'releaseDate', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'releaseDate');
     });
   }
 
@@ -29433,18 +28566,16 @@ extension RSDataModelQueryWhereDistinct
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QDistinct>
-      distinctBySubscriptionEndDate({bool caseSensitive = true}) {
+      distinctBySubscriptionEndDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'subscriptionEndDate',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'subscriptionEndDate');
     });
   }
 
   QueryBuilder<RSDataModel, RSDataModel, QDistinct>
-      distinctBySubscriptionStartDate({bool caseSensitive = true}) {
+      distinctBySubscriptionStartDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'subscriptionStartDate',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'subscriptionStartDate');
     });
   }
 
@@ -29452,14 +28583,6 @@ extension RSDataModelQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'surveyAddress',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctBySurveyDescription(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'surveyDescription',
           caseSensitive: caseSensitive);
     });
   }
@@ -29473,13 +28596,6 @@ extension RSDataModelQueryWhereDistinct
   QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctBySurveyPoint() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'surveyPoint');
-    });
-  }
-
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctBySurveyTitle(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'surveyTitle', caseSensitive: caseSensitive);
     });
   }
 
@@ -29534,10 +28650,9 @@ extension RSDataModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByUpdatedAt(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RSDataModel, RSDataModel, QDistinct> distinctByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'updatedAt', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'updatedAt');
     });
   }
 
@@ -29777,7 +28892,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> closeDateProperty() {
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations> closeDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'closeDate');
     });
@@ -29827,7 +28942,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> createdAtProperty() {
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
     });
@@ -29879,7 +28994,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> entryDateProperty() {
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations> entryDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'entryDate');
     });
@@ -30289,7 +29404,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations>
       mobileVersionPublishDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'mobileVersionPublishDate');
@@ -30384,7 +29499,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> openDateProperty() {
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations> openDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'openDate');
     });
@@ -30561,7 +29676,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> releaseDateProperty() {
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations> releaseDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'releaseDate');
     });
@@ -30776,14 +29891,14 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations>
       subscriptionEndDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'subscriptionEndDate');
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations>
       subscriptionStartDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'subscriptionStartDate');
@@ -30796,7 +29911,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations>
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
       surveyDescriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'surveyDescription');
@@ -30822,7 +29937,8 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> surveyTitleProperty() {
+  QueryBuilder<RSDataModel, List<RSDataTitleLanguageModel>?, QQueryOperations>
+      surveyTitleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'surveyTitle');
     });
@@ -30887,7 +30003,7 @@ extension RSDataModelQueryProperty
     });
   }
 
-  QueryBuilder<RSDataModel, String?, QQueryOperations> updatedAtProperty() {
+  QueryBuilder<RSDataModel, DateTime?, QQueryOperations> updatedAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'updatedAt');
     });
@@ -45677,7 +44793,7 @@ const RSDataSurveyModelSchema = Schema(
     r'createdAt': PropertySchema(
       id: 1,
       name: r'createdAt',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'departmentId': PropertySchema(
       id: 2,
@@ -45762,7 +44878,7 @@ const RSDataSurveyModelSchema = Schema(
     r'updatedAt': PropertySchema(
       id: 18,
       name: r'updatedAt',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     )
   },
   estimateSize: _rSDataSurveyModelEstimateSize,
@@ -45777,12 +44893,6 @@ int _rSDataSurveyModelEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.createdAt;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   {
     final value = object.description;
     if (value != null) {
@@ -45861,12 +44971,6 @@ int _rSDataSurveyModelEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  {
-    final value = object.updatedAt;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   return bytesCount;
 }
 
@@ -45877,7 +44981,7 @@ void _rSDataSurveyModelSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeBool(offsets[0], object.askNoteAfterSurvey);
-  writer.writeString(offsets[1], object.createdAt);
+  writer.writeDateTime(offsets[1], object.createdAt);
   writer.writeLong(offsets[2], object.departmentId);
   writer.writeString(offsets[3], object.description);
   writer.writeString(offsets[4], object.emails);
@@ -45894,7 +44998,7 @@ void _rSDataSurveyModelSerialize(
   writer.writeString(offsets[15], object.surveyLines);
   writer.writeString(offsets[16], object.thanksMessageForNegativeReviews);
   writer.writeString(offsets[17], object.thanksMessageForPositiveReviews);
-  writer.writeString(offsets[18], object.updatedAt);
+  writer.writeDateTime(offsets[18], object.updatedAt);
 }
 
 RSDataSurveyModel _rSDataSurveyModelDeserialize(
@@ -45905,7 +45009,7 @@ RSDataSurveyModel _rSDataSurveyModelDeserialize(
 ) {
   final object = RSDataSurveyModel(
     askNoteAfterSurvey: reader.readBoolOrNull(offsets[0]),
-    createdAt: reader.readStringOrNull(offsets[1]),
+    createdAt: reader.readDateTimeOrNull(offsets[1]),
     departmentId: reader.readLongOrNull(offsets[2]),
     description: reader.readStringOrNull(offsets[3]),
     emails: reader.readStringOrNull(offsets[4]),
@@ -45922,7 +45026,7 @@ RSDataSurveyModel _rSDataSurveyModelDeserialize(
     surveyLines: reader.readStringOrNull(offsets[15]),
     thanksMessageForNegativeReviews: reader.readStringOrNull(offsets[16]),
     thanksMessageForPositiveReviews: reader.readStringOrNull(offsets[17]),
-    updatedAt: reader.readStringOrNull(offsets[18]),
+    updatedAt: reader.readDateTimeOrNull(offsets[18]),
   );
   return object;
 }
@@ -45937,7 +45041,7 @@ P _rSDataSurveyModelDeserializeProp<P>(
     case 0:
       return (reader.readBoolOrNull(offset)) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 2:
       return (reader.readLongOrNull(offset)) as P;
     case 3:
@@ -45971,7 +45075,7 @@ P _rSDataSurveyModelDeserializeProp<P>(
     case 17:
       return (reader.readStringOrNull(offset)) as P;
     case 18:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -46026,58 +45130,49 @@ extension RSDataSurveyModelQueryFilter
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      createdAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      createdAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
       createdAtGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
       createdAtLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
       createdAtBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -46086,77 +45181,6 @@ extension RSDataSurveyModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      createdAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      createdAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      createdAtContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      createdAtMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'createdAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      createdAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      createdAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'createdAt',
-        value: '',
       ));
     });
   }
@@ -48408,58 +47432,49 @@ extension RSDataSurveyModelQueryFilter
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      updatedAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      updatedAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
       updatedAtGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
       updatedAtLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
       updatedAtBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -48468,77 +47483,6 @@ extension RSDataSurveyModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      updatedAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      updatedAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      updatedAtContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      updatedAtMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'updatedAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      updatedAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'updatedAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataSurveyModel, RSDataSurveyModel, QAfterFilterCondition>
-      updatedAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'updatedAt',
-        value: '',
       ));
     });
   }
