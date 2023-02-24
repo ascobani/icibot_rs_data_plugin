@@ -17,13 +17,18 @@ const RSVersionModelSchema = CollectionSchema(
   name: r'RSVersionModel',
   id: -1482417130803253827,
   properties: {
-    r'getDate': PropertySchema(
+    r'appHotelId': PropertySchema(
       id: 0,
+      name: r'appHotelId',
+      type: IsarType.long,
+    ),
+    r'getDate': PropertySchema(
+      id: 1,
       name: r'getDate',
       type: IsarType.dateTime,
     ),
     r'version': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'version',
       type: IsarType.long,
     )
@@ -57,8 +62,9 @@ void _rSVersionModelSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDateTime(offsets[0], object.getDate);
-  writer.writeLong(offsets[1], object.version);
+  writer.writeLong(offsets[0], object.appHotelId);
+  writer.writeDateTime(offsets[1], object.getDate);
+  writer.writeLong(offsets[2], object.version);
 }
 
 RSVersionModel _rSVersionModelDeserialize(
@@ -68,8 +74,9 @@ RSVersionModel _rSVersionModelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = RSVersionModel(
-    getDate: reader.readDateTimeOrNull(offsets[0]),
-    version: reader.readLongOrNull(offsets[1]),
+    appHotelId: reader.readLongOrNull(offsets[0]),
+    getDate: reader.readDateTimeOrNull(offsets[1]),
+    version: reader.readLongOrNull(offsets[2]),
   );
   object.id = id;
   return object;
@@ -83,8 +90,10 @@ P _rSVersionModelDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 1:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 2:
       return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -187,6 +196,80 @@ extension RSVersionModelQueryWhere
 
 extension RSVersionModelQueryFilter
     on QueryBuilder<RSVersionModel, RSVersionModel, QFilterCondition> {
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
+      appHotelIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'appHotelId',
+      ));
+    });
+  }
+
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
+      appHotelIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'appHotelId',
+      ));
+    });
+  }
+
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
+      appHotelIdEqualTo(int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'appHotelId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
+      appHotelIdGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'appHotelId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
+      appHotelIdLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'appHotelId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
+      appHotelIdBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'appHotelId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<RSVersionModel, RSVersionModel, QAfterFilterCondition>
       getDateIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -399,6 +482,20 @@ extension RSVersionModelQueryLinks
 
 extension RSVersionModelQuerySortBy
     on QueryBuilder<RSVersionModel, RSVersionModel, QSortBy> {
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterSortBy>
+      sortByAppHotelId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'appHotelId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterSortBy>
+      sortByAppHotelIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'appHotelId', Sort.desc);
+    });
+  }
+
   QueryBuilder<RSVersionModel, RSVersionModel, QAfterSortBy> sortByGetDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'getDate', Sort.asc);
@@ -428,6 +525,20 @@ extension RSVersionModelQuerySortBy
 
 extension RSVersionModelQuerySortThenBy
     on QueryBuilder<RSVersionModel, RSVersionModel, QSortThenBy> {
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterSortBy>
+      thenByAppHotelId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'appHotelId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<RSVersionModel, RSVersionModel, QAfterSortBy>
+      thenByAppHotelIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'appHotelId', Sort.desc);
+    });
+  }
+
   QueryBuilder<RSVersionModel, RSVersionModel, QAfterSortBy> thenByGetDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'getDate', Sort.asc);
@@ -469,6 +580,13 @@ extension RSVersionModelQuerySortThenBy
 
 extension RSVersionModelQueryWhereDistinct
     on QueryBuilder<RSVersionModel, RSVersionModel, QDistinct> {
+  QueryBuilder<RSVersionModel, RSVersionModel, QDistinct>
+      distinctByAppHotelId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'appHotelId');
+    });
+  }
+
   QueryBuilder<RSVersionModel, RSVersionModel, QDistinct> distinctByGetDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'getDate');
@@ -487,6 +605,12 @@ extension RSVersionModelQueryProperty
   QueryBuilder<RSVersionModel, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<RSVersionModel, int?, QQueryOperations> appHotelIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'appHotelId');
     });
   }
 

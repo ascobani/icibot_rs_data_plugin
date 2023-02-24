@@ -6,10 +6,12 @@ part 'rs_version_model.g.dart';
 class RSVersionModel {
   Id id = Isar.autoIncrement;
   final int? version;
+  final int? appHotelId;
   final DateTime? getDate;
 
   RSVersionModel({
     this.version,
+    this.appHotelId,
     this.getDate,
   });
 
