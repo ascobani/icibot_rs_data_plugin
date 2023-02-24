@@ -56,30 +56,32 @@ class RSDataMenuItemBookDetailsModel {
   ///
   /// defoult: false
   bool? acceptOnlyInternalReservation;
+
   List<RSDataBookDetailReservationGroupModel>? bookDetailResGroup;
 
-  RSDataMenuItemBookDetailsModel(
-      {this.id,
-      this.menuItemId,
-      this.menuItemBookId,
-      this.startTime,
-      this.endTime,
-      this.name,
-      this.bookable,
-      this.interval,
-      this.price,
-      this.activateOffer,
-      this.offerPrice,
-      this.offerTitle,
-      this.currencyCode,
-      this.viewCount,
-      this.limit,
-      this.isChildAccept,
-      this.childPrice,
-      this.babyPrice,
-      this.maximumNumberOfPeoplePerReservation,
-      this.acceptOnlyInternalReservation,
-      this.bookDetailResGroup});
+  RSDataMenuItemBookDetailsModel({
+    this.id,
+    this.menuItemId,
+    this.menuItemBookId,
+    this.startTime,
+    this.endTime,
+    this.name,
+    this.bookable,
+    this.interval,
+    this.price,
+    this.activateOffer,
+    this.offerPrice,
+    this.offerTitle,
+    this.currencyCode,
+    this.viewCount,
+    this.limit,
+    this.isChildAccept,
+    this.childPrice,
+    this.babyPrice,
+    this.maximumNumberOfPeoplePerReservation,
+    this.acceptOnlyInternalReservation,
+    this.bookDetailResGroup,
+  });
 
   RSDataMenuItemBookDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -103,6 +105,7 @@ class RSDataMenuItemBookDetailsModel {
     maximumNumberOfPeoplePerReservation =
         json['maximum_number_of_people_per_reservation'];
     acceptOnlyInternalReservation = json['accept_only_internal_reservation'];
+
     bookDetailResGroup = json['book_detail_res_group']
         .map<RSDataBookDetailReservationGroupModel>(
             (e) => RSDataBookDetailReservationGroupModel.fromJson(e))

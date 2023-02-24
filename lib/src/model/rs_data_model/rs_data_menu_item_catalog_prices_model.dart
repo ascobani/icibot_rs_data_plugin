@@ -93,32 +93,34 @@ class RSDataMenuItemCatalogPricesModel {
       this.updatedAt,
       this.updatedBy});
 
-  RSDataMenuItemCatalogPricesModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    menuItemCatalogGroupId = json['menu_item_catalog_group_id'];
+  RSDataMenuItemCatalogPricesModel.fromJson(Map<String, dynamic>? json) {
+    id = json?['id'];
+    menuItemCatalogGroupId = json?['menu_item_catalog_group_id'];
     menuItemCatalogModifierGroupId =
-        json['menu_item_catalog_modifier_group_id'];
-    menuItemCatalogId = json['menu_item_catalog_id'];
-    menuItemId = json['menu_item_id'];
-    price = json['price'].toDouble();
-    size = getLanguage(data: json['size']);
-    priority = json['priority'];
-    activateOffer = json['activate_offer'];
-    offerPrice = json['offer_price'].toDouble();
-    offerTitle = getLanguage(data:json['offer_title']);
-    currencyCode = json['currency_code'];
-    isModifier = json['is_modifier'];
-    menuItemCatalogModifierId = json['menu_item_catalog_modifier_id'];
-    reservationBlockTimeValue = json['reservation_block_time_value'];
-    reservationBlockTimeType = json['reservation_block_time_type'];
-    maximumLimit = json['maximum_limit'];
+        json?['menu_item_catalog_modifier_group_id'];
+    menuItemCatalogId = json?['menu_item_catalog_id'];
+    menuItemId = json?['menu_item_id'];
+    price = json?['price'].toDouble();
+    size = getLanguage(data: json?['size']);
+    priority = json?['priority'];
+    activateOffer = json?['activate_offer'];
+    offerPrice = json?['offer_price'].toDouble();
+    offerTitle = getLanguage(data: json?['offer_title']);
+    currencyCode = json?['currency_code'];
+    isModifier = json?['is_modifier'];
+    menuItemCatalogModifierId = json?['menu_item_catalog_modifier_id'];
+    reservationBlockTimeValue = json?['reservation_block_time_value'];
+    reservationBlockTimeType = json?['reservation_block_time_type'];
+    maximumLimit = json?['maximum_limit'];
     canBePurchasedWithLoyaltyPoints =
-        json['can_be_purchased_with_loyalty_points'];
-    loyaltyPointsExchangeValue =
-        json['loyalty_points_exchange_value'].toDouble();
-    createdAt = DateTime.parse(json['created_at']);
-    createdBy = json['created_by'];
-    updatedAt = DateTime.parse(json['updated_at']);
-    updatedBy = json['updated_by'];
+        json?['can_be_purchased_with_loyalty_points'];
+    if (json?['loyalty_points_exchange_value'] != null) {
+      loyaltyPointsExchangeValue =
+          json?['loyalty_points_exchange_value'].toDouble();
+    }
+    createdAt = DateTime.parse(json?['created_at'] ?? '0001-01-01');
+    createdBy = json?['created_by'];
+    updatedAt = DateTime.parse(json?['updated_at']?? '0001-01-01');
+    updatedBy = json?['updated_by'];
   }
 }

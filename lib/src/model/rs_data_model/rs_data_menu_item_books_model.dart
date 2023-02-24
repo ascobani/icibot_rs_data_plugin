@@ -79,6 +79,8 @@ class RSDataMenuItemBooksModel {
     callToActionText = json['call_to_action_text'];
     commentsText = json['comments_text'];
     isNoReservationAfterThisTime = json['is_no_reservation_after_this_time'];
-    noReservationAfterThisTime = DateTime.parse(json['no_reservation_after_this_time']);
+    noReservationAfterThisTime = DateTime.parse(
+        json['no_reservation_after_this_time'] ??
+            DateTime(0001 - 01 - 01).toString());
   }
 }

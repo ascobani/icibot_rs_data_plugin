@@ -93,12 +93,16 @@ class RSDataMenuItemCatalogsModel {
     description = getLanguage(data: json['description']);
     cannotBeSold = json['cannot_be_sold'];
     rewardPoint = json['reward_point'].toDouble();
-    vat = json['vat'].toDouble();
+    if (json['vat'] != null) {
+      vat = json['vat'].toDouble();
+    }
     termsAndConditions = json['terms_and_conditions'];
     usageTerms = json['usage_terms'];
-    startingDate = DateTime.parse(json['starting_date']);
-    endingDate = DateTime.parse(json['ending_date']);
-    inventory = json['inventory'].toDouble();
+    startingDate = DateTime.parse(json['starting_date'] ?? '0001-01-01');
+    endingDate = DateTime.parse(json['ending_date'] ?? '0001-01-01');
+    if (json['inventory'] != null) {
+      inventory = json['inventory'].toDouble();
+    }
     capacityType = json['capacity_type'];
     expirePeriodType = json['expire_period_type'];
     expirePeriod = json['expire_period'];
