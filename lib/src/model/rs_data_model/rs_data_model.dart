@@ -30,6 +30,14 @@ part 'rs_data_menu_item_catalog_prices_model.dart';
 
 part 'rs_data_tags_model.dart';
 
+part 'rs_data_menu_item_books_model.dart';
+
+part 'rs_data_menu_item_book_details_model.dart';
+
+part 'rs_data_book_detail_res_group_model.dart';
+
+part 'rs_data_menu_item_catalog_modifier_groups_models.dart';
+
 part 'rs_data_model.g.dart';
 
 @Collection()
@@ -102,6 +110,8 @@ class RSDataModel {
   int? mobileVersion;
   String? hotelChain;
   DateTime? mobileVersionPublishDate;
+
+  /// Kim publish etti
   String? mobilePublishBy;
   bool? onlineCheckIn;
   bool? onlineCheckInImage;
@@ -161,7 +171,11 @@ class RSDataModel {
   String? googleMapAddress;
   bool? showWelcome;
   bool? showChat;
+
+  /// Register ekranında çıkması istenen alanları tanıtır. Ornegin FirstName+EntryDate+LastName+ReleaseDate+RoomNo+EMail
   String? inHouseListLoginType;
+
+  /// GuestList tablosunda  belirtilen alanların hangi koşullarda arama için eşleşeceğini belirtir. Ornegin FirstName+EntryDate+LastName+ReleaseDate+RoomNo+EMail
   String? inHouseListMatchingCondition;
   String? pmsApplication;
   bool? createPowerBIdata;
@@ -191,6 +205,8 @@ class RSDataModel {
   String? surveyAddress;
   int? checkInSurveyId;
   int? checkOutSurveyId;
+
+  /// Rezervasyon datasından otomatik misafir oluşturulması gerekiyorsa işaretlenmelidir.
   bool? autoCreateProfile;
   RsDataMenuSectionModel? bars;
   RsDataMenuSectionModel? cafes;

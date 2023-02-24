@@ -11,8 +11,8 @@ class RsDataHomePageDesignerModel {
   String? imageUrl;
   List<RSDataTitleLanguageModel>? title;
   String? url;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   RsDataHomePageDesignerModel({
     this.icibotId,
@@ -37,8 +37,8 @@ class RsDataHomePageDesignerModel {
     menuItemId = json?['menu_item_id']?.toInt();
     imageUrl = json?['image_url']?.toString();
     title = getLanguage(data: json?['title']);
-    url = json?['url']?.toString();
-    createdAt = json?['created_at']?.toString();
-    updatedAt = json?['updated_at']?.toString();
+    url = json?['url'];
+    createdAt = DateTime.parse(json?['created_at']);
+    updatedAt = DateTime.parse(json?['updated_at']);
   }
 }

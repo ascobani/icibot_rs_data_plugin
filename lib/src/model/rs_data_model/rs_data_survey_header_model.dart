@@ -20,6 +20,8 @@ class RSDataSurveyHeaderModel {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? surveyLines;
+
+  /// Bu soru hangi departmanın ortalamasını etkileyen bir sorudur. Örneğin: Tüm departmanları etkileyen bir soru ise 0 gönderilecek. Headerda tanımıl ise line oluşturulurken 0 olanlara headerda tanımlanmış olan değer atanacak. Herzaman line geçerli
   int? departmentId;
   String? groups;
 

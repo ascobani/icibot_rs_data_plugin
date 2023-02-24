@@ -2,28 +2,60 @@ part of 'rs_data_model.dart';
 
 @embedded
 class RSDataMenuItemCatalogsModel {
-  /// Id
   int? id;
+
+  /// Menu Catalog Group
   int? menuItemCatalogGroupId;
+
+  /// Hangi Menu Item ile ilişkili
   int? menuItemId;
+
+  /// Gösterim sırasında sıralama için kullanılacak.
   int? priority;
+
   /// İlgili ürünün adı
-  String? name;
-  String? description;
+  List<RSDataTitleLanguageModel>? name;
+
+  /// ilgili ürün ile ilgili açıklamalar girilecek
+  List<RSDataTitleLanguageModel>? description;
+
+  /// Bu ürünü satış listesinden kaldır. Satılamaz yap.
   bool? cannotBeSold;
+
+  /// Ödül Puanı. Bu alan aktif olarak kullanılmıyor. Bir süre sonra kaldırabiliriz
   double? rewardPoint;
+
+  /// KDV Oranı
   double? vat;
+
+  /// Şartlar ve Koşullar
   String? termsAndConditions;
+
+  /// Kullanım Açıklamaları
   String? usageTerms;
+
+  /// Ürünün yayına alınma tarihi
   DateTime? startingDate;
+
+  /// Ürünün yayından kaldırılma tarihi
   DateTime? endingDate;
+
+  /// Ürünün satılabilir miktarı. Yani Stok
   double? inventory;
+
+  /// Seçenekler şunlar olacak Date Per Person (Aynı tarihte sadece kişi sayısı kadar), Date Per Order (Aynı tarihte sipariş sayısı kadar), Quantity (Sadece Miktar kadar)"
   String? capacityType;
+
+  /// Ürünün satın alındıktan sonra ne kadar sürede kullanıması gerektiği. Seçenekler Gün,Ay
   String? expirePeriodType;
+
+  /// Ürünün satın alındıktan sonra ne kadar sürede kullanıması gerektiği
   int? expirePeriod;
   List<RSDataMenuItemCatalogPricesModel>? menuItemCatalogPrices;
+
+  /// xxxxxx
   List<String>? restrictedMenuItemCapacities;
-  List<String>? menuItemCatalogModifierGroups;
+  List<MenuItemCatalogModifierGroup>? menuItemCatalogModifierGroups;
   List<RSDataImagesModel>? images;
   List<RSDataTagsModel>? tags;
 
@@ -57,8 +89,8 @@ class RSDataMenuItemCatalogsModel {
     menuItemCatalogGroupId = json['menu_item_catalog_group_id'];
     menuItemId = json['menu_item_id'];
     priority = json['priority'];
-    name = json['name'];
-    description = json['description'];
+    name = getLanguage(data: json['name']);
+    description = getLanguage(data: json['description']);
     cannotBeSold = json['cannot_be_sold'];
     rewardPoint = json['reward_point'].toDouble();
     vat = json['vat'].toDouble();
@@ -87,7 +119,8 @@ class RSDataMenuItemCatalogsModel {
     }
     if (json['restricted_menu_item_capacities'] != null) {
       menuItemCatalogModifierGroups = json['menu_item_catalog_modifier_groups']
-          .map<String>((e) => e.toString())
+          .map<MenuItemCatalogModifierGroup>(
+              (e) => MenuItemCatalogModifierGroup.fromJson(e))
           .toList();
     }
     images = json['images'] != null

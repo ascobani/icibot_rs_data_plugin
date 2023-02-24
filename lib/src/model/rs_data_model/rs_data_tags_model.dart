@@ -1,44 +1,75 @@
-
 part of 'rs_data_model.dart';
 
 @embedded
 class RSDataTagsModel {
   int? id;
+
+  /// Hotel
   int? hotelId;
+
+  /// Hangi tabloya ait
   String? tableName;
+
+  /// Hangi ID
   int? tableRecordId;
+
+  /// Restoranlar, Spa gibi bilgi amaçlı
   int? menuSectionId;
+
+  /// Direk restoran için bilgi amaçlı.
   int? menuItemId;
+
+  /// Hangi Tag Şablonu
   int? menuTagTemplateId;
+
+  /// Etiket Kategorisi MenuTagTemplate'den gelecek
   int? menuTagCategoryId;
+
+  /// Special Attention, Dietary Restriction, Etiketleri categorilere ayırmak için kullanacağız. MenuTagTemplate'den gelecek
   String? menuTagCategoryName;
+
+  // örneğin ben ve misafirim için bir request gönderdiğimde kendimin tagları ile misafir-lerimin taglarini bu alanda ayracağız.
   String? type;
+
+  /// Fish, Pork, Kosher gibi etiket isimlerini girecekler. MenuTagTemplate'den gelecek
   String? name;
+
+  /// Yorum. MenuTagTemplate'den gelecek
   String? comment;
+
+  /// Renk Kodu MenuTagCategory tablosundaki color bu alana akacak. Cascade update çalışmalı MenuTagTemplate'den gelecek
   String? colorCode;
+
+  /// Oluşturma Tarihi
   String? createdAt;
+
+  /// Oluşturan Kişi
   int? createdBy;
+
+  /// Değiştirme Tarihi
   String? updatedAt;
+
+  /// Değiştiren Kişi
   int? updatedBy;
 
   RSDataTagsModel(
       {this.id,
-        this.hotelId,
-        this.tableName,
-        this.tableRecordId,
-        this.menuSectionId,
-        this.menuItemId,
-        this.menuTagTemplateId,
-        this.menuTagCategoryId,
-        this.menuTagCategoryName,
-        this.type,
-        this.name,
-        this.comment,
-        this.colorCode,
-        this.createdAt,
-        this.createdBy,
-        this.updatedAt,
-        this.updatedBy});
+      this.hotelId,
+      this.tableName,
+      this.tableRecordId,
+      this.menuSectionId,
+      this.menuItemId,
+      this.menuTagTemplateId,
+      this.menuTagCategoryId,
+      this.menuTagCategoryName,
+      this.type,
+      this.name,
+      this.comment,
+      this.colorCode,
+      this.createdAt,
+      this.createdBy,
+      this.updatedAt,
+      this.updatedBy});
 
   RSDataTagsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

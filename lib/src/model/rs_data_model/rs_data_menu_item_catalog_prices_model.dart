@@ -3,27 +3,69 @@ part of 'rs_data_model.dart';
 @embedded
 class RSDataMenuItemCatalogPricesModel {
   int? id;
+
+  /// Menu Catalog Group
   int? menuItemCatalogGroupId;
+
+  /// Modifierları gruplamak için kullanacağız
   int? menuItemCatalogModifierGroupId;
   int? menuItemCatalogId;
+
+  /// Menu Item ID restoran id gibi
   int? menuItemId;
+
+  /// Fiyat
   double? price;
-  String? size;
+
+  /// Ürün çeşidi boyutu
+  List<RSDataTitleLanguageModel>? size;
+
+  /// Sıralama için kullanılacak
   int? priority;
+
+  /// Fırsat fiyatı var.
   bool? activateOffer;
+
+  /// Fırsat fiyatı
   double? offerPrice;
-  String? offerTitle;
+
+  /// Fırsat Etiketi
+  List<RSDataTitleLanguageModel>? offerTitle;
+
+  /// Döviz Kodu
   String? currencyCode;
+
+  /// Ekstra olarak ürüne eklenebilecek malzemeleri bu işaretli olarak kullanılacak.
   bool? isModifier;
+
+  /// Eğer modifier ise Modifier Id.
   int? menuItemCatalogModifierId;
+
+  /// rezerasyon alan itemlar için; bu item ne kadar süre kapatılmış  1 ,  90
   int? reservationBlockTimeValue;
+
+  /// rezerasyon alan itemlar için; bu item ne kadar süre kapatılmış   saat dakika
   String? reservationBlockTimeType;
+
+  /// Maximum limit
   int? maximumLimit;
+
+  /// Sadakat puanları ile satın alınabilir.
   bool? canBePurchasedWithLoyaltyPoints;
+
+  /// t:Misafir sadakat puanı ile bu ürünü almak isterse kaç puan karşılığı bu ürünü alabilir.
   double? loyaltyPointsExchangeValue;
-  String? createdAt;
+
+  /// Oluşturma Tarihi
+  DateTime? createdAt;
+
+  /// Kaydı Oluşturan
   int? createdBy;
-  String? updatedAt;
+
+  /// Değişiklik Tarihi
+  DateTime? updatedAt;
+
+  /// Kaydı Değiştiren
   int? updatedBy;
 
   RSDataMenuItemCatalogPricesModel(
@@ -59,11 +101,11 @@ class RSDataMenuItemCatalogPricesModel {
     menuItemCatalogId = json['menu_item_catalog_id'];
     menuItemId = json['menu_item_id'];
     price = json['price'].toDouble();
-    size = json['size'];
+    size = getLanguage(data: json['size']);
     priority = json['priority'];
     activateOffer = json['activate_offer'];
     offerPrice = json['offer_price'].toDouble();
-    offerTitle = json['offer_title'];
+    offerTitle = getLanguage(data:json['offer_title']);
     currencyCode = json['currency_code'];
     isModifier = json['is_modifier'];
     menuItemCatalogModifierId = json['menu_item_catalog_modifier_id'];
@@ -72,10 +114,11 @@ class RSDataMenuItemCatalogPricesModel {
     maximumLimit = json['maximum_limit'];
     canBePurchasedWithLoyaltyPoints =
         json['can_be_purchased_with_loyalty_points'];
-    loyaltyPointsExchangeValue = json['loyalty_points_exchange_value'].toDouble();
-    createdAt = json['created_at'];
+    loyaltyPointsExchangeValue =
+        json['loyalty_points_exchange_value'].toDouble();
+    createdAt = DateTime.parse(json['created_at']);
     createdBy = json['created_by'];
-    updatedAt = json['updated_at'];
+    updatedAt = DateTime.parse(json['updated_at']);
     updatedBy = json['updated_by'];
   }
 }

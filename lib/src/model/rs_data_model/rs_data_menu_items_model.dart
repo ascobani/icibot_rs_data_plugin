@@ -64,6 +64,8 @@ class RSDataMenuItemsModel {
   DateTime? startDate;
   DateTime? endDate;
   bool? selectCapacity;
+
+  /// Bu alan işaretliyse sistem profili yoksa kullanıcıdan profil bilgisini ister ama konaklama bilgisini istemez, eğer bu alan işaretli değilse şimdiki gibi konaklama bilgisini sorar.
   bool? noAccommodationRequired;
   bool? order;
   bool? orderWithReservation;
@@ -80,15 +82,15 @@ class RSDataMenuItemsModel {
   String? excludedPostCodes;
   bool? activateFreeDeliveryOverAmount;
   int? freeDeliveryOverAmount;
-  int? deliveryPriceDistanceRange_1;
+  double? deliveryPriceDistanceRange_1;
   String? deliveryPriceType_1;
-  int? deliveryUnitPrice_1;
-  int? deliveryPriceDistanceRange_2;
+  double? deliveryUnitPrice_1;
+  double? deliveryPriceDistanceRange_2;
   String? deliveryPriceType_2;
-  int? deliveryUnitPrice_2;
-  int? deliveryPriceDistanceRange_3;
+  double? deliveryUnitPrice_2;
+  double? deliveryPriceDistanceRange_3;
   String? deliveryPriceType_3;
-  int? deliveryUnitPrice_3;
+  double? deliveryUnitPrice_3;
   bool? orderSystem;
   bool? showPrice;
   bool? showComment;
@@ -101,11 +103,13 @@ class RSDataMenuItemsModel {
   RSDataSurveyHeaderModel? surveyHeader;
   List<RSDataMenuItemCatalogGroupsModel>? menuItemCatalogGroups;
   List<RSDataMenuItemBulletListModel>? bulletList;
+  List<RSDataMenuItemBooksModel>? menuItemBooks;
 
   RSDataMenuItemsModel({
     this.icibotId,
     this.menuSectionId,
     this.menuSectionName,
+    this.menuItemBooks,
     this.menuCategoryId,
     this.menuCategoryName,
     this.bulletList,
@@ -283,15 +287,15 @@ class RSDataMenuItemsModel {
     excludedPostCodes = json['excluded_post_codes'];
     activateFreeDeliveryOverAmount = json['activate_free_delivery_over_amount'];
     freeDeliveryOverAmount = json['free_delivery_over_amount'];
-    deliveryPriceDistanceRange_1 = json['delivery_price_distance_range_1'];
+    deliveryPriceDistanceRange_1 = json['delivery_price_distance_range_1'].toDouble();
     deliveryPriceType_1 = json['delivery_price_type_1'];
-    deliveryUnitPrice_1 = json['delivery_unit_price_1'];
-    deliveryPriceDistanceRange_2 = json['delivery_price_distance_range_2'];
+    deliveryUnitPrice_1 = json['delivery_unit_price_1'].toDouble();
+    deliveryPriceDistanceRange_2 = json['delivery_price_distance_range_2'].toDouble();
     deliveryPriceType_2 = json['delivery_price_type_2'];
-    deliveryUnitPrice_2 = json['delivery_unit_price_2'];
-    deliveryPriceDistanceRange_3 = json['delivery_price_distance_range_3'];
+    deliveryUnitPrice_2 = json['delivery_unit_price_2'].toDouble();
+    deliveryPriceDistanceRange_3 = json['delivery_price_distance_range_3'].toDouble();
     deliveryPriceType_3 = json['delivery_price_type_3'];
-    deliveryUnitPrice_3 = json['delivery_unit_price_3'];
+    deliveryUnitPrice_3 = json['delivery_unit_price_3'].toDouble();
     orderSystem = json['order_system'];
     showPrice = json['show_price'];
     showComment = json['show_comment'];
@@ -312,6 +316,12 @@ class RSDataMenuItemsModel {
       bulletList = json['menu_item_bullet_lists']
           .map<RSDataMenuItemBulletListModel>(
               (e) => RSDataMenuItemBulletListModel.fromJson(e))
+          .toList();
+    }
+    if (json['menu_item_books'] != null) {
+      menuItemBooks = json['menu_item_books']
+          .map<RSDataMenuItemBooksModel>(
+              (e) => RSDataMenuItemBooksModel.fromJson(e))
           .toList();
     }
   }
