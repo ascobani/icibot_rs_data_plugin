@@ -118,9 +118,9 @@ class RSDataMenuItemCatalogPricesModel {
       loyaltyPointsExchangeValue =
           json?['loyalty_points_exchange_value'].toDouble();
     }
-    createdAt = DateTime.parse(json?['created_at'] ?? '0001-01-01');
+    createdAt = DateTime.tryParse(json?['created_at']);
     createdBy = json?['created_by'];
-    updatedAt = DateTime.parse(json?['updated_at']?? '0001-01-01');
+    updatedAt = DateTime.tryParse(json?['updated_at']);
     updatedBy = json?['updated_by'];
   }
 }

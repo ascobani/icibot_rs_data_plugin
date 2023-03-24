@@ -30,7 +30,7 @@ class RSDataBookDetailReservationGroupModel {
     bookDetailId = json['book_detail_id'];
     title = getLanguage(data: json['title']);
     description = getLanguage(data: json['description']);
-    defaultTime = DateTime.parse(json['default_time']);
+    defaultTime = DateTime.tryParse(json['default_time']);
     limitCorrectionValue = json['limit_correction_value'];
   }
 }

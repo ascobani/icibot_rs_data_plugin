@@ -41,13 +41,13 @@ class RSDataTagsModel {
   String? colorCode;
 
   /// Oluşturma Tarihi
-  String? createdAt;
+  DateTime? createdAt;
 
   /// Oluşturan Kişi
   int? createdBy;
 
   /// Değiştirme Tarihi
-  String? updatedAt;
+  DateTime? updatedAt;
 
   /// Değiştiren Kişi
   int? updatedBy;
@@ -85,9 +85,9 @@ class RSDataTagsModel {
     name = json['name'];
     comment = json['comment'];
     colorCode = json['color_code'];
-    createdAt = json['created_at'];
+    createdAt = DateTime.tryParse(json['created_at']);
     createdBy = json['created_by'];
-    updatedAt = json['updated_at'];
+    updatedAt = DateTime.tryParse(json['updated_at']);
     updatedBy = json['updated_by'];
   }
 }

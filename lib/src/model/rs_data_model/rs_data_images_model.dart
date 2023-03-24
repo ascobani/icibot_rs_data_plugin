@@ -15,7 +15,7 @@ class RSDataImagesModel {
     fileName = json?['file_name'];
     url = json?['url'];
     key = json?['key'];
-    lastModified = DateTime.parse(json?['last_modified']);
+    lastModified = DateTime.tryParse(json?['last_modified']);
     sizeKB = json?['size_KB'].toDouble();
   }
 }

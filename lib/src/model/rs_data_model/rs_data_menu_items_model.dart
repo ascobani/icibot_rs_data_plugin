@@ -270,8 +270,8 @@ class RSDataMenuItemsModel {
     reservationRestrictionType = json?['reservation_restriction_type'];
     reservationRestrictionValue = json?['reservation_restriction_value'];
     showDateRange = json?['show_date_range'];
-    startDate = DateTime.parse(json?['start_date']);
-    endDate = DateTime.parse(json?['end_date']);
+    startDate = DateTime.tryParse(json?['start_date']);
+    endDate = DateTime.tryParse(json?['end_date']);
     selectCapacity = json?['select_capacity'];
     noAccommodationRequired = json?['no_accommodation_required'];
     order = json?['order'];
@@ -290,18 +290,32 @@ class RSDataMenuItemsModel {
     activateFreeDeliveryOverAmount =
         json?['activate_free_delivery_over_amount'];
     freeDeliveryOverAmount = json?['free_delivery_over_amount'];
-    deliveryPriceDistanceRange_1 =
-        json?['delivery_price_distance_range_1'].toDouble();
+    if (json?['delivery_price_distance_range_1'] != null) {
+      deliveryPriceDistanceRange_1 =
+          json?['delivery_price_distance_range_1'].toDouble();
+    }
     deliveryPriceType_1 = json?['delivery_price_type_1'];
-    deliveryUnitPrice_1 = json?['delivery_unit_price_1'].toDouble();
-    deliveryPriceDistanceRange_2 =
-        json?['delivery_price_distance_range_2'].toDouble();
+
+    if (json?['delivery_unit_price_1'] != null) {
+      deliveryUnitPrice_1 = json?['delivery_unit_price_1'].toDouble();
+    }
+
+    if (json?['delivery_price_distance_range_2'] != null) {
+      deliveryPriceDistanceRange_2 =
+          json?['delivery_price_distance_range_2'].toDouble();
+    }
     deliveryPriceType_2 = json?['delivery_price_type_2'];
-    deliveryUnitPrice_2 = json?['delivery_unit_price_2'].toDouble();
-    deliveryPriceDistanceRange_3 =
-        json?['delivery_price_distance_range_3'].toDouble();
+    if (json?['delivery_unit_price_2'] != null) {
+      deliveryUnitPrice_2 = json?['delivery_unit_price_2'].toDouble();
+    }
+    if (json?['delivery_price_distance_range_3'] != null) {
+      deliveryPriceDistanceRange_3 =
+          json?['delivery_price_distance_range_3'].toDouble();
+    }
     deliveryPriceType_3 = json?['delivery_price_type_3'];
-    deliveryUnitPrice_3 = json?['delivery_unit_price_3'].toDouble();
+    if (json?['delivery_unit_price_3'] != null) {
+      deliveryUnitPrice_3 = json?['delivery_unit_price_3'].toDouble();
+    }
     orderSystem = json?['order_system'];
     showPrice = json?['show_price'];
     showComment = json?['show_comment'];

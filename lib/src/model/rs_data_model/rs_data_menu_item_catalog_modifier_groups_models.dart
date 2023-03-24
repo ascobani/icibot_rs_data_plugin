@@ -63,9 +63,9 @@ class MenuItemCatalogModifierGroup {
         prices!.add(RSDataMenuItemCatalogPricesModel.fromJson(v));
       });
     }
-    createdAt = DateTime.parse(json['created_at']);
+    createdAt = DateTime.tryParse(json['created_at']);
     createdBy = json['created_by'];
-    updatedAt = DateTime.parse(json['updated_at']);
+    updatedAt = DateTime.tryParse(json['updated_at']);
     updatedBy = json['updated_by'];
   }
 }

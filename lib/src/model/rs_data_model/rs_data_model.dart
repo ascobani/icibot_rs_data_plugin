@@ -486,7 +486,9 @@ class RSDataModel {
     placeId = json?['place_id'];
     imageUrl = json?['image_url'];
     photos = json?['photos'];
-    rating = json?['rating'].toDouble();
+    if(json?['rating']!= null) {
+      rating = json?['rating'].toDouble();
+    }
     webSiteUrl = getLanguage(data: json?['web_site_url']);
     latLng = json?['lat_lng'];
     onlineReservationUrl = getLanguage(data: json?['online_reservation_url']);
@@ -537,11 +539,11 @@ class RSDataModel {
     smFacebookUrl = json?['sm_facebook_url'];
     smTwitterUrl = json?['sm_twitter_url'];
     smVkontakteUrl = json?['sm_vkontakte_url'];
-    createdAt = DateTime.parse(json?['created_at']);
-    updatedAt = DateTime.parse(json?['updated_at']);
+    createdAt = DateTime.tryParse(json?['created_at']);
+    updatedAt = DateTime.tryParse(json?['updated_at']);
     mobileVersion = json?['mobile_version'];
     mobileVersionPublishDate =
-        DateTime.parse(json?['mobile_version_publish_date']);
+        DateTime.tryParse(json?['mobile_version_publish_date']);
     mobilePublishBy = json?['mobile_publish_by'];
     hotelChain = json?['hotel_chain'];
     onlineCheckIn = json?['online_check_in'];
@@ -594,10 +596,10 @@ class RSDataModel {
     googlePlayLink = json?['google_play_link'];
     firebaseLink = json?['firebase_link'];
     openForYear = json?['open_for_year'];
-    openDate = DateTime.parse(json?['open_date']);
-    closeDate = DateTime.parse(json?['close_date']);
-    entryDate = DateTime.parse(json?['entry_date']);
-    releaseDate = DateTime.parse(json?['release_date']);
+    openDate = DateTime.tryParse(json?['open_date']);
+    closeDate = DateTime.tryParse(json?['close_date']);
+    entryDate = DateTime.tryParse(json?['entry_date']);
+    releaseDate = DateTime.tryParse(json?['release_date']);
     babyAgeRange = json?['baby_age_range'];
     childAgeRange = json?['child_age_range'];
     oldAgeRange = json?['old_age_range'];
@@ -632,8 +634,7 @@ class RSDataModel {
     upsellItemId = json?['upsell_item_id'];
     hotelLanguage = json?['hotel_language'];
     hotelToken = json?['hotel_token'];
-    hotelTokenExpiredTime = DateTime.parse(json?['hotel_token_expired_time'] ??
-        DateTime(0001 - 01 - 01).toString());
+    hotelTokenExpiredTime = DateTime.tryParse(json?['hotel_token_expired_time']);
     tokenExpireSeconds = json?['token_expire_seconds'];
     manuelRequestOwnerType = json?['manuel_request_owner_type'];
     onetimeInformation = json?['onetime_information'];

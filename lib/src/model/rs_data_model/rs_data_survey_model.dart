@@ -60,8 +60,8 @@ class RSDataSurveyModel {
     thanksMessageForNegativeReviews =
         json['thanks_message_for_negative_reviews'];
     askNoteAfterSurvey = json['ask_note_after_survey'];
-    createdAt = DateTime.parse(json['created_at']);
-    updatedAt = DateTime.parse(json['updated_at']);
+    createdAt = DateTime.tryParse(json['created_at']);
+    updatedAt = DateTime.tryParse(json['updated_at']);
     surveyLines = json['survey_lines'];
     departmentId = json['department_id'];
     groups = json['groups'];

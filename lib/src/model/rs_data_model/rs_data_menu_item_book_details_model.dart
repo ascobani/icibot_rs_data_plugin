@@ -87,8 +87,8 @@ class RSDataMenuItemBookDetailsModel {
     id = json['id'];
     menuItemId = json['menu_item_id'];
     menuItemBookId = json['menu_item_book_id'];
-    startTime = DateTime.parse(json['start_time']);
-    endTime = DateTime.parse(json['end_time']);
+    startTime = DateTime.tryParse(json['start_time']);
+    endTime = DateTime.tryParse(json['end_time']);
     name = getLanguage(data: json['name']);
     bookable = json['bookable'];
     interval = json['interval'];
@@ -99,8 +99,12 @@ class RSDataMenuItemBookDetailsModel {
     currencyCode = json['currency_code'];
     viewCount = json['view_count'];
     limit = json['limit'];
-    isChildAccept = json['is_child_accept'].toDouble();
-    childPrice = json['child_price'].toDouble();
+    if(json['is_child_accept'] != null) {
+      isChildAccept = json['is_child_accept'].toDouble();
+    }
+    if(json['child_price'] != null) {
+      childPrice = json['child_price'].toDouble();
+    }
     babyPrice = json['baby_price'];
     maximumNumberOfPeoplePerReservation =
         json['maximum_number_of_people_per_reservation'];

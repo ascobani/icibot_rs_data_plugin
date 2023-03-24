@@ -38,7 +38,7 @@ class RsDataHomePageDesignerModel {
     imageUrl = json?['image_url']?.toString();
     title = getLanguage(data: json?['title']);
     url = json?['url'];
-    createdAt = DateTime.parse(json?['created_at']);
-    updatedAt = DateTime.parse(json?['updated_at']);
+    createdAt = DateTime.tryParse(json?['created_at']);
+    updatedAt = DateTime.tryParse(json?['updated_at']);
   }
 }
