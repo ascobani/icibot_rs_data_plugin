@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:isar/isar.dart';
+export 'package:flutter/material.dart';
 
 import '../../icibot_rs_data.dart';
 import '../manager/dio_manager/dio_manager.dart';
@@ -21,6 +22,7 @@ class IcIbotRSDataService {
 
   /// Initializes the [IcIbotRSDataService]
   Future<void> _init() async {
+    WidgetsFlutterBinding.ensureInitialized();
     await IsarService.instance.openDB();
     await RichDataService.init();
   }
