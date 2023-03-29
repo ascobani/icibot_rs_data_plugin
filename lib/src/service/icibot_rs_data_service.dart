@@ -12,15 +12,24 @@ part 'rich_data_service.dart';
 /// This service is used to open the database and get the [RSDataModel] and [RSVersionModel] from the database
 class IcIbotRSDataService {
   /// Creates a new instance of [IcIbotRSDataService]
-  IcIbotRSDataService() {
-    init();
-  }
+
+  IcIbotRSDataService._internal();
+
+  static final IcIbotRSDataService _instance = IcIbotRSDataService._internal();
+
+  static IcIbotRSDataService get instance => _instance;
 
   /// Initializes the [IcIbotRSDataService]
-  Future<void> init() async {
-    await IsarService().openDB();
-    await RichDataService().init();
+  Future<void> _init() async {
+    await IsarService.openDB();
+    await RichDataService.init();
   }
+
+  static Future<void> init() async {
+    await _instance._init();
+  }
+
+  IsarService isarService = IsarService._instance;
 
   /// Gets the [RSDataModel] from the database if version did not change or there is no [RSDataModel] in the database
   ///
@@ -29,8 +38,7 @@ class IcIbotRSDataService {
   /// @version - The latest version of the [RSVersionModel] can be found in the {https://b1development.s3.eu-central-1.amazonaws.com/icibotV2/$appHotelId/MobileVersion.json} by the key "version"
   Future<void> versionControlledUpdate({required int appHotelId}) async {
     // [RSVersionModel] is used to check if the version of the [RSDataModel] has changed
-    var richDataService = RichDataService();
-    var isarService = IsarService();
+    var richDataService = RichDataService.instance;
     try {
       // Gets the [RSVersionModel] from the database
       RSVersionModel? versionModel = await isarService.getRSVersionModel();
@@ -67,7 +75,6 @@ class IcIbotRSDataService {
   ///
   /// Returns the [RSDataModel] if it exists, otherwise returns null
   Future<RSDataModel?> getRSDataModel() async {
-    IsarService isarService = IsarService();
     return isarService.getRSDataModel();
   }
 
@@ -75,13 +82,11 @@ class IcIbotRSDataService {
   ///
   /// Returns the [RSVersionModel] if it exists, otherwise returns null
   Future<RSVersionModel?> getRSVersionModel() async {
-    IsarService isarService = IsarService();
     return isarService.getRSVersionModel();
   }
 
   /// Deletes everything from the database
   Future<void> clearDB() async {
-    IsarService isarService = IsarService();
     return isarService.deleteDB();
   }
 }

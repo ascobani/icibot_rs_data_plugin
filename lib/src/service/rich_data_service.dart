@@ -6,7 +6,20 @@ enum RichDataServiceStatus { success, error }
 /// [RichDataService] is a service class that is used to get data from the server.
 class RichDataService with DioManager {
   /// Initializes the [RichDataService]
-  Future<void> init() async {
+  ///
+  ///
+
+  RichDataService._internal();
+
+  static final RichDataService _instance = RichDataService._internal();
+
+  static RichDataService get instance => _instance;
+
+  static Future<void> init() async {
+    await _instance._init();
+  }
+
+  Future<void> _init() async {
     await dio.get('/3/MobileVersion.json?$timeStamp').catchError((e) {
       throw e;
     });

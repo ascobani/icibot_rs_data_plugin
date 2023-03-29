@@ -5,8 +5,17 @@ class IsarService {
   late Future<Isar> db;
 
   /// Creates a new instance of [IsarService]
-  IsarService() {
-    db = openDB();
+
+  IsarService._internal();
+
+  static final IsarService _instance = IsarService._internal();
+
+  static IsarService get instance => _instance;
+
+  /// Opens the database
+
+  static Future<Isar> openDB() async {
+    return await _instance._openDB();
   }
 
   /// Gets the [RSDataModel] from the database
@@ -51,7 +60,7 @@ class IsarService {
   /// Creates a new instance of [IsarService]
   ///
   /// @inspector - to open thw web inspector by default is [true]
-  Future<Isar> openDB({bool inspector = true}) async {
+  Future<Isar> _openDB({bool inspector = true}) async {
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
         [RSDataModelSchema, RSVersionModelSchema], //Isar Models,

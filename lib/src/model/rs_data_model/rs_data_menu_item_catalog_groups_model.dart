@@ -8,7 +8,6 @@ class RSDataMenuItemCatalogGroupsModel {
   int? priority;
   String? mainGroup;
   int? maxPerPerson;
-
   List<RSDataImagesModel>? images;
   List<RSDataMenuItemCatalogsModel>? menuItemCatalogs;
 
