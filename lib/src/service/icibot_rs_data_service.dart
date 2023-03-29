@@ -21,11 +21,11 @@ class IcIbotRSDataService {
 
   /// Initializes the [IcIbotRSDataService]
   Future<void> _init() async {
-    await IsarService.openDB();
+    await IsarService.instance.openDB();
     await RichDataService.init();
   }
 
-  static Future<void> init() async {
+  static Future init() async {
     await _instance._init();
   }
 
