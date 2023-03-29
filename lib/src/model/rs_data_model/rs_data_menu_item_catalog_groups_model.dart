@@ -4,7 +4,7 @@ part of 'rs_data_model.dart';
 class RSDataMenuItemCatalogGroupsModel {
   int? id;
   int? menuItemId;
-  String? name;
+  List<RSDataTitleLanguageModel>? name;
   int? priority;
   String? mainGroup;
   int? maxPerPerson;
@@ -25,7 +25,7 @@ class RSDataMenuItemCatalogGroupsModel {
   RSDataMenuItemCatalogGroupsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     menuItemId = json['menu_item_id'];
-    name = json['name'];
+    name = getLanguage(data: json['name']);
     priority = json['priority'];
     mainGroup = json['main_group'];
     maxPerPerson = json['max_per_person'];

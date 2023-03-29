@@ -51214,7 +51214,8 @@ const RSDataMenuItemCatalogGroupsModelSchema = Schema(
     r'name': PropertySchema(
       id: 6,
       name: r'name',
-      type: IsarType.string,
+      type: IsarType.objectList,
+      target: r'RSDataTitleLanguageModel',
     ),
     r'priority': PropertySchema(
       id: 7,
@@ -51269,9 +51270,17 @@ int _rSDataMenuItemCatalogGroupsModelEstimateSize(
     }
   }
   {
-    final value = object.name;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    final list = object.name;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[RSDataTitleLanguageModel]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += RSDataTitleLanguageModelSchema.estimateSize(
+              value, offsets, allOffsets);
+        }
+      }
     }
   }
   return bytesCount;
@@ -51299,7 +51308,12 @@ void _rSDataMenuItemCatalogGroupsModelSerialize(
     object.menuItemCatalogs,
   );
   writer.writeLong(offsets[5], object.menuItemId);
-  writer.writeString(offsets[6], object.name);
+  writer.writeObjectList<RSDataTitleLanguageModel>(
+    offsets[6],
+    allOffsets,
+    RSDataTitleLanguageModelSchema.serialize,
+    object.name,
+  );
   writer.writeLong(offsets[7], object.priority);
 }
 
@@ -51326,7 +51340,12 @@ RSDataMenuItemCatalogGroupsModel _rSDataMenuItemCatalogGroupsModelDeserialize(
       RSDataMenuItemCatalogsModel(),
     ),
     menuItemId: reader.readLongOrNull(offsets[5]),
-    name: reader.readStringOrNull(offsets[6]),
+    name: reader.readObjectList<RSDataTitleLanguageModel>(
+      offsets[6],
+      RSDataTitleLanguageModelSchema.deserialize,
+      allOffsets,
+      RSDataTitleLanguageModel(),
+    ),
     priority: reader.readLongOrNull(offsets[7]),
   );
   return object;
@@ -51362,7 +51381,12 @@ P _rSDataMenuItemCatalogGroupsModelDeserializeProp<P>(
     case 5:
       return (reader.readLongOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<RSDataTitleLanguageModel>(
+        offset,
+        RSDataTitleLanguageModelSchema.deserialize,
+        allOffsets,
+        RSDataTitleLanguageModel(),
+      )) as P;
     case 7:
       return (reader.readLongOrNull(offset)) as P;
     default:
@@ -52054,131 +52078,31 @@ extension RSDataMenuItemCatalogGroupsModelQueryFilter on QueryBuilder<
     });
   }
 
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-      RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition> nameEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<
+      RSDataMenuItemCatalogGroupsModel,
+      RSDataMenuItemCatalogGroupsModel,
+      QAfterFilterCondition> nameLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-      RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition> nameGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-      RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition> nameLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-      RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition> nameBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'name',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-      RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition> nameStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-      RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition> nameEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-          RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition>
-      nameContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
-          RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition>
-      nameMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'name',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'name',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<RSDataMenuItemCatalogGroupsModel,
       RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: '',
-      ));
+      return query.listLength(
+        r'name',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
@@ -52187,10 +52111,69 @@ extension RSDataMenuItemCatalogGroupsModelQueryFilter on QueryBuilder<
       RSDataMenuItemCatalogGroupsModel,
       QAfterFilterCondition> nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'name',
-        value: '',
-      ));
+      return query.listLength(
+        r'name',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<
+      RSDataMenuItemCatalogGroupsModel,
+      RSDataMenuItemCatalogGroupsModel,
+      QAfterFilterCondition> nameLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'name',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<
+      RSDataMenuItemCatalogGroupsModel,
+      RSDataMenuItemCatalogGroupsModel,
+      QAfterFilterCondition> nameLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'name',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<
+      RSDataMenuItemCatalogGroupsModel,
+      RSDataMenuItemCatalogGroupsModel,
+      QAfterFilterCondition> nameLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'name',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -52295,6 +52278,14 @@ extension RSDataMenuItemCatalogGroupsModelQueryObject on QueryBuilder<
       menuItemCatalogsElement(FilterQuery<RSDataMenuItemCatalogsModel> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'menuItemCatalogs');
+    });
+  }
+
+  QueryBuilder<RSDataMenuItemCatalogGroupsModel,
+          RSDataMenuItemCatalogGroupsModel, QAfterFilterCondition>
+      nameElement(FilterQuery<RSDataTitleLanguageModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'name');
     });
   }
 }
