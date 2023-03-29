@@ -20,15 +20,13 @@ class IcIbotRSDataService {
 
   static IcIbotRSDataService get instance => _instance;
 
+
+
   /// Initializes the [IcIbotRSDataService]
-  Future<void> _init() async {
+  static Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
     await IsarService.instance.openDB();
     await RichDataService.init();
-  }
-
-  static Future init() async {
-    await _instance._init();
   }
 
   IsarService isarService = IsarService._instance;
