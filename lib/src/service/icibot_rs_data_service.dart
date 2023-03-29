@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:isar/isar.dart';
+export 'package:flutter/material.dart';
 
 import '../../icibot_rs_data.dart';
 import '../manager/dio_manager/dio_manager.dart';
@@ -12,16 +13,25 @@ part 'rich_data_service.dart';
 /// This service is used to open the database and get the [RSDataModel] and [RSVersionModel] from the database
 class IcIbotRSDataService {
   /// Creates a new instance of [IcIbotRSDataService]
-  IcIbotRSDataService() {
-    init();
-  }
+
+  IcIbotRSDataService._internal();
+
+  static final IcIbotRSDataService _instance = IcIbotRSDataService._internal();
+
+  static IcIbotRSDataService get instance => _instance;
 
   /// Initializes the [IcIbotRSDataService]
-  Future<void> init() async {
+  Future<void> _init() async {
+    WidgetsFlutterBinding.ensureInitialized();
     await IsarService.instance.openDB();
+    await RichDataService.init();
   }
 
-  var isarService = IsarService.instance;
+  static Future init() async {
+    await _instance._init();
+  }
+
+  IsarService isarService = IsarService._instance;
 
   /// Gets the [RSDataModel] from the database if version did not change or there is no [RSDataModel] in the database
   ///
