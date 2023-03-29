@@ -43,7 +43,8 @@ class IcIbotRSDataService {
           'versionControlledUpdate: ${versionModelFromServer.version}, currentVersion: ${versionModel?.version}');
       // If the version did not change and the [RSVersionModel] is not null, return
       if (versionModelFromServer.version != null &&
-          versionModelFromServer.version == versionModel?.version) {
+          versionModelFromServer.version == versionModel?.version &&
+          versionModel?.appHotelId == appHotelId) {
         return;
       }
       if (versionModel?.version != versionModelFromServer.version) {

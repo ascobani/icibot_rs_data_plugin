@@ -32,13 +32,13 @@ class RsDataMenuSectionModel {
 
   RsDataMenuSectionModel.fromJson(Map<String, dynamic>? json) {
     icibotId = json?['id'];
-    hotelId = json?['hotelId'];
-    menuAreaId = json?['menuAreaId'];
-    catalogueActive = json?['catalogueActive'];
-    timetableAndReservationActive = json?['timetableAndReservationActive'];
+    hotelId = json?['hotel_id'];
+    menuAreaId = json?['menu_area_id'];
+    catalogueActive = json?['catalogue_active'];
+    timetableAndReservationActive = json?['timetable_and_reservation_active'];
     title = getLanguage(data: json?['title']);
-    theShow = json?['theShow'];
-    surveyHeaderId = json?['surveyHeaderId'];
+    theShow = json?['show'];
+    surveyHeaderId = json?['survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json?['survey_header']);
     if (json?['menu_categories'] != null) {
       menuCategories = json?['menu_categories']
@@ -47,6 +47,8 @@ class RsDataMenuSectionModel {
           .toList();
     }
     request = json?['request'];
-    survey = RSDataSurveyModel.fromJson(json?['survey']);
+    if (json?['survey'] != null) {
+      survey = RSDataSurveyModel.fromJson(json?['survey']);
+    }
   }
 }

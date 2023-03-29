@@ -30,6 +30,14 @@ part 'rs_data_menu_item_catalog_prices_model.dart';
 
 part 'rs_data_tags_model.dart';
 
+part 'rs_data_menu_item_books_model.dart';
+
+part 'rs_data_menu_item_book_details_model.dart';
+
+part 'rs_data_book_detail_res_group_model.dart';
+
+part 'rs_data_menu_item_catalog_modifier_groups_models.dart';
+
 part 'rs_data_model.g.dart';
 
 @Collection()
@@ -450,59 +458,61 @@ class RSDataModel {
     this.welcomeMessage,
   });
 
-  RSDataModel.fromJson(Map<String, dynamic> json) {
-    icibotId = json['id'];
-    clientId = json['client_id'];
-    facebookId = json['facebook_id'];
-    name = json['name'];
-    contactName = json['contact_name'];
-    contactPhone = json['contact_phone'];
-    contactEmail = json['contact_email'];
-    callCenter = json['call_center'];
-    houseKeepingPhone = json['house_keeping_phone'];
-    masterColor = json['master_color'];
-    activated = json['activated'];
-    subscriptionStartDate = DateTime.parse(json['subscription_start_date']);
-    subscriptionEndDate = DateTime.parse(json['subscription_end_date']);
-    address = json['address'];
-    postCode = json['post_code'];
-    city = json['city'];
-    country = json['country'];
-    currencyCode = json['currency_code'];
-    deliveryDistanceType = json['delivery_distance_type'];
-    languages = json['languages']
+  RSDataModel.fromJson(Map<String, dynamic>? json) {
+    icibotId = json?['id'];
+    clientId = json?['client_id'];
+    facebookId = json?['facebook_id'];
+    name = json?['name'];
+    contactName = json?['contact_name'];
+    contactPhone = json?['contact_phone'];
+    contactEmail = json?['contact_email'];
+    callCenter = json?['call_center'];
+    houseKeepingPhone = json?['house_keeping_phone'];
+    masterColor = json?['master_color'];
+    activated = json?['activated'];
+    subscriptionStartDate = DateTime.parse(json?['subscription_start_date']);
+    subscriptionEndDate = DateTime.parse(json?['subscription_end_date']);
+    address = json?['address'];
+    postCode = json?['post_code'];
+    city = json?['city'];
+    country = json?['country'];
+    currencyCode = json?['currency_code'];
+    deliveryDistanceType = json?['delivery_distance_type'];
+    languages = json?['languages']
         .split(',')
         .map((e) => e.trim())
         .toList()
         .cast<String>();
-    placeId = json['place_id'];
-    imageUrl = json['image_url'];
-    photos = json['photos'];
-    rating = json['rating'].toDouble();
-    webSiteUrl = getLanguage(data: json['web_site_url']);
-    latLng = json['lat_lng'];
-    onlineReservationUrl = getLanguage(data: json['online_reservation_url']);
-    directReservation = json['direct_reservation'];
-    reservationMailAddress = json['reservation_mail_address'];
-    groupHotels = json['group_hotels'];
-    googleAnalyticsLink = json['google_analytics_link'];
-    yandexMetricaLink = json['yandex_metrica_link'];
-    bingLink = json['bing_link'];
-    surveyUrl = getLanguage(data: json['survey_url']);
-    hotelInformationTr = json['hotel_information_tr'];
-    hotelInformationEn = json['hotel_information_en'];
-    hotelInformationRu = json['hotel_information_ru'];
-    hotelInformationDe = json['hotel_information_de'];
-    hotelInformationFr = json['hotel_information_fr'];
-    hotelInformationAr = json['hotel_information_ar'];
-    hotelInformationIr = json['hotel_information_ir'];
-    hotelInformationEs = json['hotel_information_es'];
-    subColor = json['sub_color'];
-    kvkkLink = getLanguage(data: json['kvkk_link']);
-    privacyPolicyLink = getLanguage(data: json['privacy_policy_link']);
-    if (json['accommodation_contract'].contains(':') &&
-        json['accommodation_contract'] != '') {
-      accommodationContract = jsonDecode(json['accommodation_contract'])
+    placeId = json?['place_id'];
+    imageUrl = json?['image_url'];
+    photos = json?['photos'];
+    if(json?['rating']!= null) {
+      rating = json?['rating'].toDouble();
+    }
+    webSiteUrl = getLanguage(data: json?['web_site_url']);
+    latLng = json?['lat_lng'];
+    onlineReservationUrl = getLanguage(data: json?['online_reservation_url']);
+    directReservation = json?['direct_reservation'];
+    reservationMailAddress = json?['reservation_mail_address'];
+    groupHotels = json?['group_hotels'];
+    googleAnalyticsLink = json?['google_analytics_link'];
+    yandexMetricaLink = json?['yandex_metrica_link'];
+    bingLink = json?['bing_link'];
+    surveyUrl = getLanguage(data: json?['survey_url']);
+    hotelInformationTr = json?['hotel_information_tr'];
+    hotelInformationEn = json?['hotel_information_en'];
+    hotelInformationRu = json?['hotel_information_ru'];
+    hotelInformationDe = json?['hotel_information_de'];
+    hotelInformationFr = json?['hotel_information_fr'];
+    hotelInformationAr = json?['hotel_information_ar'];
+    hotelInformationIr = json?['hotel_information_ir'];
+    hotelInformationEs = json?['hotel_information_es'];
+    subColor = json?['sub_color'];
+    kvkkLink = getLanguage(data: json?['kvkk_link']);
+    privacyPolicyLink = getLanguage(data: json?['privacy_policy_link']);
+    if (json?['accommodation_contract'].contains(':') &&
+        json?['accommodation_contract'] != '') {
+      accommodationContract = jsonDecode(json?['accommodation_contract'])
           .entries
           .map<RSDataTitleLanguageModel>(
               (e) => RSDataTitleLanguageModel.fromJson(e))
@@ -510,38 +520,38 @@ class RSDataModel {
     } else {
       accommodationContract = [
         RSDataTitleLanguageModel(
-            title: json['accommodation_contract'], locale: 'default')
+            title: json?['accommodation_contract'], locale: 'default')
       ];
     }
-    tripAdvisorLink = json['trip_advisor_link'];
-    mailVerificationForGuests = json['mail_verification_for_guests'];
-    apiAddress = json['api_address'];
-    spDoctor = json['sp_doctor'];
-    spSpa = json['sp_spa'];
-    spReception = json['sp_reception'];
-    spRoomService = json['sp_room_service'];
-    spCustomerRelation = json['sp_customer_relation'];
-    spTechnicalService = json['sp_technical_service'];
-    spManagement = json['sp_management'];
-    planImageUrl = json['plan_image_url'];
-    smYoutubeUrl = json['sm_youtube_url'];
-    smInstagramUrl = json['sm_instagram_url'];
-    smFacebookUrl = json['sm_facebook_url'];
-    smTwitterUrl = json['sm_twitter_url'];
-    smVkontakteUrl = json['sm_vkontakte_url'];
-    createdAt = DateTime.parse(json['created_at']);
-    updatedAt = DateTime.parse(json['updated_at']);
-    mobileVersion = json['mobile_version'];
+    tripAdvisorLink = json?['trip_advisor_link'];
+    mailVerificationForGuests = json?['mail_verification_for_guests'];
+    apiAddress = json?['api_address'];
+    spDoctor = json?['sp_doctor'];
+    spSpa = json?['sp_spa'];
+    spReception = json?['sp_reception'];
+    spRoomService = json?['sp_room_service'];
+    spCustomerRelation = json?['sp_customer_relation'];
+    spTechnicalService = json?['sp_technical_service'];
+    spManagement = json?['sp_management'];
+    planImageUrl = json?['plan_image_url'];
+    smYoutubeUrl = json?['sm_youtube_url'];
+    smInstagramUrl = json?['sm_instagram_url'];
+    smFacebookUrl = json?['sm_facebook_url'];
+    smTwitterUrl = json?['sm_twitter_url'];
+    smVkontakteUrl = json?['sm_vkontakte_url'];
+    createdAt = DateTime.tryParse(json?['created_at']);
+    updatedAt = DateTime.tryParse(json?['updated_at']);
+    mobileVersion = json?['mobile_version'];
     mobileVersionPublishDate =
-        DateTime.parse(json['mobile_version_publish_date']);
-    mobilePublishBy = json['mobile_publish_by'];
-    hotelChain = json['hotel_chain'];
-    onlineCheckIn = json['online_check_in'];
-    onlineCheckInImage = json['online_check_in_image'];
-    onlineCheckInSignature = json['online_check_in_signature'];
-    if (json['check_in_post_message'].contains(':') &&
-        json['check_in_post_message'] != '') {
-      checkInPostMessage = jsonDecode(json['check_in_post_message'])
+        DateTime.tryParse(json?['mobile_version_publish_date']);
+    mobilePublishBy = json?['mobile_publish_by'];
+    hotelChain = json?['hotel_chain'];
+    onlineCheckIn = json?['online_check_in'];
+    onlineCheckInImage = json?['online_check_in_image'];
+    onlineCheckInSignature = json?['online_check_in_signature'];
+    if (json?['check_in_post_message'].contains(':') &&
+        json?['check_in_post_message'] != '') {
+      checkInPostMessage = jsonDecode(json?['check_in_post_message'])
           .entries
           .map<RSDataTitleLanguageModel>(
               (e) => RSDataTitleLanguageModel.fromJson(e))
@@ -549,161 +559,179 @@ class RSDataModel {
     } else {
       checkInPostMessage = [
         RSDataTitleLanguageModel(
-            title: json['check_in_post_message'], locale: 'default')
+            title: json?['check_in_post_message'], locale: 'default')
       ];
     }
-    welcomeMessage = getLanguage(data: json['welcome_message']);
-    surveyHeaderId = json['survey_header_id'];
-    surveyHeader = RSDataSurveyHeaderModel.fromJson(json['survey_header']);
-    surveyTitle = getLanguage(data: json['survey_title']);
-    surveyDescription = getLanguage(data: json['survey_description']);
-    deliveryTimeOfDay = json['delivery_time_of_day'];
-    notificationPoint = json['notification_point'];
-    surveyPoint = json['survey_point'];
-    subDomainName = json['sub_domain_name'];
-    productType = json['product_type'];
-    autoSendWelcomeMail = json['auto_send_welcome_mail'];
-    homePageDesigner = json['home_page_designer']
+    welcomeMessage = getLanguage(data: json?['welcome_message']);
+    surveyHeaderId = json?['survey_header_id'];
+    surveyHeader = RSDataSurveyHeaderModel.fromJson(json?['survey_header']);
+    surveyTitle = getLanguage(data: json?['survey_title']);
+    surveyDescription = getLanguage(data: json?['survey_description']);
+    deliveryTimeOfDay = json?['delivery_time_of_day'];
+    notificationPoint = json?['notification_point'];
+    surveyPoint = json?['survey_point'];
+    subDomainName = json?['sub_domain_name'];
+    productType = json?['product_type'];
+    autoSendWelcomeMail = json?['auto_send_welcome_mail'];
+    homePageDesigner = json?['home_page_designer']
         .map<RsDataHomePageDesignerModel>(
             (v) => RsDataHomePageDesignerModel.fromJson(v))
         .toList();
-    firstLevelAlertList = json['first_level_alert_list'];
-    secondLevelAlertList = json['second_level_alert_list'];
-    thirdLevelAlertList = json['third_level_alert_list'];
-    fourthLevelAlertList = json['fourth_level_alert_list'];
-    negativeSurveyAlertList = json['negative_survey_alert_list'];
-    titleAndDescriptions = json['title_and_descriptions']
-        .map<RSDataMenuItemTitleAndDescriptionModel>(
-            (v) => RSDataMenuItemTitleAndDescriptionModel.fromJson(v))
-        .toList();
-    faq = json['faq']
-        .map<RSDataMenuItemTitleAndDescriptionModel>(
-            (v) => RSDataMenuItemTitleAndDescriptionModel.fromJson(v))
-        .toList();
-    featured = json['featured'].map<RSDataMenuItemsModel>((v) {
-      return RSDataMenuItemsModel.fromJson(v);
-    }).toList();
-    email = json['email'];
-    password = json['password'];
-    phone = json['phone'];
-    oneSignalAppId = json['one_signal_app_id'];
-    oneSignalAppKey = json['one_signal_app_key'];
-    oneSignalUserKey = json['one_signal_user_key'];
-    appStoreLink = json['app_store_link'];
-    googlePlayLink = json['google_play_link'];
-    firebaseLink = json['firebase_link'];
-    openForYear = json['open_for_year'];
-    openDate = DateTime.parse(json['open_date']);
-    closeDate = DateTime.parse(json['close_date']);
-    entryDate = DateTime.parse(json['entry_date']);
-    releaseDate = DateTime.parse(json['release_date']);
-    babyAgeRange = json['baby_age_range'];
-    childAgeRange = json['child_age_range'];
-    oldAgeRange = json['old_age_range'];
-    closeRequest = json['close_request'];
-    callForRequests = json['call_for_requests'];
-    roomNumberValidationCode = json['room_number_validation_code'];
-    claimTrackingManager = json['claim_tracking_manager'];
-    hotelType = json['hotel_type'];
-    mobilePayment = json['mobile_payment'];
-    title = getLanguage(data: json['title']);
-    description = getLanguage(data: json['description']);
-    wifiName = json['wifi_name'];
-    wifiPassword = json['wifi_password'];
-    whatsappNo = json['whatsapp_no'];
-    viberNo = json['viber_no'];
-    telegramNo = json['telegram_no'];
-    messengerAddress = json['messenger_address'];
-    googleMapAddress = json['google_map_address'];
-    showWelcome = json['show_welcome'];
-    showChat = json['show_chat'];
-    inHouseListLoginType = json['in_house_list_login_type'];
-    inHouseListMatchingCondition = json['in_house_list_matching_condition'];
-    pmsApplication = json['pms_application'];
-    createPowerBIdata = json['create_power_b_idata'];
-    reportDbScheme = json['report_db_scheme'];
-    manuelGuestVisitConfirmation = json['manuel_guest_visit_confirmation'];
-    rewardCalculationType = json['reward_calculation_type'];
-    rewardMinPoint = json['reward_min_point'];
-    rewardValue = json['reward_value'];
-    timeZone = json['time_zone'];
-    virtualTourUrl = json['virtual_tour_url'];
-    upsellItemId = json['upsell_item_id'];
-    hotelLanguage = json['hotel_language'];
-    hotelToken = json['hotel_token'];
-    hotelTokenExpiredTime = DateTime.parse(json['hotel_token_expired_time']);
-    tokenExpireSeconds = json['token_expire_seconds'];
-    manuelRequestOwnerType = json['manuel_request_owner_type'];
-    onetimeInformation = json['onetime_information'];
+    firstLevelAlertList = json?['first_level_alert_list'];
+    secondLevelAlertList = json?['second_level_alert_list'];
+    thirdLevelAlertList = json?['third_level_alert_list'];
+    fourthLevelAlertList = json?['fourth_level_alert_list'];
+    negativeSurveyAlertList = json?['negative_survey_alert_list'];
+    titleAndDescriptions =
+        getMenuItemTitleAndDescription(data: json?['title_and_descriptions']);
+    faq = getMenuItemTitleAndDescription(data: json?['faq']);
+    featured = getMenuItem(data: json?['featured']);
+    email = json?['email'];
+    password = json?['password'];
+    phone = json?['phone'];
+    oneSignalAppId = json?['one_signal_app_id'];
+    oneSignalAppKey = json?['one_signal_app_key'];
+    oneSignalUserKey = json?['one_signal_user_key'];
+    appStoreLink = json?['app_store_link'];
+    googlePlayLink = json?['google_play_link'];
+    firebaseLink = json?['firebase_link'];
+    openForYear = json?['open_for_year'];
+    openDate = DateTime.tryParse(json?['open_date']);
+    closeDate = DateTime.tryParse(json?['close_date']);
+    entryDate = DateTime.tryParse(json?['entry_date']);
+    releaseDate = DateTime.tryParse(json?['release_date']);
+    babyAgeRange = json?['baby_age_range'];
+    childAgeRange = json?['child_age_range'];
+    oldAgeRange = json?['old_age_range'];
+    closeRequest = json?['close_request'];
+    callForRequests = json?['call_for_requests'];
+    roomNumberValidationCode = json?['room_number_validation_code'];
+    claimTrackingManager = json?['claim_tracking_manager'];
+    hotelType = json?['hotel_type'];
+    mobilePayment = json?['mobile_payment'];
+    title = getLanguage(data: json?['title']);
+    description = getLanguage(data: json?['description']);
+    wifiName = json?['wifi_name'];
+    wifiPassword = json?['wifi_password'];
+    whatsappNo = json?['whatsapp_no'];
+    viberNo = json?['viber_no'];
+    telegramNo = json?['telegram_no'];
+    messengerAddress = json?['messenger_address'];
+    googleMapAddress = json?['google_map_address'];
+    showWelcome = json?['show_welcome'];
+    showChat = json?['show_chat'];
+    inHouseListLoginType = json?['in_house_list_login_type'];
+    inHouseListMatchingCondition = json?['in_house_list_matching_condition'];
+    pmsApplication = json?['pms_application'];
+    createPowerBIdata = json?['create_power_b_idata'];
+    reportDbScheme = json?['report_db_scheme'];
+    manuelGuestVisitConfirmation = json?['manuel_guest_visit_confirmation'];
+    rewardCalculationType = json?['reward_calculation_type'];
+    rewardMinPoint = json?['reward_min_point'];
+    rewardValue = json?['reward_value'];
+    timeZone = json?['time_zone'];
+    virtualTourUrl = json?['virtual_tour_url'];
+    upsellItemId = json?['upsell_item_id'];
+    hotelLanguage = json?['hotel_language'];
+    hotelToken = json?['hotel_token'];
+    hotelTokenExpiredTime = DateTime.tryParse(json?['hotel_token_expired_time']);
+    tokenExpireSeconds = json?['token_expire_seconds'];
+    manuelRequestOwnerType = json?['manuel_request_owner_type'];
+    onetimeInformation = json?['onetime_information'];
     isAccountVerifyNecessaryForRequest =
-        json['is_account_verify_necessary_for_request'];
-    isClosedStaffChat = json['is_closed_staff_chat'];
-    operationSystem = json['operation_system'];
-    loyaltyManagement = json['loyalty_management'];
-    staffTracking = json['staff_tracking'];
-    qrReader = json['qr_reader'];
-    isTaskSolutionNoteMandatory = json['is_task_solution_note_mandatory'];
-    isTaskDescriptionMandatory = json['is_task_description_mandatory'];
-    isGiftCard = json['is_gift_card'];
-    surveyAddress = json['survey_address'];
-    checkInSurveyId = json['check_in_survey_id'];
-    checkOutSurveyId = json['check_out_survey_id'];
-    autoCreateProfile = json['auto_create_profile'];
-    bars = RsDataMenuSectionModel.fromJson(json['bars']);
-    cafes = RsDataMenuSectionModel.fromJson(json['cafes']);
-    golfClub = RsDataMenuSectionModel.fromJson(json['golf_club']);
-    kidsClub = RsDataMenuSectionModel.fromJson(json['kids_club']);
-    rooms = RsDataMenuSectionModel.fromJson(json['rooms']);
-    massage = RsDataMenuSectionModel.fromJson(json['massage']);
-    meetingRoom = RsDataMenuSectionModel.fromJson(json['meeting_rooms']);
-    otherFacilities = RsDataMenuSectionModel.fromJson(json['other_facilities']);
-    pools = RsDataMenuSectionModel.fromJson(json['pools']);
-    restaurants = RsDataMenuSectionModel.fromJson(json['restaurants']);
-    spa = RsDataMenuSectionModel.fromJson(json['spa']);
-    sport = RsDataMenuSectionModel.fromJson(json['sport']);
-    amenities = RsDataMenuSectionModel.fromJson(json['amenities']);
-    housekeeping = RsDataMenuSectionModel.fromJson(json['housekeeping']);
-    issues = RsDataMenuSectionModel.fromJson(json['issues']);
-    complaint = RsDataMenuSectionModel.fromJson(json['complaint']);
-    otherServices = RsDataMenuSectionModel.fromJson(json['other_services']);
-    roomServices = RsDataMenuSectionModel.fromJson(json['room_services']);
-    activity = RsDataMenuSectionModel.fromJson(json['activity']);
-    dailyAnimations = RsDataMenuSectionModel.fromJson(json['daily_animations']);
-    shows = RsDataMenuSectionModel.fromJson(json['shows']);
-    poIs = RsDataMenuSectionModel.fromJson(json['po_is']);
-    tours = RsDataMenuSectionModel.fromJson(json['tours']);
-    opportunities = RsDataMenuSectionModel.fromJson(json['opportunities']);
-    news = RsDataMenuSectionModel.fromJson(json['news']);
-    banner = RsDataMenuSectionModel.fromJson(json['banner']);
+        json?['is_account_verify_necessary_for_request'];
+    isClosedStaffChat = json?['is_closed_staff_chat'];
+    operationSystem = json?['operation_system'];
+    loyaltyManagement = json?['loyalty_management'];
+    staffTracking = json?['staff_tracking'];
+    qrReader = json?['qr_reader'];
+    isTaskSolutionNoteMandatory = json?['is_task_solution_note_mandatory'];
+    isTaskDescriptionMandatory = json?['is_task_description_mandatory'];
+    isGiftCard = json?['is_gift_card'];
+    surveyAddress = json?['survey_address'];
+    checkInSurveyId = json?['check_in_survey_id'];
+    checkOutSurveyId = json?['check_out_survey_id'];
+    autoCreateProfile = json?['auto_create_profile'];
+    bars = RsDataMenuSectionModel.fromJson(json?['bars']);
+    cafes = RsDataMenuSectionModel.fromJson(json?['cafes']);
+    golfClub = RsDataMenuSectionModel.fromJson(json?['golf_club']);
+    kidsClub = RsDataMenuSectionModel.fromJson(json?['kids_club']);
+    rooms = RsDataMenuSectionModel.fromJson(json?['rooms']);
+    massage = RsDataMenuSectionModel.fromJson(json?['massage']);
+    meetingRoom = RsDataMenuSectionModel.fromJson(json?['meeting_rooms']);
+    otherFacilities =
+        RsDataMenuSectionModel.fromJson(json?['other_facilities']);
+    pools = RsDataMenuSectionModel.fromJson(json?['pools']);
+    restaurants = RsDataMenuSectionModel.fromJson(json?['restaurants']);
+    spa = RsDataMenuSectionModel.fromJson(json?['spa']);
+    sport = RsDataMenuSectionModel.fromJson(json?['sport']);
+    amenities = RsDataMenuSectionModel.fromJson(json?['amenities']);
+    housekeeping = RsDataMenuSectionModel.fromJson(json?['housekeeping']);
+    issues = RsDataMenuSectionModel.fromJson(json?['issues']);
+    complaint = RsDataMenuSectionModel.fromJson(json?['complaint']);
+    otherServices = RsDataMenuSectionModel.fromJson(json?['other_services']);
+    roomServices = RsDataMenuSectionModel.fromJson(json?['room_services']);
+    activity = RsDataMenuSectionModel.fromJson(json?['activity']);
+    dailyAnimations =
+        RsDataMenuSectionModel.fromJson(json?['daily_animations']);
+    shows = RsDataMenuSectionModel.fromJson(json?['shows']);
+    poIs = RsDataMenuSectionModel.fromJson(json?['po_is']);
+    tours = RsDataMenuSectionModel.fromJson(json?['tours']);
+    opportunities = RsDataMenuSectionModel.fromJson(json?['opportunities']);
+    news = RsDataMenuSectionModel.fromJson(json?['news']);
+    banner = RsDataMenuSectionModel.fromJson(json?['banner']);
     loyalityManagement =
-        RsDataMenuSectionModel.fromJson(json['loyality_management']);
-    roomGuide = RsDataMenuSectionModel.fromJson(json['room_guide']);
-    malls = RsDataMenuSectionModel.fromJson(json['malls']);
-    upsell = RsDataMenuSectionModel.fromJson(json['upsell']);
-    frontOffice = RsDataMenuSectionModel.fromJson(json['front_office']);
-    mice = RsDataMenuSectionModel.fromJson(json['mice']);
-    wedding = RsDataMenuSectionModel.fromJson(json['wedding']);
-    avm = RsDataMenuSectionModel.fromJson(json['avm']);
-    life = RsDataMenuSectionModel.fromJson(json['life']);
-    cinema = RsDataMenuSectionModel.fromJson(json['cinema']);
-    events = RsDataMenuSectionModel.fromJson(json['events']);
-    other1 = RsDataMenuSectionModel.fromJson(json['other_1']);
-    other2 = RsDataMenuSectionModel.fromJson(json['other_2']);
-    other3 = RsDataMenuSectionModel.fromJson(json['other_3']);
-    other4 = RsDataMenuSectionModel.fromJson(json['other_4']);
-    other5 = RsDataMenuSectionModel.fromJson(json['other_5']);
-    other6 = RsDataMenuSectionModel.fromJson(json['other_6']);
-    other7 = RsDataMenuSectionModel.fromJson(json['other_7']);
-    other8 = RsDataMenuSectionModel.fromJson(json['other_8']);
-    video = RsDataMenuSectionModel.fromJson(json['video']);
-    services = RsDataMenuSectionModel.fromJson(json['services']);
-    giftCard = RsDataMenuSectionModel.fromJson(json['gift_card']);
-    guestny = RsDataMenuSectionModel.fromJson(json['guestny']);
+        RsDataMenuSectionModel.fromJson(json?['loyality_management']);
+    roomGuide = RsDataMenuSectionModel.fromJson(json?['room_guide']);
+    malls = RsDataMenuSectionModel.fromJson(json?['malls']);
+    upsell = RsDataMenuSectionModel.fromJson(json?['upsell']);
+    frontOffice = RsDataMenuSectionModel.fromJson(json?['front_office']);
+    mice = RsDataMenuSectionModel.fromJson(json?['mice']);
+    wedding = RsDataMenuSectionModel.fromJson(json?['wedding']);
+    avm = RsDataMenuSectionModel.fromJson(json?['avm']);
+    life = RsDataMenuSectionModel.fromJson(json?['life']);
+    cinema = RsDataMenuSectionModel.fromJson(json?['cinema']);
+    events = RsDataMenuSectionModel.fromJson(json?['events']);
+    other1 = RsDataMenuSectionModel.fromJson(json?['other_1']);
+    other2 = RsDataMenuSectionModel.fromJson(json?['other_2']);
+    other3 = RsDataMenuSectionModel.fromJson(json?['other_3']);
+    other4 = RsDataMenuSectionModel.fromJson(json?['other_4']);
+    other5 = RsDataMenuSectionModel.fromJson(json?['other_5']);
+    other6 = RsDataMenuSectionModel.fromJson(json?['other_6']);
+    other7 = RsDataMenuSectionModel.fromJson(json?['other_7']);
+    other8 = RsDataMenuSectionModel.fromJson(json?['other_8']);
+    video = RsDataMenuSectionModel.fromJson(json?['video']);
+    services = RsDataMenuSectionModel.fromJson(json?['services']);
+    giftCard = RsDataMenuSectionModel.fromJson(json?['gift_card']);
+    guestny = RsDataMenuSectionModel.fromJson(json?['guestny']);
   }
 }
 
-List<RSDataTitleLanguageModel> getLanguage({required String data}) {
-  if (data.contains(':') && data != '') {
+List<RSDataMenuItemsModel>? getMenuItem({dynamic data}) {
+  if (data != null) {
+    return data
+        .map<RSDataMenuItemsModel>((e) => RSDataMenuItemsModel.fromJson(e))
+        .toList();
+  } else {
+    return null;
+  }
+}
+
+List<RSDataMenuItemTitleAndDescriptionModel>? getMenuItemTitleAndDescription(
+    {dynamic data}) {
+  if (data != null) {
+    return data
+        .map<RSDataMenuItemTitleAndDescriptionModel>(
+            (e) => RSDataMenuItemTitleAndDescriptionModel.fromJson(e))
+        .toList();
+  } else {
+    return null;
+  }
+}
+
+List<RSDataTitleLanguageModel> getLanguage({required String? data}) {
+  if (data == null) return [];
+  if (data!.contains(':') && data != '') {
     return jsonDecode(data)
         .entries
         .map<RSDataTitleLanguageModel>(

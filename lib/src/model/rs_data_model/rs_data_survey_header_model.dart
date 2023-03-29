@@ -20,6 +20,8 @@ class RSDataSurveyHeaderModel {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? surveyLines;
+
+  /// Bu soru hangi departmanın ortalamasını etkileyen bir sorudur. Örneğin: Tüm departmanları etkileyen bir soru ise 0 gönderilecek. Headerda tanımıl ise line oluşturulurken 0 olanlara headerda tanımlanmış olan değer atanacak. Herzaman line geçerli
   int? departmentId;
   String? groups;
 
@@ -62,8 +64,8 @@ class RSDataSurveyHeaderModel {
     thanksMessageForNegativeReviews =
         json?['thanks_message_for_negative_reviews']?.toString();
     askNoteAfterSurvey = json?['ask_note_after_survey'];
-    createdAt = DateTime.parse(json?['created_at']);
-    updatedAt = DateTime.parse(json?['updated_at']);
+    createdAt = DateTime.tryParse(json?['created_at']);
+    updatedAt = DateTime.tryParse(json?['updated_at']);
     surveyLines = json?['survey_lines']?.toString();
     departmentId = json?['department_id']?.toInt();
     groups = json?['groups']?.toString();

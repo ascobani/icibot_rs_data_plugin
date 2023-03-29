@@ -2,7 +2,11 @@ part of 'rs_data_model.dart';
 
 @embedded
 class RSDataTitleLanguageModel {
+
+  /// Locale
   String? locale;
+
+  // Title
   String? title;
 
   RSDataTitleLanguageModel({

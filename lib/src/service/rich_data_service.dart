@@ -8,7 +8,6 @@ class RichDataService with DioManager {
   /// Initializes the [RichDataService]
   Future<void> init() async {
     await dio.get('/3/MobileVersion.json?$timeStamp').catchError((e) {
-
       throw e;
     });
   }
@@ -21,7 +20,6 @@ class RichDataService with DioManager {
         await dio.get('/$appHotelId/RichData.gz?$timeStamp').catchError((e) {
       throw e;
     });
-
     return RSDataModel.fromJson(jsonDecode(response.data));
   }
 

@@ -2,20 +2,19 @@ part of 'rs_data_model.dart';
 
 @embedded
 class RSDataMenuItemTitleAndDescriptionModel {
-
   int? icibotId;
   int? menuItemId;
-  String? title;
-  String? description;
-  String? selectValues;
-  String? reasonValues;
-  String? closingValues;
+  List<RSDataTitleLanguageModel>? title;
+  List<RSDataTitleLanguageModel>? description;
+  List<RSDataTitleLanguageModel>? selectValues;
+  List<RSDataTitleLanguageModel>? reasonValues;
+  List<RSDataTitleLanguageModel>? closingValues;
   bool? dateRequired;
   String? imageUrl;
   String? imageName;
   int? hotelId;
   int? responseTime;
-  String? restrictionType;
+  List<RSDataTitleLanguageModel>? restrictionType;
   int? restrictionValue;
   int? taskTypeId;
 
@@ -39,17 +38,17 @@ class RSDataMenuItemTitleAndDescriptionModel {
   RSDataMenuItemTitleAndDescriptionModel.fromJson(Map<String, dynamic>? json) {
     icibotId = json?['id'];
     menuItemId = json?['menu_item_id'];
-    title = json?['title'];
-    description = json?['description'];
-    selectValues = json?['select_values'];
-    reasonValues = json?['reason_values'];
-    closingValues = json?['closing_values'];
+    title = getLanguage(data: json?['title']);
+    description = getLanguage(data: json?['description']);
+    selectValues = getLanguage(data:json?['select_values']);
+    reasonValues = getLanguage(data:json?['reason_values']);
+    closingValues = getLanguage(data: json?['closing_values']);
     dateRequired = json?['date_required'];
     imageUrl = json?['image_url'];
     imageName = json?['image_name'];
     hotelId = json?['hotel_id'];
     responseTime = json?['response_time'];
-    restrictionType = json?['restriction_type'];
+    restrictionType = getLanguage(data:json?['restriction_type']);
     restrictionValue = json?['restriction_value'];
     taskTypeId = json?['task_type_id'];
   }
