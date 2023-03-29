@@ -23,7 +23,7 @@ class IcIbotRSDataService {
   /// Initializes the [IcIbotRSDataService]
   Future<void> _init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await IsarService.instance.openDB();
+    await IsarService().openDB();
     await RichDataService.init();
   }
 
@@ -31,7 +31,7 @@ class IcIbotRSDataService {
     await _instance._init();
   }
 
-  IsarService isarService = IsarService._instance;
+  IsarService isarService = IsarService();
 
   /// Gets the [RSDataModel] from the database if version did not change or there is no [RSDataModel] in the database
   ///
