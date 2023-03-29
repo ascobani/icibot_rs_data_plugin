@@ -4,11 +4,10 @@ part of 'icibot_rs_data_service.dart';
 class IsarService {
   late Future<Isar> db;
 
-
-
-
-  /// Opens the database
-
+  /// Creates a new instance of [IsarService]
+  IsarService() {
+    db = openDB();
+  }
 
   /// Gets the [RSDataModel] from the database
   ///
