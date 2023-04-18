@@ -41,4 +41,20 @@ class RsDataHomePageDesignerModel {
     createdAt = DateTime.tryParse(json?['created_at']);
     updatedAt = DateTime.tryParse(json?['updated_at']);
   }
+
+  toJson() {
+    return {
+      'id': icibotId,
+      'hotel_id': hotelId,
+      'type': type,
+      'priority': priority,
+      'menu_section_id': menuSectionId,
+      'menu_item_id': menuItemId,
+      'image_url': imageUrl,
+      'title': languageToMap(data: title),
+      'url': url,
+      'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
+    };
+  }
 }

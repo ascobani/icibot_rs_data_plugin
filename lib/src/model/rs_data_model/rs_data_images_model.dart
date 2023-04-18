@@ -18,4 +18,14 @@ class RSDataImagesModel {
     lastModified = DateTime.tryParse(json?['last_modified']);
     sizeKB = json?['size_KB'].toDouble();
   }
+
+  toJson() {
+    return {
+      'file_name': fileName,
+      'url': url,
+      'key': key,
+      'last_modified': lastModified?.toIso8601String(),
+      'size_KB': sizeKB,
+    };
+  }
 }

@@ -56,8 +56,12 @@ class IsarService {
       return await Isar.open(
         [RSDataModelSchema, RSVersionModelSchema], //Isar Models,
         inspector: inspector,
+        directory: 'icibot_db',
       );
     }
     return Future.value(Isar.getInstance());
   }
+
+
+
 }

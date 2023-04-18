@@ -743,3 +743,13 @@ List<RSDataTitleLanguageModel> getLanguage({required String? data}) {
     ];
   }
 }
+
+
+Map<String?, String?> languageToMap(
+    { List<RSDataTitleLanguageModel>? data}) {
+  Map<String, String> map = {};
+  for (var element in data ?? []) {
+    map[element.locale] = element.title;
+  }
+  return map;
+}

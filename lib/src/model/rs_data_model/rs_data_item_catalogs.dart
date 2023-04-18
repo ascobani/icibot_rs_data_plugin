@@ -135,4 +135,31 @@ class RSDataMenuItemCatalogsModel {
             .toList()
         : null;
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'menu_item_catalog_group_id': menuItemCatalogGroupId,
+      'menu_item_id': menuItemId,
+      'priority': priority,
+      'name': name,
+      'description': description,
+      'cannot_be_sold': cannotBeSold,
+      'reward_point': rewardPoint,
+      'vat': vat,
+      'terms_and_conditions': termsAndConditions,
+      'usage_terms': usageTerms,
+      'starting_date': startingDate,
+      'ending_date': endingDate,
+      'inventory': inventory,
+      'capacity_type': capacityType,
+      'expire_period_type': expirePeriodType,
+      'expire_period': expirePeriod,
+      'menu_item_catalog_prices': menuItemCatalogPrices,
+      'restricted_menu_item_capacities': restrictedMenuItemCapacities,
+      'menu_item_catalog_modifier_groups': menuItemCatalogModifierGroups,
+      'images': images,
+      'tags': tags,
+    };
+  }
 }

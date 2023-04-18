@@ -33,4 +33,16 @@ class RSDataBookDetailReservationGroupModel {
     defaultTime = DateTime.tryParse(json['default_time']);
     limitCorrectionValue = json['limit_correction_value'];
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'menu_item_id': menuItemId,
+      'book_detail_id': bookDetailId,
+      'title': languageToMap(data: title),
+      'description': languageToMap(data: description),
+      'default_time': defaultTime?.toIso8601String(),
+      'limit_correction_value': limitCorrectionValue,
+    };
+  }
 }

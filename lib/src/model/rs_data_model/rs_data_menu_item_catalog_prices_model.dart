@@ -123,4 +123,33 @@ class RSDataMenuItemCatalogPricesModel {
     updatedAt = DateTime.tryParse(json?['updated_at']);
     updatedBy = json?['updated_by'];
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'menu_item_catalog_group_id': menuItemCatalogGroupId,
+      'menu_item_catalog_modifier_group_id': menuItemCatalogModifierGroupId,
+      'menu_item_catalog_id': menuItemCatalogId,
+      'menu_item_id': menuItemId,
+      'price': price,
+      'size': languageToMap(data: size),
+      'priority': priority,
+      'activate_offer': activateOffer,
+      'offer_price': offerPrice,
+      'offer_title': offerTitle,
+      'currency_code': currencyCode,
+      'is_modifier': isModifier,
+      'menu_item_catalog_modifier_id': menuItemCatalogModifierId,
+      'reservation_block_time_value': reservationBlockTimeValue,
+      'reservation_block_time_type': reservationBlockTimeType,
+      'maximum_limit': maximumLimit,
+      'can_be_purchased_with_loyalty_points':
+          canBePurchasedWithLoyaltyPoints,
+      'loyalty_points_exchange_value': loyaltyPointsExchangeValue,
+      'created_at': createdAt?.toIso8601String(),
+      'created_by': createdBy,
+      'updated_at': updatedAt?.toIso8601String(),
+      'updated_by': updatedBy,
+    };
+  }
 }
