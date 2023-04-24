@@ -4,12 +4,14 @@ version: 1.0.13
 # repository: https://github.com/ascobani/icibot_rs_data_plugin
 
 environment:
-  sdk: ">=2.16.0 <4.0.0"
+  sdk: ">=2.19.0 <4.0.0"
 
 dependencies:
   dio: ^5.1.1
   isar: ^3.1.0
   isar_flutter_libs: ^3.1.0
+  path_provider: ^2.0.14
+
 
 dev_dependencies:
   flutter_test:
@@ -17,4 +19,5 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   isar_generator: ^3.1.0
   build_runner: ^2.3.3
-  test: ^1.24.1
+
+

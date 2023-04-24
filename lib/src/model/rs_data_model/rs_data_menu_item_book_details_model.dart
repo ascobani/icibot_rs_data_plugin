@@ -115,4 +115,31 @@ class RSDataMenuItemBookDetailsModel {
             (e) => RSDataBookDetailReservationGroupModel.fromJson(e))
         .toList();
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'menu_item_id': menuItemId,
+      'menu_item_book_id': menuItemBookId,
+      'start_time': startTime?.toIso8601String(),
+      'end_time': endTime?.toIso8601String(),
+      'name': name,
+      'bookable': bookable,
+      'interval': interval,
+      'price': price,
+      'activate_offer': activateOffer,
+      'offer_price': offerPrice,
+      'offer_title': offerTitle,
+      'currency_code': currencyCode,
+      'view_count': viewCount,
+      'limit': limit,
+      'is_child_accept': isChildAccept,
+      'child_price': childPrice,
+      'baby_price': babyPrice,
+      'maximum_number_of_people_per_reservation':
+          maximumNumberOfPeoplePerReservation,
+      'accept_only_internal_reservation': acceptOnlyInternalReservation,
+      'book_detail_res_group': bookDetailResGroup?.map((e) => e.toJson()).toList(),
+    };
+  }
 }

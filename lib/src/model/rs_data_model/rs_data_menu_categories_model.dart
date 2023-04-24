@@ -41,4 +41,18 @@ class RSDataMenuCategoriesModel {
     default0SurveyHeaderId = json?['default:0;survey_header_id'];
     surveyHeader = RSDataSurveyHeaderModel.fromJson(json?['survey_header']);
   }
+
+  toJson() {
+    return {
+      'id': icibotId,
+      'menu_section_id': menuSectionId,
+      'title': languageToMap(data: title),
+      'hotel_id': hotelId,
+      'menu_item_id': menuItemId,
+      'menu_items': menuItems?.map((e) => e.toJson()).toList(),
+      'priority': priority,
+      'default:0;survey_header_id': default0SurveyHeaderId,
+      'survey_header': surveyHeader?.toJson(),
+    };
+  }
 }

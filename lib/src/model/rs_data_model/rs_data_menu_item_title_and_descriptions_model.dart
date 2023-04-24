@@ -52,4 +52,24 @@ class RSDataMenuItemTitleAndDescriptionModel {
     restrictionValue = json?['restriction_value'];
     taskTypeId = json?['task_type_id'];
   }
+
+  toJson() {
+    return {
+      'id': icibotId,
+      'menu_item_id': menuItemId,
+      'title': languageToMap(data: title),
+      'description': languageToMap(data: description),
+      'select_values': languageToMap(data: selectValues),
+      'reason_values': languageToMap(data: reasonValues),
+      'closing_values': languageToMap(data: closingValues),
+      'date_required': dateRequired,
+      'image_url': imageUrl,
+      'image_name': imageName,
+      'hotel_id': hotelId,
+      'response_time': responseTime,
+      'restriction_type': languageToMap(data: restrictionType),
+      'restriction_value': restrictionValue,
+      'task_type_id': taskTypeId,
+    };
+  }
 }

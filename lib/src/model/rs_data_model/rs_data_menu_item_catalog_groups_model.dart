@@ -40,4 +40,17 @@ class RSDataMenuItemCatalogGroupsModel {
           .toList();
     }
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'menu_item_id': menuItemId,
+      'name': languageToMap(data: name),
+      'priority': priority,
+      'main_group': mainGroup,
+      'max_per_person': maxPerPerson,
+      'menu_item_catalogs': menuItemCatalogs?.map((e) => e.toJson()).toList(),
+      'images': images?.map((e) => e.toJson()).toList(),
+    };
+  }
 }

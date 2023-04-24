@@ -12,4 +12,12 @@ class RSDataMenuItemBulletListModel {
     menuItemId = json['menu_item_id'];
     title = getLanguage(data: json['title']);
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'menu_item_id': menuItemId,
+      'title': languageToMap(data: title),
+    };
+  }
 }

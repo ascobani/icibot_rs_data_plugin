@@ -52,16 +52,16 @@ class IsarService {
   ///
   /// @inspector - to open thw web inspector by default is [true]
   Future<Isar> openDB({bool inspector = true}) async {
+    // Gets the path to the database
+    final dir = await getApplicationDocumentsDirectory();
+
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
         [RSDataModelSchema, RSVersionModelSchema], //Isar Models,
         inspector: inspector,
-        directory: 'icibot_db',
+        directory: dir.path,
       );
     }
     return Future.value(Isar.getInstance());
   }
-
-
-
 }

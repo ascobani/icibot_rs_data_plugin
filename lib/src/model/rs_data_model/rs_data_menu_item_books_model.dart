@@ -82,4 +82,32 @@ class RSDataMenuItemBooksModel {
     noReservationAfterThisTime = DateTime.tryParse(
         json['no_reservation_after_this_time']);
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'menu_item_id': menuItemId,
+      'monday': monday,
+      'tuesday': tuesday,
+      'wednesday': wednesday,
+      'thursday': thursday,
+      'friday': friday,
+      'saturday': saturday,
+      'sunday': sunday,
+      'show_advanced_options': showAdvancedOptions,
+      'bookable_in_advance_days': bookableInAdvanceDays,
+      'minimum_time_in_advance_minute': minimumTimeInAdvanceMinute,
+      'minimum_time_in_advance_value': minimumTimeInAdvanceValue,
+      'minimum_time_in_advance_type': minimumTimeInAdvanceType,
+      'reservation_unit_custom': reservationUnitCustom,
+      'reservation_custom_unit_name': reservationCustomUnitName,
+      'response_for_pending_service': responseForPendingService,
+      'responce_for_confirmed_service': responceForConfirmedService,
+      'call_to_action_text': callToActionText,
+      'comments_text': commentsText,
+      'is_no_reservation_after_this_time': isNoReservationAfterThisTime,
+      'no_reservation_after_this_time':
+          noReservationAfterThisTime?.toIso8601String(),
+    };
+  }
 }

@@ -68,4 +68,22 @@ class MenuItemCatalogModifierGroup {
     updatedAt = DateTime.tryParse(json['updated_at']);
     updatedBy = json['updated_by'];
   }
+
+  toJson() {
+    return {
+      'id': id,
+      'hotel_id': hotelID,
+      'menu_section_id': menuSectionID,
+      'menu_item_catalog_group_id': menuItemCatalogGroupID,
+      'name': languageToMap(data: name),
+      'maximum_item': maximumItem,
+      'expand': expand,
+      'mandatory': mandatory,
+      'prices': prices?.map((e) => e.toJson()).toList(),
+      'created_at': createdAt?.toIso8601String(),
+      'created_by': createdBy,
+      'updated_at': updatedAt?.toIso8601String(),
+      'updated_by': updatedBy,
+    };
+  }
 }
