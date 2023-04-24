@@ -13,7 +13,7 @@ dependencies:
   icibot_rs_data_plugin:
     git:
       url: https://github.com/ascobani/icibot_rs_data_plugin
-      ref: master
+      ref: main
 
 ```
 
