@@ -1,5 +1,5 @@
 name: icibot_rs_data_plugin
-version: 1.0.15
+version: 1.0.16
 publish_to: https://onepub.dev/api/xxapsdavuh/
 description: Plugin for RSData implementation
 environment: 
