@@ -15,7 +15,7 @@ Notes        :
 
 import 'package:isar/isar.dart';
 
-import '../../../icibot_rs_data.dart';
+import '../../../icibot_rs_data_plugin.dart';
 
 class IsarManager {
   late Future<Isar> db;

@@ -49,7 +49,8 @@ class RSDataMenuCategoriesModel {
       'title': languageToMap(data: title),
       'hotel_id': hotelId,
       'menu_item_id': menuItemId,
-      'menu_items': menuItems?.map((e) => e.toJson()).toList(),
+      // Create toJson method for RSDataMenuItemsModel
+      //  'menu_items': menuItems?.map((e) => e.toJson()).toList(),
       'priority': priority,
       'default:0;survey_header_id': default0SurveyHeaderId,
       'survey_header': surveyHeader?.toJson(),

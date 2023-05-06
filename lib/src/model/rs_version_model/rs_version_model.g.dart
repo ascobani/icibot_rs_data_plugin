@@ -44,7 +44,7 @@ const RSVersionModelSchema = CollectionSchema(
   getId: _rSVersionModelGetId,
   getLinks: _rSVersionModelGetLinks,
   attach: _rSVersionModelAttach,
-  version: '3.1.0',
+  version: '3.1.0+1',
 );
 
 int _rSVersionModelEstimateSize(
