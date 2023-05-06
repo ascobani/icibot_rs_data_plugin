@@ -15,7 +15,7 @@ class RSVersionModel {
     this.getDate,
   });
 
-  factory RSVersionModel.fromJson(Map<String, dynamic> json) {
+  factory RSVersionModel.fromJson(Map<String?, dynamic> json) {
     return RSVersionModel(
       version: json['version'],
       getDate: DateTime.now(),
