@@ -49,14 +49,14 @@ class IcIbotRSDataService {
           await richDataService.getVersion(appHotelId: appHotelId);
       // Checks if the version of the [RSVersionModel] has changed
       print(
-          'versionControlledUpdate: ${versionModelFromServer.version}, currentVersion: ${versionModel?.version}');
+          'versionControlledUpdate: ${versionModelFromServer?.version}, currentVersion: ${versionModel?.version}');
       // If the version did not change and the [RSVersionModel] is not null, return
-      if (versionModelFromServer.version != null &&
-          versionModelFromServer.version == versionModel?.version &&
+      if (versionModelFromServer?.version != null &&
+          versionModelFromServer?.version == versionModel?.version &&
           versionModel?.appHotelId == appHotelId) {
         return;
       }
-      if (versionModel?.version != versionModelFromServer.version) {
+      if (versionModel?.version != versionModelFromServer?.version) {
         // Gets the [RSDataModel] from the server
         RSDataModel? dataModelFromServer =
             await richDataService.getRichData(appHotelId: appHotelId);
@@ -65,7 +65,7 @@ class IcIbotRSDataService {
         // Saves the [RSDataModel] to the database
         await isarService.saveRSDataModel(dataModelFromServer);
         // Saves the [RSVersionModel] to the database
-        await isarService.saveRSVersionModel(versionModelFromServer);
+        await isarService.saveRSVersionModel(versionModelFromServer!);
       }
     } catch (e) {
       rethrow;

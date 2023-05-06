@@ -39,7 +39,7 @@ class RichDataService with DioManager {
   /// Gets the [RSVersionModel] from the server
   ///
   /// @id - [AppHotelID] can be found in the {https://icibot.net/v2/api/me} by providing the token in the header
-  Future<RSVersionModel> getVersion({required int appHotelId}) async {
+  Future<RSVersionModel?> getVersion({required int appHotelId}) async {
     final response = await dio
         .get('/$appHotelId/MobileVersion.json?$timeStamp')
         .catchError((e) {
