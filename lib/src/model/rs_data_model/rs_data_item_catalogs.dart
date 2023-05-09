@@ -123,7 +123,7 @@ class RSDataMenuItemCatalogsModel {
           .map<String>((e) => e.toString())
           .toList();
     }
-    if (json['restricted_menu_item_capacities'] != null) {
+    if (json['menu_item_catalog_modifier_groups'] != null) {
       menuItemCatalogModifierGroups = json['menu_item_catalog_modifier_groups']
           .map<MenuItemCatalogModifierGroup>(
               (e) => MenuItemCatalogModifierGroup.fromJson(e))

@@ -64,8 +64,8 @@ class RSDataSurveyHeaderModel {
     thanksMessageForNegativeReviews =
         json?['thanks_message_for_negative_reviews']?.toString();
     askNoteAfterSurvey = json?['ask_note_after_survey'];
-    createdAt = DateTime.tryParse(json?['created_at']);
-    updatedAt = DateTime.tryParse(json?['updated_at']);
+    createdAt = DateTime.tryParse(json?['created_at'] ?? '');
+    updatedAt = DateTime.tryParse(json?['updated_at'] ?? '');
     surveyLines = json?['survey_lines']?.toString();
     departmentId = json?['department_id']?.toInt();
     groups = json?['groups']?.toString();
