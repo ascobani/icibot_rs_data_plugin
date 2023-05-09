@@ -56,7 +56,7 @@ class IcIbotRSDataService {
           versionModel?.appHotelId == appHotelId) {
         return;
       }
-      if (versionModel?.version != versionModelFromServer?.version) {
+      if (versionModel?.version != versionModelFromServer?.version || versionModel == null) {
         // Gets the [RSDataModel] from the server
         RSDataModel? dataModelFromServer =
             await richDataService.getRichData(appHotelId: appHotelId);
